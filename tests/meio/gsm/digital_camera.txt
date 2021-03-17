@@ -1,0 +1,9 @@
+stage_id,lead_time,max_s_time,cost,risk_pool,ext_demand_mean,ext_demand_std,ext_demand_thres,up_stages
+Camera,60,,750,2,,,,
+Imager,60,,950,2,,,,
+Circuit_Board,40,,650,2,,,,
+Other_Parts_L_60,60,,150,2,,,,
+Other_Parts_M_60,150,,200,2,,,,
+Build_Test_Pack,6,,250,2,,,,Camera,1,Imager,1,Circuit_Board,1,Other_Parts_L_60,1,Other_Parts_M_60,1
+Transfer,2,,50,2,,,,Build_Test_Pack,1
+Ship,3,5,0,,11,7,1.645,Transfer,1

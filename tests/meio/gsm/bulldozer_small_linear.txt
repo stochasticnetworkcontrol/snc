@@ -1,0 +1,4 @@
+stage_id,lead_time,max_s_time,cost_rate,risk_pool,ext_demand_mean,ext_demand_std,ext_demand_thres,up_stages
+Common_Subassembly,5,,2400,2,,,,
+Final_Assembly,4,0,2400,,5,3,1.645,Main_Assembly,1
+Main_Assembly,8,,3600,2,,,,Common_Subassembly,1
