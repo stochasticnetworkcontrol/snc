@@ -1,3 +1,0 @@
-stage_id,lead_time,max_s_time,cost,risk_pool,ext_demand_mean,ext_demand_std,ext_demand_thres,up_stages
-Dist,39,,0.07,2,,,,
-Demand,1,0,0.02,,10,10,1.645,Dist,1

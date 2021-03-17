@@ -11,6 +11,7 @@ pandas==1.0.3
 pycddlib==2.1.0
 scipy==1.4.1
 streamlit
+xlrd
 
 # Reinforcement learning
 gym==0.12.0
