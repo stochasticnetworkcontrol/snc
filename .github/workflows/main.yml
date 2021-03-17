@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install libraries for pycddlib
-        run: sudo apt-get install libgmp3-dev python3.7-dev
+        run: sudo apt-get update && apt-get install -y libgmp3-dev python3.7-dev
       - name: Install Tox and any other packages
         run: pip install tox
       - name: Run Tox
