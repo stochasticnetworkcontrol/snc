@@ -25,7 +25,7 @@ jobs:
       # ===============================
       # Publish documentation
       # From https://github.com/ammaraskar/sphinx-action-test
-      - uses: sphinx-action@master
+      - uses: stochasticnetworkcontrol/snc@master
         with:
           docs-folder: "docs/"
       # Example of using a custom build-command.
