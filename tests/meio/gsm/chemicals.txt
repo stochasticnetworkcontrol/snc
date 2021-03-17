@@ -1,0 +1,9 @@
+stage_id,lead_time,max_s_time,cost_rate,risk_pool,ext_demand_mean,ext_demand_std,ext_demand_thres,up_stages
+Part_0003,10,,9,2,,,
+Retail_0002,0,0,0,,45.0,1.0,1.645,Manuf_0001,1,Manuf_0002,1
+Manuf_0002,10,,36,2,,,,Part_0001,1,Part_0002,1,Part_0003,1
+Manuf_0001,10,,39,2,,,,Part_0001,1,Part_0002,1,Part_0003,1
+Retail_0003,0,0,0,,75.0,2.0,1.645,Manuf_0002,1
+Retail_0001,0,0,0,,253.0,36.62,1.645,Manuf_0001,1
+Part_0001,28,,12,2,,,
+Part_0002,15,,5,2,,,

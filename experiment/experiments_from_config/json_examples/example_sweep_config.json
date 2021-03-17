@@ -1,0 +1,13 @@
+{
+  "simple_reentrant_line": {
+    "lab_name": "rl_experiments_sirl_all",
+    "agent_name": ["set", ["ppo", "reinforce"]],
+    "action_repetitions": ["set", [1, 4, 8]],
+    "num_iters": ["set", [6000]],
+    "env_param_overrides" : {
+      "initial_state": ["set", [[[0], [0], [0]], [[80], [80], [80]]]],
+      "cost_per_buffer": ["set", [[[1],[1],[1]], [[1],[5],[4]]]],
+      "alpha1": ["set", [9.75, 2.0]]
+    }
+  }
+}
