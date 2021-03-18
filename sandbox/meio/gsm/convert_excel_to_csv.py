@@ -26,11 +26,11 @@ def init_network_description():
     return network_description
 
 
-def parse_willems_graphs(excel_file, supply_chain_number, how_many_std_to_lead_time=0):
+def parse_supply_chain_graphs(excel_file, supply_chain_number, how_many_std_to_lead_time=0):
     """
-    Parse the graphs loaded in the willems excel sheet
+    Parse the graphs loaded in the excel sheet
 
-    :param excel_file: Excel file from Willems et al with all 38 supply chains
+    :param excel_file: Excel file with supply chains
     :param supply_chain_number: which supply chain to load
     :param how_many_std_to_lead_time: how many standard deviations to add to the mean
     :return:
@@ -99,15 +99,15 @@ def write_to_csv(filename, stage_configs, up_stages):
 
 
 def main():
-    willems_file = "../../../meio/willems_dataset/data/MSOM-06-038-R2 Data Set in Excel.xls"
-    data_xls = load_into_excel(willems_file)
-    dest =  os.path.join("../../../meio/willems_dataset", "data")
+    supply_chain_file = "../../../meio/supply_chain_dataset/data/..."
+    data_xls = load_into_excel(supply_chain_file)
+    dest =  os.path.join("../../../meio/supply_chain_dataset", "data")
     os.makedirs(dest, exist_ok=True)
     no_graphs_in_dataset = 38
     for i in range(1, no_graphs_in_dataset + 1):
         no = "{:02d}".format(i)  # '01', '02',.. '38'
-        out_filename = os.path.join(dest,"willems_{}.csv".format(no))
-        stage_configs, up_stages, _ = parse_willems_graphs(data_xls, no)
+        out_filename = os.path.join(dest,"supply_chain_{}.csv".format(no))
+        stage_configs, up_stages, _ = parse_supply_chain_graphs(data_xls, no)
         write_to_csv(out_filename, stage_configs, up_stages)
 
 
