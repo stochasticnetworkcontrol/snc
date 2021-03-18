@@ -26,9 +26,9 @@ jobs:
       # Publish documentation
       # From https://github.com/ammaraskar/sphinx-action-test
       - uses: ammaraskar/sphinx-action@master
-          with:
-            docs-folder: "docs/"
-            build-command: "sphinx-build source build"
+        with:
+          docs-folder: "docs/"
+          build-command: "sphinx-build source build"
       - uses: actions/upload-artifact@v1
         with:
           name: DocumentationHTML
