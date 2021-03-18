@@ -606,13 +606,12 @@ def test_priority_heuristic_agent_map_state_to_actions_no_priorities():
     agent = custom_priority_agent.CustomActivityPriorityAgent(env, priorities)
 
     expected_action = np.array([[1], [0.5], [0.5], [0.25], [0.25], [0.25], [0.25]])
-    num_sim = int(1e4)
+    num_sim = int(5e4)
     actions = np.zeros((buffer_processing_matrix.shape[1], num_sim))
     for i in np.arange(num_sim):
         actions[:, [i]] = agent.map_state_to_actions(state=state)
     average_action = np.sum(actions, axis=1) / float(num_sim)
-    np.testing.assert_array_almost_equal(average_action.reshape(-1, 1), expected_action,
-                                         decimal=2)
+    np.testing.assert_array_almost_equal(average_action.reshape(-1, 1), expected_action, decimal=2)
 
 
 def test_priority_heuristic_agent_map_state_to_actions_full_priorities_empty_buffer():
@@ -633,9 +632,9 @@ def test_priority_heuristic_agent_map_state_to_actions_full_priorities_empty_buf
     agent = custom_priority_agent.CustomActivityPriorityAgent(env, priorities)
 
     expected_average_action = np.array([[1], [0.], [1.], [0.33], [0.33], [0.], [0.33]])
-    num_sim = 5e4
-    actions = np.zeros((buffer_processing_matrix.shape[1], int(num_sim)))
-    for i in np.arange(int(num_sim)):
+    num_sim = int(5e4)
+    actions = np.zeros((buffer_processing_matrix.shape[1], num_sim))
+    for i in np.arange(num_sim):
         actions[:, [i]] = agent.map_state_to_actions(state=state)
     average_action = np.sum(actions, axis=1) / num_sim
     np.testing.assert_array_almost_equal(average_action.reshape(-1, 1), expected_average_action,
