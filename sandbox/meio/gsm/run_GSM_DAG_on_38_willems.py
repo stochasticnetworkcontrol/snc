@@ -36,9 +36,9 @@ if __name__ == '__main__':
     results["data"] = {}
     results["metadata"]["timeout"] = parser.parse_args().timeout
     network_descriptions = {}
-    willems_dir = '{}/../../../meio/willems_dataset/data/'
+    sup_chain_dir = '{}/../../../meio/supply_chain_dataset/data/'
     for i in chains:
-        supply_chain_results = 'willems_dataset/exps/temp{}'.format(i)
+        supply_chain_results = 'supply_chain_dataset/exps/temp{}'.format(i)
         if os.path.isfile(supply_chain_results+'.json'):
             with open(supply_chain_results+'.json', 'r') as fp:
                 results_single = json.load(fp)
@@ -46,7 +46,7 @@ if __name__ == '__main__':
                     results["data"][i] = results_single
                     print('supply chain {} loaded.'.format(i))
                     network_descriptions[i], stage_configs, up_stages = get_network(i)
-                    print_supply_chain_log(i, results["data"][i], willems_dir, supply_chain_results,
+                    print_supply_chain_log(i, results["data"][i], sup_chain_dir, supply_chain_results,
                                            network_descriptions[i], stage_configs, up_stages,
                                            plot=False)
         else:
