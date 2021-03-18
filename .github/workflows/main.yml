@@ -18,9 +18,9 @@ jobs:
           python-version: ${{ matrix.python }}
       # ===============================
       # Run tox
-      - name: Install Tox and any other packages
+      - name: Install Tox
         run: pip install tox
-      - name: Run Tox
+      - name: Run Tox and install requirements
         run: tox
       # ===============================
       # Publish documentation
