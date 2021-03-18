@@ -18,6 +18,6 @@ Two Jupyter notebooks using most of GSM functionality can be found in notebooks 
 
 GSM algorithms can be run on an extensive supply chain dataset from 
 
-Willems, S. P., “Data Set:  Real-World Multi-Echelon Supply Chains Used for Inventory Optimization,” Manufacturing & Service Operations Management, Winter 2008, Vol. 10, No. 1, pp. 19-23.;
+Willems, S. P., “Data Set:  Real-World Multi-Echelon Supply Chains Used for Inventory Optimization,” Manufacturing & Service Operations Management, Winter 2008, Vol. 10, No. 1, pp. 19-23.
 
-The data itself can be downloaded using this [link](https://pubsonline.informs.org/doi/suppl/10.1287/msom.1070.0176)
+The data itself can be downloaded using this [link](https://pubsonline.informs.org/doi/suppl/10.1287/msom.1070.0176).
