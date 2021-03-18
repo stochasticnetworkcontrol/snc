@@ -9,7 +9,7 @@ import numpy as np
 
 from snc.environments import examples
 from snc.environments import examples_distribution_with_rebalancing as examples_dwr
-from snc.environments.example_product_demo import product_demo_beer_kegs
+
 
 Scenario = namedtuple('Scenario', ['scenario_name', 'env'])
 
@@ -35,7 +35,6 @@ SCENARIO_CONSTRUCTORS: Dict[str, Callable] = {
     'ksrs_network_model': examples.ksrs_network_model,
     'multiple_demand_model': examples.multiple_demand_model,
     'one_warehouse': examples_dwr.one_warehouse,
-    'product_demo_beer_kegs': product_demo_beer_kegs,
     'push_pull': examples_dwr.push_and_pull_model_example,
     'push_pull_minimal': examples_dwr.push_and_pull_model_minimal_example,
     'simple_link_constrained_model': examples.simple_link_constrained_model,
@@ -187,23 +186,6 @@ def get_scenario_default_params(name: str, job_gen_seed: Optional[int] = None) -
         return dict(d=0.2, mu1=0.1, mu2=0.1, mu3=0.1, mu4=0.1,
                     cost_per_buffer=np.ones((3, 1)), initial_state=np.ones((3, 1)),
                     capacity=np.ones((3, 1)) * np.inf, job_conservation_flag=True,
-                    job_gen_seed=job_gen_seed)
-
-    elif name == 'product_demo_beer_kegs':
-        return dict(d1=0.006, d2=0.005, d3=0.004,
-                    d4=0.006, d5=0.005, d6=0.004,
-                    d7=0.006, d8=0.005, d9=0.004,
-                    mu1=0.019, mu2=0.019, mu3=0.019,
-                    mu4=0.016, mu5=0.016, mu6=0.016,
-                    mu7=0.014, mu8=0.014, mu9=0.014,
-                    mu10=0.5, mu11=0.5, mu12=0.5,
-                    mu13=0.5, mu14=0.5, mu15=0.5,
-                    mu16=0.5, mu17=0.5, mu18=0.5,
-                    mu19=0.9, mu20=0.9, mu21=0.9,
-                    cost_per_buffer=np.ones((21, 1)),
-                    initial_state=np.array([[5], [5], [5], [7], [5], [5], [5], [5], [5], [5], [3],
-                                            [5], [5], [5], [5], [5], [5], [5], [5], [5], [5]]),
-                    capacity=np.ones((21, 1)) * np.inf, job_conservation_flag=True,
                     job_gen_seed=job_gen_seed)
 
     elif name == 'push_pull':
