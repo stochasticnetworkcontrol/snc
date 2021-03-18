@@ -18,6 +18,12 @@ jobs:
           python-version: ${{ matrix.python }}
       # ===============================
       # Run tox
+      - name: Install Tox and any other packages
+        run: pip install tox
+      - name: Run Tox
+        run: tox
+      # ===============================
+      # Publish documentation
       - name: Checkout
         uses: actions/checkout@master
         with:
