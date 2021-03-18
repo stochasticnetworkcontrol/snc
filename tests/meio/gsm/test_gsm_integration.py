@@ -9,13 +9,13 @@ dirname = os.path.dirname(__file__)
 
 
 @pytest.fixture(params=range(1, 38))
-def willems_file(request):
+def supply_chain_file(request):
     chain = request.param
-    return "willems_{:0=2d}.csv".format(chain)
+    return "supply_chain_{:0=2d}.csv".format(chain)
 
 
-def test_willems_dataset(willems_file):
-    data_path = '{}/../../../meio/willems_dataset/data/'.format(dirname)
+def test_supply_chain_dataset(willems_file):
+    data_path = '{}/../../../meio/supply_chain_dataset/data/'.format(dirname)
     try:
         gsm = run_gsm(data_path, willems_file, None, run_gsm_optimiser=False, plotting=False)
         load_succeeded
