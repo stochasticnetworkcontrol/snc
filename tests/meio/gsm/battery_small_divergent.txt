@@ -1,0 +1,4 @@
+stage_id,lead_time,max_s_time,cost_rate,risk_pool,ext_demand_mean,ext_demand_std,ext_demand_thres,up_stages
+Central_DC_A,6,0,0.02,,43422,67236,1.645,Pack_SKU_A,1
+East_DC_A,4,0,0.01,,67226,109308,1.645,Pack_SKU_A,1
+Pack_SKU_A,11,,0.07,2,,,,

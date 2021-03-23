@@ -1,0 +1,145 @@
+{
+    "klimov_model":
+        [
+            {
+                "lab_name": "klimov_scaled_state",
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 10000,
+                "episodes_per_iter": 25,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [80, 80, 80, 80]
+                }
+            },
+             {
+                "lab_name": "klimov_scaled_state",
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 5000,
+                "episodes_per_iter": 10,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [80, 80, 80, 80]
+                }
+            },
+             {
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 5000,
+                "episodes_per_iter": 10,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [60, 60, 60, 60]
+                }
+            },
+             {
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 5000,
+                "episodes_per_iter": 10,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [40, 40, 40, 40]
+                }
+            },
+             {
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 5000,
+                "episodes_per_iter": 10,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [20, 20, 20, 20]
+                }
+            },
+             {
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 10000,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [10, 10, 10, 10]
+                }
+            },
+             {
+                "max_episode_length": 300,
+                "eval_freq": 50,
+                "save_freq": 25,
+                "log_freq": 10,
+                "num_iters": 10000,
+                "env_param_overrides": {
+                    "alpha1": 0.95,
+                    "alpha2": 0.95,
+                    "alpha3": 0.95,
+                    "alpha4": 0.95,
+                    "mu1": 4.0,
+                    "mu2": 4.0,
+                    "mu3": 4.0,
+                    "mu4": 4.0,
+                    "cost_per_buffer": [[1],[1],[1],[1]],
+                    "initial_state": [0, 0, 0, 0]
+                }
+            }
+        ]
+}

@@ -1,0 +1,4 @@
+stage_id,lead_time,max_s_time,cost_rate,risk_pool,ext_demand_mean,ext_demand_std,ext_demand_thres,up_stages
+Case,5,,660,2,,,
+Case&Frame,6,5,450,,5,3,1.645,Case,1,Frame_Assembly,1
+Frame_Assembly,9,,181.5,2,,,,

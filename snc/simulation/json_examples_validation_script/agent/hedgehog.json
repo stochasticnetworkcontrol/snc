@@ -1,0 +1,36 @@
+{
+  "AsymptoticCovarianceParams": {
+    "num_presimulation_steps": 100,
+    "num_batch": 20
+  },
+  "WorkloadRelaxationParams": {
+    "num_vectors": 6,
+    "convex_solver": "cvx.CPLEX"
+  },
+  "StrategicIdlingParams": {
+    "convex_solver": "cvx.CPLEX",
+    "epsilon": 0.1,
+    "shift_eps": 5e-2,
+    "penalty_coeff_w_star": 2e-5,
+    "hedging_scaling_factor": 1
+  },
+  "HedgehogHyperParams": {
+    "activity_rates_policy_class_name": "BigStepLayeredPolicy",
+    "horizon_drain_time_ratio": 0,
+    "horizon_mpc_ratio": 1,
+    "minimum_horizon": 100,
+    "mpc_policy_class_name": "FeedbackStationaryFeasibleMpcPolicy",
+    "theta_0": 1
+  },
+  "BigStepPenaltyPolicyParams": {
+    "convex_solver": "cvx.CPLEX",
+    "nonidling_penalty_coeff": 1e2,
+    "safety_penalty_coeff": 1e2
+  },
+  "BigStepLayeredPolicyParams": {
+    "convex_solver": "cvx.CPLEX"
+  },
+  "name": "bs_hedgehog"
+}
+
+
