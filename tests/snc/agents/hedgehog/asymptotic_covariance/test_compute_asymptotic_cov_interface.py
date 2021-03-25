@@ -1,6 +1,7 @@
 import numpy as np
-from src.snc import ComputeAsymptoticCovInterface
-import src.snc.environments.examples as examples
+from snc.agents.hedgehog.asymptotic_workload_cov.\
+    compute_asymptotic_cov_interface import ComputeAsymptoticCovInterface
+import snc.environments.examples as examples
 
 
 def test_compute_steady_state_policy_double_reentrant_line():

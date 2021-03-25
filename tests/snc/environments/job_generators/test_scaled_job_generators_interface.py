@@ -1,8 +1,10 @@
 import numpy as np
 import pytest
-from src.snc.environments \
+from snc.environments.job_generators.\
+    scaled_bernoulli_services_poisson_arrivals_generator \
     import ScaledBernoulliServicesPoissonArrivalsGenerator
-from src.snc.environments \
+from snc.environments.job_generators.\
+    scaled_bernoulli_services_and_arrivals_generator \
     import ScaledBernoulliServicesAndArrivalsGenerator
 
 

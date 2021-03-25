@@ -1,5 +1,5 @@
 import numpy as np
-import src.snc.simulation.plot.plotting_handlers as ph
+import snc.simulation.plot.plotting_handlers as ph
 
 
 def test_cumulative_cost_plotter_non_discounted_large_plot_frequency():

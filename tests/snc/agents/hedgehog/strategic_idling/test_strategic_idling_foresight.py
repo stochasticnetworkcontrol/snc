@@ -1,10 +1,10 @@
 import numpy as np
 
-import src.snc.environments.examples as examples
-from src import snc as wl
-from src.snc import BigStepPenaltyPolicyParams, StrategicIdlingParams
-from src.snc import BigStepPolicy
-from src.snc import StrategicIdlingForesight
+import snc.environments.examples as examples
+import snc.agents.hedgehog.workload.workload as wl
+from snc.agents.hedgehog.params import BigStepPenaltyPolicyParams, StrategicIdlingParams
+from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
+from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
 
 
 def test_cum_cost_computation_standard_hedging_regime():

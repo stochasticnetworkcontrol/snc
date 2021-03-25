@@ -8,7 +8,7 @@ from tf_agents.trajectories.trajectory import _create_trajectory as create_traje
 from tf_agents.trajectories import time_step as ts
 from tf_agents.trajectories.policy_step import PolicyStep
 
-from src.experiment.rl import \
+from experiment.rl.custom_tf_metrics import \
     EpisodicConditionalActivityTracker1D, EvalPerStepLogger, ActionProbabilityMetric
 
 MockDistributionReturn = namedtuple("MockDistributionReturn", "action")

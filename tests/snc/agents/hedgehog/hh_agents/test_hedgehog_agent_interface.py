@@ -1,4 +1,4 @@
-from src.snc import HedgehogAgentInterface
+from snc.agents.hedgehog.hh_agents.hedgehog_agent_interface import HedgehogAgentInterface
 
 
 def test_get_num_steps_to_recompute_policy_not_integer_horizon():

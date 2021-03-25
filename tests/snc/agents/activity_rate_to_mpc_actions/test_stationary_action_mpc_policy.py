@@ -1,8 +1,8 @@
 import numpy as np
 from collections import namedtuple
-from src.snc \
+from snc.agents.activity_rate_to_mpc_actions.stationary_mpc_policy \
     import StationaryActionMPCPolicy
-from src.snc import is_binary
+from snc.utils.snc_tools import is_binary
 import pytest
 
 mock_action_mpc_policy = namedtuple('MockMPC', 'np_random')

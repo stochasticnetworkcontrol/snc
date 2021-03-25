@@ -7,15 +7,15 @@ from tf_agents.agents.tf_agent import TFAgent
 from tf_agents.policies import tf_policy
 from tf_agents.trajectories.time_step import TimeStep, StepType
 
-from src.snc.utils import snc_types
+from snc.utils import snc_types
 
-from src.snc import NumpyEncoder
-from src.snc.environments import load_scenario
-from src.snc.environments import \
+from snc.simulation.store_data.numpy_encoder import NumpyEncoder
+from snc.environments.scenarios import load_scenario
+from snc.environments.rl_environment_wrapper import \
     RLControlledRandomWalk, rl_env_from_snc_env
-from src.snc import create_reinforce_agent, create_ppo_agent
-from src.snc import RLSimulationAgent
-from src.snc.environments import ControlledRandomWalk
+from snc.agents.rl.agents import create_reinforce_agent, create_ppo_agent
+from snc.agents.rl.snc_agent_interface_for_rl import RLSimulationAgent
+from snc.environments.controlled_random_walk import ControlledRandomWalk
 
 
 def test_rl_simulation_agent_init():

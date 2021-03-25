@@ -1,10 +1,12 @@
 import numpy as np
 import pytest
 
-from src.snc import BigStepPenaltyPolicyParams
-from src.snc.agents.hedgehog.policies import policy_utils
-from src.snc import BigStepPolicy
-from .utils_test_policies import get_allowed_activities
+from snc.agents.hedgehog.params import BigStepPenaltyPolicyParams
+from snc.agents.hedgehog.policies import policy_utils
+from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
+from snc.demand_planning.constant_demand_plan import ConstantDemandPlan
+from tests.snc.agents.hedgehog.policies.utils_test_policies import get_allowed_activities
+
 
 def test_obtain_nonidling_resources_empty_botlenecks():
     k_idling_set = np.array([0])

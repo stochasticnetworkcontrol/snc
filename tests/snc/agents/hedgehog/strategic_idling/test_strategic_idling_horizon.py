@@ -1,10 +1,10 @@
 import numpy as np
 
-from src.snc import StrategicIdlingParams
-from src.snc import \
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.agents.hedgehog.strategic_idling.strategic_idling_horizon import \
     StrategicIdlingCoreHorizon, StrategicIdlingGTOHorizon
-from src import snc as wl
-import src.snc.environments.examples as examples
+import snc.agents.hedgehog.workload.workload as wl
+import snc.environments.examples as examples
 
 
 def test_zero_workloads_input():

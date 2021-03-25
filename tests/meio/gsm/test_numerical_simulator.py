@@ -1,8 +1,8 @@
 import numpy as np
 import os.path
 from scipy.stats import poisson
-from src.meio import read_supply_chain_from_txt
-from src.meio.experiment import simulate, compute_base_stocks, truncate_and_conserve
+from meio.gsm.utils import read_supply_chain_from_txt
+from meio.experiment.numerical_simulator import simulate, compute_base_stocks, truncate_and_conserve
 
 
 def test_numerical_simulator():

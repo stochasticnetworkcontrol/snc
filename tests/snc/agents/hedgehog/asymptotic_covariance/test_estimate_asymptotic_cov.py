@@ -1,5 +1,6 @@
 import numpy as np
-from src.snc import EstimateAsymptoticWorkloadCovBatchMeans
+from snc.agents.hedgehog.asymptotic_workload_cov.\
+    estimate_asymptotic_cov import EstimateAsymptoticWorkloadCovBatchMeans
 
 
 def test_get_batch():

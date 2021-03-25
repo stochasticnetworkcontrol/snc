@@ -1,8 +1,8 @@
 import numpy as np
-from src.snc \
+from snc.agents.hedgehog.asymptotic_workload_cov.estimate_asymptotic_cov \
     import EstimateAsymptoticWorkloadCovBatchMeans
-from src.snc.agents.hedgehog.workload import workload
-from src.snc import SteadyStatePolicyAgent
+from snc.agents.hedgehog.workload import workload
+from snc.agents.steady_state_agents.steady_state_policy_agent import SteadyStatePolicyAgent
 
 
 def perform_test(env, num_batch, num_data, class_kind, job_gen_seed):

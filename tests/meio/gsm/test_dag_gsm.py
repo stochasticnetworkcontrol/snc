@@ -6,16 +6,16 @@ import numpy as np
 import pytest
 from scipy.sparse.csgraph._min_spanning_tree import minimum_spanning_tree
 
-from src import meio as dag_gsm
-import src.meio.gsm.tree_gsm as tree_gsm
-from src.meio import (solution_policies_equal, setup_cyclic_network,
-                      setup_skip_network, setup_coc_network,
-                      setup_diamond_network, setup_dist_network,
-                      setup_ext_diamond_network,
-                      setup_diamond_network_extra_edge)
-from src.meio import GuaranteedServiceModelDAG
-from src.meio.gsm.tree_gsm import GuaranteedServiceModelTree, Stage
-from src.meio import read_supply_chain_from_txt
+import meio.gsm.dag_gsm as dag_gsm
+import meio.gsm.tree_gsm as tree_gsm
+from meio.gsm.common_test_utils import (solution_policies_equal, setup_cyclic_network,
+                                        setup_skip_network, setup_coc_network,
+                                        setup_diamond_network, setup_dist_network,
+                                        setup_ext_diamond_network,
+                                        setup_diamond_network_extra_edge)
+from meio.gsm.dag_gsm import GuaranteedServiceModelDAG
+from meio.gsm.tree_gsm import GuaranteedServiceModelTree, Stage
+from meio.gsm.utils import read_supply_chain_from_txt
 
 
 dirname = os.path.dirname(__file__)

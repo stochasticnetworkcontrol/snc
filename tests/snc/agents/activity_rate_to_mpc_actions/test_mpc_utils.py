@@ -1,5 +1,6 @@
 import pytest
-import src.snc.agents.activity_rate_to_mpc_actions.mpc_utils as mpc_utils
+import numpy as np
+import snc.agents.activity_rate_to_mpc_actions.mpc_utils as mpc_utils
 
 
 def test_check_num_time_steps_float():

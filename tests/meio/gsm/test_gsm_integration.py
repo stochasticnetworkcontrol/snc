@@ -2,9 +2,8 @@ import os
 
 import pytest
 
-from src.meio.experiment import run_gsm
-from src.meio import GuaranteedServiceModelDAG
-import sandbox.meio.gsm as sandbox_gsm
+from meio.experiment.demo_gsm import run_gsm
+from meio.gsm.dag_gsm import GuaranteedServiceModelDAG
 
 dirname = os.path.dirname(__file__)
 
@@ -16,9 +15,7 @@ def willems_file(request):
 
 
 def test_willems_dataset(willems_file):
-    print(sandbox_gsm.__file__)
-    data_path = '{}/willems_dataset/data/'.format(os.path.dirname(sandbox_gsm.__file__))
-    print(data_path)
+    data_path = '{}/../../../meio/willems_dataset/data/'.format(dirname)
     try:
         gsm = run_gsm(data_path, willems_file, None, run_gsm_optimiser=False, plotting=False)
         load_completed = True

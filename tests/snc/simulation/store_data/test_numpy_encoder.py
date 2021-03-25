@@ -4,7 +4,7 @@ import cvxpy as cvx
 import json
 import numpy as np
 
-from src import snc as numpy_encoder
+import snc.simulation.store_data.numpy_encoder as numpy_encoder
 
 
 class MySerializableClass:

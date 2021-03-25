@@ -1,7 +1,7 @@
-from src.snc import BigStepHedgehogGTOAgent
-from src.snc import StrategicIdlingGTO
-import src.snc.environments.examples as examples
-from src.snc.simulation.utils import get_hedgehog_hyperparams
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_gto_agent import BigStepHedgehogGTOAgent
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import StrategicIdlingGTO
+import snc.environments.examples as examples
+from snc.simulation.utils.load_agents import get_hedgehog_hyperparams
 
 
 class TestBigStepGTOAgent:

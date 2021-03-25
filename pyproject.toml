@@ -44,6 +44,7 @@ jupyter = "1.0.0"
 jupytext = "1.5.2"
 seaborn = "0.9.0"
 graphviz = "0.10.1"
+python-json-logger = "^2.0.1"
 
 
 [tool.poetry.dev-dependencies]

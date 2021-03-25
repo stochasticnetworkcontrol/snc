@@ -1,10 +1,10 @@
 import numpy as np
 
-from src.snc import BigStepHedgehogAgent
-from src import snc as mdt
-import src.snc.environments.examples as examples
-from src.snc import ConstantDemandPlan
-from src.snc.simulation.utils import build_bs_hedgehog_agent, get_hedgehog_hyperparams
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+import snc.agents.hedgehog.minimal_draining_time as mdt
+import snc.environments.examples as examples
+from snc.demand_planning.constant_demand_plan import ConstantDemandPlan
+from snc.simulation.utils.load_agents import build_bs_hedgehog_agent, get_hedgehog_hyperparams
 
 
 class TestBigStepHedgehogAgent:
