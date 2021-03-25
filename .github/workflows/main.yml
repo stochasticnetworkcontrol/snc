@@ -17,11 +17,13 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       # ===============================
-      # Run tox
-      - name: Install Tox
-        run: pip install tox
-      - name: Run Tox and install requirements
-        run: tox
+      # Run tests
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Install Requirements etc
+        run: poetry install
+      - name: run tests
+        run: poetry run task test
       # ===============================
       # Publish documentation
       - name: Checkout
