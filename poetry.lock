@@ -270,7 +270,7 @@ python-versions = "*"
 
 [[package]]
 name = "cvxpy"
-version = "1.1.7"
+version = "1.1.11"
 description = "A domain-specific language for modeling convex optimization problems in Python."
 category = "main"
 optional = false
@@ -362,7 +362,7 @@ tf = ["tensorflow (>=1.6)"]
 
 [[package]]
 name = "gitdb"
-version = "4.0.5"
+version = "4.0.6"
 description = "Git Object Database"
 category = "main"
 optional = false
@@ -1161,7 +1161,7 @@ version = "1.4.3"
 description = "Utilities for writing pandoc filters in python"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "parso"
@@ -2059,7 +2059,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "26e5335508b62e6f199292eeadbcb530f49a9a6becb04a5598db3ed924504020"
+content-hash = "5eabc7be04ff5c55255bb868e4d29b7b7ce00ce17b1c3f23474f23082bc9cc81"
 
 [metadata.files]
 absl-py = [
@@ -2290,22 +2290,18 @@ cvxopt = [
     {file = "cvxopt-1.2.3.tar.gz", hash = "sha256:ea62a2a1b8e2db3a6ae44ac394f58e4620149af226c250c6f2b18739b48cfc21"},
 ]
 cvxpy = [
-    {file = "cvxpy-1.1.7-cp35-cp35m-macosx_10_9_x86_64.whl", hash = "sha256:a4a7ca9af06775dfe63dfb0a5937ab3e83cee6f5fdc1472c09a36a32cc3beeb8"},
-    {file = "cvxpy-1.1.7-cp35-cp35m-win_amd64.whl", hash = "sha256:0a57b866d36783fb122c563453f36860b877fda2c45763e872ed4a007c289af6"},
-    {file = "cvxpy-1.1.7-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:6718b6555f3719f6da9bd729fb810f860cf8dcd7b48212a223a41532c5cca6dd"},
-    {file = "cvxpy-1.1.7-cp36-cp36m-win_amd64.whl", hash = "sha256:e5512489a5ba83801579fb142e711fda8df72c055df5652ffae4e51a96d437d6"},
-    {file = "cvxpy-1.1.7-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:40f8a446446070c7d336270ba69a553a9b139af264b09675e9c85d3751d3c840"},
-    {file = "cvxpy-1.1.7-cp37-cp37m-win_amd64.whl", hash = "sha256:46b29e622c7e9cb5463f514e7d9fc5f17129b89991a753c215f021f59442e386"},
-    {file = "cvxpy-1.1.7-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:51e6d0e6a6d85b885e99fa443d60f5a07d2a3153b033eae325290f9bfaa48939"},
-    {file = "cvxpy-1.1.7-cp38-cp38-win_amd64.whl", hash = "sha256:57cca8490a0d9ea0545ada8da61dfc6bcec91f9a213153224b8b360875d984c7"},
-    {file = "cvxpy-1.1.7-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:53dee27264455368db873854db4eca9adb57b6cd783ccf1d47741f147e9d1f64"},
-    {file = "cvxpy-1.1.7-cp39-cp39-win_amd64.whl", hash = "sha256:9d4cf4fbfb95bf4036553ac460a939e2b30c03c986bcbd69ceebb6ea61c12b86"},
-    {file = "cvxpy-1.1.7-py3.5-win-amd64.egg", hash = "sha256:2bbd7377aa56352923889a83feb1c4ec2f68c862c556b96e7f0471fa63123a86"},
-    {file = "cvxpy-1.1.7-py3.6-win-amd64.egg", hash = "sha256:4247938236794c3c5c34cf26b11869dc15404cfe951b1f4080e9d510fcf81182"},
-    {file = "cvxpy-1.1.7-py3.7-win-amd64.egg", hash = "sha256:ae67a06616bf19bf0ee02732b2d7a47fe4a265cbcd56fb500107eba712281440"},
-    {file = "cvxpy-1.1.7-py3.8-win-amd64.egg", hash = "sha256:6b2d01c12c9544d17439238ac51eb568e31bc99717f53429b7c4099cd5e46730"},
-    {file = "cvxpy-1.1.7-py3.9-win-amd64.egg", hash = "sha256:f1c839762efe3b2c4a1fb1030cc8addefd4154c1a83ccd29b4b81313714e0747"},
-    {file = "cvxpy-1.1.7.tar.gz", hash = "sha256:330eb76e8369c360b68d9231c6eb350848e373b5952134f9bfebaed1a4c4211f"},
+    {file = "cvxpy-1.1.11-cp36-cp36m-win_amd64.whl", hash = "sha256:dd4180bf75b4836322d71f6508a1f683e7f770e0ace8604362be705ee6b519f8"},
+    {file = "cvxpy-1.1.11-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:deac0d22be9c95bd10a0b18465fa65490c481faed4a63aa60c869d9c37dc98e5"},
+    {file = "cvxpy-1.1.11-cp37-cp37m-win_amd64.whl", hash = "sha256:eeec527d85c39d07af2bf645e35fbb7008dd9194c4eb0a518ccb5e976f962f6b"},
+    {file = "cvxpy-1.1.11-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:ced621c6fc66592ba2e120273d9ee2a20552a01a7c65855c7b27e406a9e6e16e"},
+    {file = "cvxpy-1.1.11-cp38-cp38-win_amd64.whl", hash = "sha256:802de95adfecb013ca0809cc969aa20cc1ddb2ee7e12b8b93018e7b4556950cf"},
+    {file = "cvxpy-1.1.11-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:7ac1a226eb381829af950479d8ab0a6a910b5d6dbaccbbff5f1fec888acbaea9"},
+    {file = "cvxpy-1.1.11-cp39-cp39-win_amd64.whl", hash = "sha256:bd5c439ded5a7d17ee39deeb13d374038a815e97196f57debcb8591a15c88d76"},
+    {file = "cvxpy-1.1.11-py3.6-win-amd64.egg", hash = "sha256:7626221a4a354415c23b2e3e9688d63906c28a608af61be20e10439d5c249956"},
+    {file = "cvxpy-1.1.11-py3.7-win-amd64.egg", hash = "sha256:7383e89936718eee5582d220e84f3d0907343a061e03b93d1daf828beecc0ab4"},
+    {file = "cvxpy-1.1.11-py3.8-win-amd64.egg", hash = "sha256:cdec82bee09863c2d9a45659c0ba7dfcfa6af934276812ba251061c082f82119"},
+    {file = "cvxpy-1.1.11-py3.9-win-amd64.egg", hash = "sha256:313fd564caba0afb74ba8a4909c97003296533bc29575763495c87c3a6667e52"},
+    {file = "cvxpy-1.1.11.tar.gz", hash = "sha256:5b8aa5cbe834ed0d62609efafed19936404f6bea1abe14c3518450ddc67eb352"},
 ]
 cycler = [
     {file = "cycler-0.10.0-py2.py3-none-any.whl", hash = "sha256:1d8a5ae1ff6c5cf9b93e8811e581232ad8920aeec647c37316ceac982b08cb2d"},
@@ -2359,8 +2355,8 @@ gin-config = [
     {file = "gin_config-0.1.3-py3-none-any.whl", hash = "sha256:3c622f73ca3474723d6a7d90078b49ca88a169ab8279f3cc7dd7b62ea17f168f"},
 ]
 gitdb = [
-    {file = "gitdb-4.0.5-py3-none-any.whl", hash = "sha256:91f36bfb1ab7949b3b40e23736db18231bf7593edada2ba5c3a174a7b23657ac"},
-    {file = "gitdb-4.0.5.tar.gz", hash = "sha256:c9e1f2d0db7ddb9a704c2a0217be31214e91a4fe1dea1efad19ae42ba0c285c9"},
+    {file = "gitdb-4.0.6-py3-none-any.whl", hash = "sha256:27dea6c52fbcf768530e1af47f2e34afd24a52e53fa310c8279a5589bd7c85bd"},
+    {file = "gitdb-4.0.6.tar.gz", hash = "sha256:42535bb16b5db8983e2c4f6a714d29a8feba7165a12addc63e08fc672dfeccb9"},
 ]
 gitpython = [
     {file = "GitPython-3.1.14-py3-none-any.whl", hash = "sha256:3283ae2fba31c913d857e12e5ba5f9a7772bbc064ae2bb09efafa71b0dd4939b"},
