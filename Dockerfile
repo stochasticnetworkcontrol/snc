@@ -28,6 +28,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
 
+RUN python -m pip install -U pip && pip install poetry
+
 ## Install development dependencies into the virtual environment
 # There is an issue installing some of the dependencies - switch off the new installer
 RUN poetry config experimental.new-installer false
@@ -40,7 +42,5 @@ COPY ./ /tmp/src/snc/
 RUN cd /tmp/src/snc \
     && poetry build -f wheel -n \
     && pip install --no-deps dist/*.whl
-
-FROM builder as docs
 
 RUN pip install -r /tmp/src/snc/docs/docs_requirements.txt
