@@ -1,6 +1,6 @@
 import numpy as np
-from typing import Tuple
-from src import snc as types
+from typing import List, Tuple
+import snc.utils.snc_types as types
 import math
 
 

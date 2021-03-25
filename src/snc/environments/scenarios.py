@@ -7,8 +7,8 @@ from collections import namedtuple
 
 import numpy as np
 
-from src.snc.environments import examples
-from src.snc.environments import examples_distribution_with_rebalancing as examples_dwr
+from snc.environments import examples
+from snc.environments import examples_distribution_with_rebalancing as examples_dwr
 
 
 Scenario = namedtuple('Scenario', ['scenario_name', 'env'])

@@ -2,12 +2,12 @@ import cvxpy as cvx
 import numpy as np
 from typing import Optional, List, NamedTuple, Dict, Any
 
-from src.snc import StrategicIdlingParams
-from src.snc \
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.agents.hedgehog.strategic_idling.compute_dual_effective_cost \
     import ComputeDualEffectiveCost
-from src.snc.agents.solver_names import SolverNames
-from src.snc import clean_to_serializable
-from src.snc import Array1D, StateSpace, WorkloadMatrix, WorkloadSpace
+from snc.agents.solver_names import SolverNames
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
+from snc.utils.snc_types import Array1D, StateSpace, WorkloadMatrix, WorkloadSpace
 
 
 StrategicIdlingOutput = NamedTuple('StrategicIdlingOutput',

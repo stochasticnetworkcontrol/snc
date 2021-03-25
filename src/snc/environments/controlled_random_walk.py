@@ -1,12 +1,13 @@
 from copy import deepcopy
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import gym
 import numpy as np
 
-import src.snc.environments.job_generators.job_generator_interface as jobgen
-import src.snc.environments.state_initialiser as stinit
-from src import snc as snc, snc as snc_types
+import snc.environments.job_generators.job_generator_interface as jobgen
+import snc.environments.state_initialiser as stinit
+import snc.utils.snc_tools as snc
+import snc.utils.snc_types as snc_types
 
 
 class ControlledRandomWalk(gym.Env):

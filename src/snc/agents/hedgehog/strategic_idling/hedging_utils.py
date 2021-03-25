@@ -1,6 +1,6 @@
 from typing import List
 
-from src import snc as types
+import snc.utils.snc_types as types
 import numpy as np
 
 

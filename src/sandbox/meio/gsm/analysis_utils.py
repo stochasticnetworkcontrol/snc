@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from src.sandbox.meio.gsm.convert_excel_to_csv import parse_willems_graphs, write_to_csv, \
+from sandbox.meio.gsm.convert_excel_to_csv import parse_willems_graphs, write_to_csv, \
     load_into_excel
-from src.meio.experiment import run_gsm_with_timeout, plot_gsm
-from src.meio import GSM, read_supply_chain_from_txt
+from meio.experiment.gsm_experiment_utils import run_gsm_with_timeout, plot_gsm
+from meio.gsm.utils import GSM, read_supply_chain_from_txt
 
 
 def get_network(supply_chain):

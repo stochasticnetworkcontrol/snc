@@ -7,7 +7,7 @@ from tf_agents.environments.tf_py_environment import TFPyEnvironment
 from tf_agents.agents.reinforce.reinforce_agent import ReinforceAgent
 from tf_agents.agents.ppo.ppo_agent import PPOAgent
 
-from src.snc.agents.rl.multi_headed_softmax_policy import MultiHeadedCategoricalActionNetwork
+from snc.agents.rl.multi_headed_softmax_policy import MultiHeadedCategoricalActionNetwork
 
 
 def create_reinforce_agent(

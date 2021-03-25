@@ -1,13 +1,13 @@
 from typing import Optional, Union
 
-from src.snc import BigStepHedgehogAgent
-from src.snc import AsymptoticCovarianceParams, \
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+from snc.agents.hedgehog.params import AsymptoticCovarianceParams, \
     BigStepLayeredPolicyParams, \
     BigStepPenaltyPolicyParams, \
     HedgehogHyperParams, \
     WorkloadRelaxationParams, DemandPlanningParams
-from src.snc import StrategicIdlingGTO
-from src.snc.environments import ControlledRandomWalk
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import StrategicIdlingGTO
+from snc.environments.controlled_random_walk import ControlledRandomWalk
 
 
 class BigStepHedgehogGTOAgent(BigStepHedgehogAgent):

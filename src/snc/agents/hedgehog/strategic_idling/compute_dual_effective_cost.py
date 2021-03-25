@@ -1,8 +1,9 @@
+from copy import deepcopy
 from typing import Tuple, Dict
 import cvxpy as cvx
-from src import snc as types
-from src.snc.agents.solver_names import SolverNames
-from src.snc import clean_to_serializable
+import snc.utils.snc_types as types
+from snc.agents.solver_names import SolverNames
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
 
 
 class ComputeDualEffectiveCost:

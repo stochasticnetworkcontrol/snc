@@ -1,19 +1,19 @@
 import numpy as np
 from typing import Optional, Set, Dict, Any
 
-from src.snc import compute_minimal_draining_time_from_workload \
+from snc.agents.hedgehog.minimal_draining_time import compute_minimal_draining_time_from_workload \
     as compute_min_drain_time
-from src.snc import BigStepWBoundPolicy
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore, \
+from snc.agents.hedgehog.policies.big_step_w_bound_policy import BigStepWBoundPolicy
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore, \
     StrategicIdlingOutput
-from src.snc import StrategicIdlingParams
-from src.snc \
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto \
     import StrategicIdlingHedgehogGTO
-from src.snc \
+from snc.agents.hedgehog.strategic_idling.strategic_idling_horizon \
     import StrategicIdlingCoreHorizon, StrategicIdlingGTOHorizon
-from src.snc import get_dynamic_bottlenecks
-from src import snc as types
-from src.snc import WorkloadSpace, StateSpace
+from snc.agents.hedgehog.strategic_idling.strategic_idling_utils import get_dynamic_bottlenecks
+import snc.utils.snc_types as types
+from snc.utils.snc_types import WorkloadSpace, StateSpace
 
 
 class StrategicIdlingForesight(StrategicIdlingHedgehogGTO):

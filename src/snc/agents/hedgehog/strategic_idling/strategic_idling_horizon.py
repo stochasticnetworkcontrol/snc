@@ -2,12 +2,12 @@ import cvxpy as cvx
 import numpy as np
 from typing import Any, Dict, Optional
 
-from src.snc import compute_minimal_draining_time_from_workload \
+from snc.agents.hedgehog.minimal_draining_time import compute_minimal_draining_time_from_workload \
     as compute_min_drain_time
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore, \
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore, \
     StrategicIdlingOutput
-from src.snc import StrategicIdlingParams
-from src.snc import StateSpace, WorkloadMatrix, WorkloadSpace
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.utils.snc_types import StateSpace, WorkloadMatrix, WorkloadSpace
 
 
 class StrategicIdlingCoreHorizon(StrategicIdlingCore):

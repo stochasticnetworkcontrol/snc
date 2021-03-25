@@ -9,19 +9,21 @@ import time
 from typing import Optional, Dict, Union, List
 from warnings import warn
 
-from src.experiment.experiment_utils import get_args_string
-from src import snc, snc as mdt, snc as ps
-from src.snc import BigStepHedgehogAgent
-from src.snc \
+from experiment.experiment_utils import get_args_string
+import snc
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+from snc.agents.hedgehog.hh_agents.pure_feedback_mip_hedgehog_agent \
     import PureFeedbackMIPHedgehogAgent
-from src.snc \
+from snc.agents.hedgehog.hh_agents.pure_feedback_stationary_hedgehog_agent \
     import PureFeedbackStationaryHedgehogAgent
-import src.snc.environments.scenarios as scenarios
-from src.snc import set_up_json_logging
-import src.snc.simulation.store_data.reporter as rep
-from src.snc.simulation.utils import load_agents
-import src.snc.simulation.utils.validation_utils as validation_utils
-from src.snc import is_routing_network
+import snc.agents.hedgehog.minimal_draining_time as mdt
+import snc.environments.scenarios as scenarios
+import snc.simulation.snc_simulator as ps
+from snc.simulation.store_data.json_logging import set_up_json_logging
+import snc.simulation.store_data.reporter as rep
+from snc.simulation.utils import load_agents
+import snc.simulation.utils.validation_utils as validation_utils
+from snc.utils.snc_tools import is_routing_network
 
 set_up_json_logging()
 

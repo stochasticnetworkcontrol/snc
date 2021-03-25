@@ -1,4 +1,4 @@
-import src.experiment.process_results.result_handling_utils as result_handling
+import experiment.process_results.result_handling_utils as result_handling
 
 
 def plot_cost_and_eff_cost_err():

@@ -9,8 +9,8 @@ from matplotlib import axes
 from matplotlib import animation
 from matplotlib import lines as mlines
 
-from src import snc as types
-import src.snc.simulation.plot.drawing_utils as drawing_utils
+import snc.utils.snc_types as types
+import snc.simulation.plot.drawing_utils as drawing_utils
 
 
 def plot_results(cost_log: types.Array1D, label: str, state_log: types.StateProcess,

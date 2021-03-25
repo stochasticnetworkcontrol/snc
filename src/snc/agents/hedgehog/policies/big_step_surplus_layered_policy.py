@@ -1,10 +1,10 @@
 import cvxpy as cvx
 import numpy as np
-from typing import Callable, Dict, List, Optional, Set
+from typing import Callable, Dict, List, Optional, Set, Tuple
 
-from src.snc import BigStepLayeredPolicyParams
-from src.snc import BigStepLayeredPolicy
-from src import snc as types
+from snc.agents.hedgehog.params import BigStepLayeredPolicyParams
+from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredPolicy
+import snc.utils.snc_types as types
 
 
 class BigStepSurplusLayeredPolicy(BigStepLayeredPolicy):

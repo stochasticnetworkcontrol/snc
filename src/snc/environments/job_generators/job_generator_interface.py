@@ -5,8 +5,8 @@ from numpy.random.mtrand import RandomState
 
 import numpy as np
 
-from src.snc import BufferRoutesType, SupplyNodeType, ExitNodeType
-from src import snc as snc_types
+from snc.utils.snc_types import BufferRoutesType, SupplyNodeType, ExitNodeType
+import snc.utils.snc_types as snc_types
 
 
 class JobGeneratorInterface(ABC):

@@ -1,15 +1,15 @@
 import argparse
 import numpy as np
-from src.snc \
+from snc.agents.activity_rate_to_mpc_actions.feedback_mip_feasible_mpc_policy \
     import FeedbackMipFeasibleMpcPolicy
-from src.snc import compute_minimal_draining_time_from_workload \
+from snc.agents.hedgehog.minimal_draining_time import compute_minimal_draining_time_from_workload \
     as compute_min_drain_time
-from src.snc import StrategicIdlingParams
-from src.snc import BigStepWBoundPolicy
-from src.snc import StrategicIdlingCoreHorizon
-from src import snc as wl
-from src.snc.environments import ControlledRandomWalk
-from src.snc.simulation.utils import load_env, load_env_params
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.agents.hedgehog.policies.big_step_w_bound_policy import BigStepWBoundPolicy
+from snc.agents.hedgehog.strategic_idling.strategic_idling_horizon import StrategicIdlingCoreHorizon
+import snc.agents.hedgehog.workload.workload as wl
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+from snc.simulation.utils.load_env import load_env, load_env_params
 
 
 def parse_arg_path():

@@ -1,9 +1,9 @@
 import numpy as np
 from typing import Dict, List, Optional, Set, Tuple, Union
 
-from src import snc as types
-from src.snc import BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams
-from src.snc import clean_to_serializable
+import snc.utils.snc_types as types
+from snc.agents.hedgehog.params import BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
 
 
 class BigStepBasePolicy:
@@ -102,7 +102,7 @@ class BigStepBasePolicy:
                 self.buffer_processing_matrix,
                 self.constituency_matrix
             )
-            if len(fa_s) > 0:
+            if fa_s:
                 ind_forbidden_activities.extend(fa_s)
         return set(ind_forbidden_activities)
 

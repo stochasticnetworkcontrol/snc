@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
+from copy import deepcopy
 
 import numpy as np
 from typing import Dict, Any, Optional
-from src import snc as types
-from src.snc.environments import controlled_random_walk as crw
-from src.snc import clean_to_serializable
+import snc.utils.snc_types as types
+from snc.environments import controlled_random_walk as crw
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
 
 
 class AgentInterface(ABC):

@@ -1,8 +1,10 @@
 import numpy as np
-from src import snc as types
-from src.snc.environments \
+import snc.utils.snc_types as types
+from snc.environments.job_generators.\
+    scaled_bernoulli_services_and_arrivals_generator \
     import ScaledBernoulliServicesAndArrivalsGenerator
-from src.snc \
+from snc.agents.hedgehog.asymptotic_workload_cov.\
+    compute_asymptotic_cov_bernoulli_service_interface \
     import ComputeAsymptoticCovBernoulliServiceInterface
 
 

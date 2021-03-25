@@ -8,10 +8,10 @@ from typing import List, Dict, Tuple, Callable, Set, Optional, Iterable
 import numpy as np
 from collections import OrderedDict, deque, defaultdict
 
-from src.meio import Sub_Prob_Cost_Func, Cumul_Min_Sub_Prob_Cost_Func
-from src.meio import (GSM_Policy, GSM_Constraints, GSM_Unsatisfied_Constraints,
-                      Stages_Labels, Labels_Stages,
-                      Depths_Stages, Stages_Depths, Labels_Parents)
+from meio.gsm.types import Sub_Prob_Cost_Func, Cumul_Min_Sub_Prob_Cost_Func
+from meio.gsm.types import (GSM_Policy, GSM_Constraints, GSM_Unsatisfied_Constraints,
+                            Stages_Labels, Labels_Stages,
+                            Depths_Stages, Stages_Depths, Labels_Parents)
 
 
 class GSM_Solution:

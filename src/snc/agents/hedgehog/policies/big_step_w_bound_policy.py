@@ -1,9 +1,11 @@
+from copy import deepcopy
 from typing import Tuple, Optional, Dict
 
 import numpy as np
 import cvxpy as cvx
-from src import snc as types
-from src.snc import clean_to_serializable
+import snc.utils.snc_types as types
+import snc.agents.hedgehog.policies.policy_utils as policy_utils
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
 
 
 class BigStepWBoundPolicy:

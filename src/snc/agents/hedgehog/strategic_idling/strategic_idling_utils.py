@@ -1,5 +1,5 @@
 import numpy as np
-from src import snc as types
+import snc.utils.snc_types as types
 from typing import Set
 
 

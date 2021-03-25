@@ -2,8 +2,8 @@ from typing import Tuple
 
 import cvxpy as cvx
 import numpy as np
-from src.snc import is_binary
-from src import snc as types
+from snc.utils.snc_tools import is_binary
+import snc.utils.snc_types as types
 
 
 class ValidateNegativeWorkloadVectors:

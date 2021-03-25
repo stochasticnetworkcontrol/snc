@@ -1,16 +1,16 @@
 import numpy as np
 
 from typing import Dict, Any
-from src.snc.utils import snc_types
+from snc.utils import snc_types
 
 from tf_agents.agents import PPOAgent
 from tf_agents.agents.tf_agent import TFAgent
 from tf_agents.trajectories.time_step import TimeStep, StepType
 
-from src.snc import AgentInterface
-from src.snc.environments import \
+from snc.agents.agent_interface import AgentInterface
+from snc.environments.controlled_random_walk import \
     ControlledRandomWalk
-from src.snc.environments import \
+from snc.environments.rl_environment_wrapper import \
     rl_env_from_snc_env
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from typing import Optional
-import src.experiment.process_results.result_handling_utils as result_handling
+import experiment.process_results.result_handling_utils as result_handling
 
 
 def values_to_array(results, statistic, agent, env_key, env_val, agent_keys):

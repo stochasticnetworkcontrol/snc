@@ -1,16 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Optional, Tuple, Dict, Union
-from src import snc as snc_types, snc as ps
-import src.snc.simulation.utils.validation_utils as validation_utils
+import snc.utils.snc_types as snc_types
+import snc.simulation.utils.validation_utils as validation_utils
 
-from src.snc.environments import examples
-from src.snc.agents.hedgehog.workload import workload
-import src.snc.simulation.utils.load_agents as load_agents
-from src.snc.simulation.plot import Handler, ProgressBarHandler
-from src.snc import BigStepHedgehogAgent
-import src.snc.simulation.store_data.reporter as rep
-import src.snc.environments.controlled_random_walk as crw
+from snc.environments import examples
+from snc.agents.hedgehog.workload import workload
+import snc.simulation.utils.load_agents as load_agents
+from snc.simulation.plot.base_handlers import Handler, ProgressBarHandler
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+import snc.simulation.snc_simulator as ps
+import snc.simulation.store_data.reporter as rep
+import snc.environments.controlled_random_walk as crw
 
 
 def run_simulations(

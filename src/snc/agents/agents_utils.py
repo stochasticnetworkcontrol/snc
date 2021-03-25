@@ -1,5 +1,5 @@
 import numpy as np
-from src import snc as types
+import snc.utils.snc_types as types
 
 
 def has_orthogonal_rows(binary_matrix: types.Matrix) -> bool:

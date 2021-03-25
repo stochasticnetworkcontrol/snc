@@ -3,8 +3,8 @@ from functools import reduce
 from tqdm import tqdm
 import numpy as np
 
-import src.snc.simulation.plot.drawing_utils as draw
-import src.snc.simulation.plot.plotting_utils as plot
+import snc.simulation.plot.drawing_utils as draw
+import snc.simulation.plot.plotting_utils as plot
 
 
 def stitch_data_dicts(list_of_datadicts):

@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from src.sandbox.meio.gsm.analysis_utils import run_gsm, get_network, print_supply_chain_log
+from sandbox.meio.gsm.analysis_utils import run_gsm, get_network, print_supply_chain_log
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Running gsm")

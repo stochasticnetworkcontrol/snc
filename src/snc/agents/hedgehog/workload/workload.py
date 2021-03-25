@@ -5,10 +5,10 @@ import numpy as np
 from scipy.spatial import HalfspaceIntersection
 from typing import Optional
 
-from src.snc \
+from snc.agents.hedgehog.workload.validate_negative_workload_vectors \
     import ValidateNegativeWorkloadVectors
-from src.snc.environments import ControlledRandomWalk
-from src import snc as types
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+import snc.utils.snc_types as types
 
 WorkloadTuple = namedtuple('WorkloadTuple', ['load', 'workload_mat', 'nu'])
 

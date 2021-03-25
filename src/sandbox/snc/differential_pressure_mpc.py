@@ -1,10 +1,11 @@
 import numpy as np
 
-from src import snc as types, snc as sch_mw
+import snc.utils.snc_types as types
 
-import src.snc.agents.activity_rate_to_mpc_actions.mpc_utils as mpc_utils
-from src.snc import ActionMPCPolicy
-from src.snc import StationaryActionMPCPolicy
+import snc.agents.activity_rate_to_mpc_actions.mpc_utils as mpc_utils
+import snc.agents.maxweight_variants.scheduling_maxweight_agent as sch_mw
+from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
+from snc.agents.activity_rate_to_mpc_actions.stationary_mpc_policy import StationaryActionMPCPolicy
 
 
 class DifferentialBackPressureMPC(ActionMPCPolicy):

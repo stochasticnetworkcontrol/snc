@@ -2,7 +2,7 @@ import json
 from typing import Dict, Optional
 
 import numpy as np
-from src.snc.environments import SCENARIO_CONSTRUCTORS
+from snc.environments.scenarios import SCENARIO_CONSTRUCTORS
 
 
 def load_env_params(json_file_name):

@@ -1,10 +1,10 @@
 from typing import Optional, Tuple, List, Any
 import numpy as np
 import cvxpy as cvx
-from src.snc.utils import snc_types as types
-from src.snc.environments import controlled_random_walk as crw
-from src.snc import AgentInterface
-from src.snc \
+from snc.utils import snc_types as types
+from snc.environments import controlled_random_walk as crw
+from snc.agents.agent_interface import AgentInterface
+from snc.agents.activity_rate_to_mpc_actions.stationary_mpc_policy \
     import StationaryActionMPCPolicy
 
 

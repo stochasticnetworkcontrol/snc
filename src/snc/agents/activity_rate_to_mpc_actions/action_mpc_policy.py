@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
+from copy import deepcopy
 import numpy as np
 from typing import Optional, Dict
 
-from src import snc as types
-from src.snc import clean_to_serializable
+import snc.utils.snc_types as types
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
 
 
 class ActionMPCPolicy(ABC):

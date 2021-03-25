@@ -4,7 +4,7 @@ from matplotlib import axes
 from matplotlib import text as mtext
 from matplotlib import patches as mpatches
 
-from src import snc as types
+import snc.utils.snc_types as types
 
 
 ################

@@ -1,6 +1,7 @@
-from src.snc.environments \
+from snc.environments.job_generators.\
+    scaled_bernoulli_services_generator_interface \
     import ScaledBernoulliServicesGeneratorInterface
-from src import snc as snc_types
+import snc.utils.snc_types as snc_types
 
 
 class ScaledBernoulliServicesPoissonArrivalsGenerator(ScaledBernoulliServicesGeneratorInterface):

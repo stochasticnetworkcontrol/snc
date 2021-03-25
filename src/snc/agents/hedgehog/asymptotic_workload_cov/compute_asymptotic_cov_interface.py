@@ -4,9 +4,9 @@ from typing import Dict
 
 import numpy as np
 import cvxpy as cvx
-from src import snc as types
-from src.snc.agents import agents_utils
-from src.snc.environments import \
+import snc.utils.snc_types as types
+from snc.agents import agents_utils
+from snc.environments.job_generators.job_generator_interface import \
     JobGeneratorInterface
 
 

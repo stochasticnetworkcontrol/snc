@@ -3,10 +3,10 @@ import os
 import re
 from logging import warning
 
-import src.meio.gsm.tree_gsm as tree_gsm
-from src.meio.experiment import plot_gsm
-from src.meio import GuaranteedServiceModelDAG
-from src.meio import read_supply_chain_from_txt
+import meio.gsm.tree_gsm as tree_gsm
+from meio.experiment.gsm_experiment_utils import plot_gsm
+from meio.gsm.dag_gsm import GuaranteedServiceModelDAG
+from meio.gsm.utils import read_supply_chain_from_txt
 
 
 def run_gsm(path, network, figpath, run_gsm_optimiser, plotting=True):

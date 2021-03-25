@@ -2,16 +2,16 @@ import os
 import json
 import signal
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 from graphviz import Digraph
 from scipy.stats.distributions import poisson
 
-from src.meio.gsm.tree_gsm import GSM_Solution, InconsistentGSMConfiguration, \
+from meio.gsm.tree_gsm import GSM_Solution, InconsistentGSMConfiguration, \
     IncompatibleGraphTopology, GSMException, UnSupportedGSMException, \
     compute_expected_inventories, compute_base_stocks
-from src.meio import create_gsm_instance, GSM
+from meio.gsm.utils import create_gsm_instance, GSM
 
 
 # TODO: write test

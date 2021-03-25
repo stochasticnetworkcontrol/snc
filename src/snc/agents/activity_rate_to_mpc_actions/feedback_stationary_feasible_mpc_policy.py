@@ -1,8 +1,10 @@
 import numpy as np
 from typing import List, Optional, Tuple
 
-from src.snc import ActionMPCPolicy
-from src import snc as agents_utils, snc as policy_utils, snc as types
+from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
+import snc.agents.agents_utils as agents_utils
+import snc.agents.hedgehog.policies.policy_utils as policy_utils
+import snc.utils.snc_types as types
 
 
 class FeedbackStationaryFeasibleMpcPolicy(ActionMPCPolicy):

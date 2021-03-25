@@ -2,7 +2,7 @@ from typing import Dict, List, Optional, Set, Tuple
 import numpy as np
 import cvxpy as cvx
 from scipy.optimize import linprog
-from src import snc as types
+import snc.utils.snc_types as types
 
 
 def obtain_nonidling_bottleneck_resources(num_bottlenecks: int,

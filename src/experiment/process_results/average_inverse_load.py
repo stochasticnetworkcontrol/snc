@@ -1,4 +1,4 @@
-import src.experiment.process_results.result_handling_utils as result_handling
+import experiment.process_results.result_handling_utils as result_handling
 
 
 def get_num_actions(e_runs):

@@ -2,9 +2,9 @@ import cvxpy as cvx
 import numpy as np
 from typing import Optional, List, Tuple
 
-from src.snc import ActionMPCPolicy
-from src.snc.agents.solver_names import SolverNames
-from src import snc as types
+from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
+from snc.agents.solver_names import SolverNames
+import snc.utils.snc_types as types
 
 
 class FeedbackMipFeasibleMpcPolicy(ActionMPCPolicy):

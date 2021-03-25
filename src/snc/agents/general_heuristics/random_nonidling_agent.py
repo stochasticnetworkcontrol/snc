@@ -1,9 +1,9 @@
 import numpy as np
 from typing import Dict, Optional
 
-from src.snc.utils import snc_types as types
-from src.snc.environments import controlled_random_walk as crw
-from src.snc import AgentInterface
+from snc.utils import snc_types as types
+from snc.environments import controlled_random_walk as crw
+from snc.agents.agent_interface import AgentInterface
 
 
 class RandomNonIdlingAgent(AgentInterface):

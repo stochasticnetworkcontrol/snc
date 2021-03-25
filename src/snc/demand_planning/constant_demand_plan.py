@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from src.snc.demand_planning.demand_plan_interface import DemandPlanInterface
+from snc.demand_planning.demand_plan_interface import DemandPlanInterface
 
 
 class ConstantDemandPlan(DemandPlanInterface):

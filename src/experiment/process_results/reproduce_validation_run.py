@@ -4,9 +4,9 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
-import src.snc.simulation.store_data.reporter as rep
-import src.snc.simulation.utils.validation_utils as validation_utils
-import src.experiment.process_results.result_handling_utils as handle_results
+import snc.simulation.store_data.reporter as rep
+import snc.simulation.utils.validation_utils as validation_utils
+import experiment.process_results.result_handling_utils as handle_results
 
 
 def main():

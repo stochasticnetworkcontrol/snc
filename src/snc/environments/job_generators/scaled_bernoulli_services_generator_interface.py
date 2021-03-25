@@ -1,8 +1,9 @@
 import numpy as np
 from abc import abstractmethod
-from src.snc.environments \
+from snc.environments.job_generators.scaled_job_generator_interface \
     import  ScaledJobGeneratorInterface
-from src import snc as snc_types, snc as snc_tools
+import snc.utils.snc_types as snc_types
+import snc.utils.snc_tools as snc_tools
 
 
 class ScaledBernoulliServicesGeneratorInterface(ScaledJobGeneratorInterface):

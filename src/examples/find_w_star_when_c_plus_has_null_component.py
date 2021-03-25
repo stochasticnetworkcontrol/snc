@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import src.snc.agents.hedgehog.strategic_idling.strategic_idling as si
+import snc.agents.hedgehog.strategic_idling.strategic_idling as si
 
 
 def obtain_w_star_for_different_penalty_values(cost_vector, workload_matrix, w, penalty_range):

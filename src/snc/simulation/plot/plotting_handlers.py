@@ -3,14 +3,14 @@ import numpy as np
 from matplotlib import axes
 from typing import List, Iterable, Optional, Tuple
 
-import src.snc.simulation.utils.validation_utils as validation_utils
-from src.snc.simulation.plot import LinePlotHandler
-from src import snc as types
+import snc.simulation.utils.validation_utils as validation_utils
+from snc.simulation.plot.base_handlers import LinePlotHandler
+import snc.utils.snc_types as types
 
-from src.snc.environments import (
+from snc.environments.job_generators.scaled_bernoulli_services_poisson_arrivals_generator import (
     ScaledBernoulliServicesPoissonArrivalsGenerator
 )
-from src.snc.environments import (
+from snc.environments.job_generators.scaled_bernoulli_services_and_arrivals_generator import (
     ScaledBernoulliServicesAndArrivalsGenerator
 )
 

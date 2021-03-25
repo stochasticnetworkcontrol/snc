@@ -7,9 +7,9 @@ from typing import Dict, List, Optional
 from scipy.stats import poisson
 import numpy as np
 
-import src.meio.gsm.tree_gsm as tree_gsm
-from src.meio.gsm.tree_gsm import GSM_Policy
-from src.meio import GSM_Stage_Policy
+import meio.gsm.tree_gsm as tree_gsm
+from meio.gsm.tree_gsm import GSM_Policy
+from meio.gsm.types import GSM_Stage_Policy
 
 
 np.random.seed(seed=8675309)

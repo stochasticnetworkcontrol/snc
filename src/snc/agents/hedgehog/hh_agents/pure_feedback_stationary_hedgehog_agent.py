@@ -1,6 +1,6 @@
 from typing import Optional, Type
-from src.snc import BigStepHedgehogAgent
-from src.snc import (
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+from snc.agents.hedgehog.params import (
     AsymptoticCovarianceParams,
     BigStepPenaltyPolicyParams,
     DemandPlanningParams,
@@ -8,9 +8,9 @@ from src.snc import (
     StrategicIdlingParams,
     WorkloadRelaxationParams
 )
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from src.snc import StrategicIdlingHedging
-from src.snc.environments import ControlledRandomWalk
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
+from snc.environments.controlled_random_walk import ControlledRandomWalk
 
 
 class PureFeedbackStationaryHedgehogAgent(BigStepHedgehogAgent):

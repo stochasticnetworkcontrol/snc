@@ -3,10 +3,10 @@ import json
 from typing import List, Optional, Dict, Any
 import numpy as np
 
-from src.snc.environments import controlled_random_walk as crw
-from src.snc import AgentInterface
-import src.snc.simulation.store_data.reporter as rep
-from src.snc import NumpyEncoder, format_json_with_np
+from snc.environments import controlled_random_walk as crw
+from snc.agents.agent_interface import AgentInterface
+import snc.simulation.store_data.reporter as rep
+from snc.simulation.store_data.numpy_encoder import NumpyEncoder, format_json_with_np
 
 
 class SncSimulator:

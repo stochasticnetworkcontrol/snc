@@ -3,10 +3,10 @@ import numpy as np
 import random
 from typing import Any, DefaultDict, Dict, List, Optional, ValuesView, Tuple
 
-from src.snc.environments import ControlledRandomWalk
-from src.snc.environments import JobGeneratorInterface
-from src.snc.environments.state_initialiser import CRWStateInitialiser
-from src import snc as snc_types
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+from snc.environments.job_generators.job_generator_interface import JobGeneratorInterface
+from snc.environments.state_initialiser import CRWStateInitialiser
+import snc.utils.snc_types as snc_types
 
 
 class ClosedLoopCRW(ControlledRandomWalk):
@@ -233,7 +233,7 @@ class ClosedLoopCRW(ControlledRandomWalk):
             - resource_to_activity: Dict associating resources (keys) to actions (values).
         """
         activity_to_resource: Dict[int, int] = {}
-        resource_to_activity = defaultdict(list)
+        resource_to_activity: DefaultDict[int, List[int]] = defaultdict(list)
 
         for node in supply_nodes:
             action = node[1]

@@ -2,41 +2,41 @@ from abc import abstractmethod
 import numpy as np
 from typing import Any, Dict, Optional, Tuple, Type, Union
 
-from src.snc import ActionMPCPolicy
-from src.snc import AgentInterface
-from src.snc.agents.hedgehog import safety_stocks
-from src.snc \
+from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
+from snc.agents.agent_interface import AgentInterface
+from snc.agents.hedgehog import safety_stocks
+from snc.agents.hedgehog.asymptotic_workload_cov.estimate_asymptotic_cov \
     import EstimateAsymptoticWorkloadCovBatchMeans
-from src.snc import get_class_from_name
-from src.snc import \
+from snc.agents.hedgehog.class_loader import get_class_from_name
+from snc.agents.hedgehog.params import \
     AsymptoticCovarianceParams, \
     BigStepLayeredPolicyParams, \
     BigStepPenaltyPolicyParams, \
     HedgehogHyperParams, \
     StrategicIdlingParams, \
     WorkloadRelaxationParams, DemandPlanningParams
-from src.snc import BigStepBasePolicy
-from src.snc import BigStepLayeredPolicy
-from src.snc import BigStepPolicy
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from src.snc import StrategicIdlingForesight
-from src.snc import \
+from snc.agents.hedgehog.policies.big_step_base_policy import BigStepBasePolicy
+from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredPolicy
+from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
+from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import \
     StrategicIdlingHedgehogGTO, \
     StrategicIdlingHedgehogGTO2, \
     StrategicIdlingHedgehogNaiveGTO, \
     StrategicIdlingGTO
-from src.snc import StrategicIdlingHedging
-from src.snc import get_dynamic_bottlenecks
-from src.snc import \
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
+from snc.agents.hedgehog.strategic_idling.strategic_idling_utils import get_dynamic_bottlenecks
+from snc.agents.hedgehog.workload.workload import \
     compute_load_workload_matrix, \
     WorkloadTuple
-from src.snc import SteadyStatePolicyAgent
-from src.snc import ConstantDemandPlan
-from src.snc.demand_planning.demand_plan_interface import DemandPlanInterface
-from src.snc.environments import controlled_random_walk as crw
-import src.snc.simulation.store_data.reporter as rep
-from src.snc import clean_to_serializable
-from src.snc.utils import snc_types as types
+from snc.agents.steady_state_agents.steady_state_policy_agent import SteadyStatePolicyAgent
+from snc.demand_planning.constant_demand_plan import ConstantDemandPlan
+from snc.demand_planning.demand_plan_interface import DemandPlanInterface
+from snc.environments import controlled_random_walk as crw
+import snc.simulation.store_data.reporter as rep
+from snc.simulation.store_data.numpy_encoder import clean_to_serializable
+from snc.utils import snc_types as types
 
 
 class HedgehogAgentInterface(AgentInterface):

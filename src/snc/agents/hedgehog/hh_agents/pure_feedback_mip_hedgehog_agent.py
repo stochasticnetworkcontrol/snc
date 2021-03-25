@@ -1,5 +1,6 @@
-from src.snc import PureFeedbackStationaryHedgehogAgent
-from src.snc import BigStepPenaltyPolicyParams
+from snc.agents.hedgehog.hh_agents.\
+    pure_feedback_stationary_hedgehog_agent import PureFeedbackStationaryHedgehogAgent
+from snc.agents.hedgehog.params import BigStepPenaltyPolicyParams
 
 
 class PureFeedbackMIPHedgehogAgent(PureFeedbackStationaryHedgehogAgent):

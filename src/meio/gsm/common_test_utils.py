@@ -4,9 +4,9 @@ from typing import Optional, List
 
 import numpy as np
 
-import src.meio.gsm.tree_gsm as tree_gsm
-from src.meio import GSM_Constraints
-from src.meio import create_supply_chain_network_from_iterator
+import meio.gsm.tree_gsm as tree_gsm
+from meio.gsm.types import GSM_Constraints
+from meio.gsm.utils import create_supply_chain_network_from_iterator
 
 
 def setup_cyclic_network():

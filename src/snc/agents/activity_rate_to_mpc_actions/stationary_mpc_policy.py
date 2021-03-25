@@ -1,9 +1,10 @@
 import numpy as np
 from typing import Optional
 
-from src.snc import ActionMPCPolicy
-import src.snc.agents.activity_rate_to_mpc_actions.mpc_utils as mpc_utils
-from src import snc as agents_utils, snc as types
+from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
+import snc.agents.activity_rate_to_mpc_actions.mpc_utils as mpc_utils
+import snc.agents.agents_utils as agents_utils
+import snc.utils.snc_types as types
 
 
 class StationaryActionMPCPolicy(ActionMPCPolicy):

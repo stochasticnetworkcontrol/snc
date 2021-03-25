@@ -10,10 +10,11 @@ from tf_agents.environments.tf_py_environment import TFPyEnvironment
 from tf_agents.environments.wrappers import ActionRepeat
 from tf_agents.environments.parallel_py_environment import ParallelPyEnvironment
 
-import src.snc.environments.controlled_random_walk as crw
-import src.snc.environments.job_generators.job_generator_interface as jobgen
-import src.snc.environments.state_initialiser as stinit
-from src import snc as snc, snc as snc_types
+import snc.environments.controlled_random_walk as crw
+import snc.environments.job_generators.job_generator_interface as jobgen
+import snc.environments.state_initialiser as stinit
+import snc.utils.snc_tools as snc
+import snc.utils.snc_types as snc_types
 
 
 class RLControlledRandomWalk(crw.ControlledRandomWalk):

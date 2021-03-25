@@ -2,11 +2,11 @@ from copy import deepcopy
 from typing import Dict, List, Optional
 
 import numpy as np
-from src import snc as types
-from src.snc import AgentInterface
-from src.snc.environments import ControlledRandomWalk
-from src.snc import WorkloadTuple
-from src.snc import SncSimulator
+import snc.utils.snc_types as types
+from snc.agents.agent_interface import AgentInterface
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+from snc.agents.hedgehog.workload.workload import WorkloadTuple
+from snc.simulation.snc_simulator import SncSimulator
 
 
 class EstimateAsymptoticWorkloadCovBatchMeans:

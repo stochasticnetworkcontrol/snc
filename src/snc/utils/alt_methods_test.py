@@ -3,10 +3,11 @@ import numpy as np
 from scipy.optimize import linprog
 from typing import Tuple, List, Optional
 
-from src.snc import StrategicIdlingHedging
-from src.snc import compute_vertexes_cdd
-from src.snc.environments import ControlledRandomWalk
-from src import snc as exceptions, snc as types
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
+from snc.agents.hedgehog.workload.workload import compute_vertexes_cdd
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+import snc.utils.exceptions as exceptions
+import snc.utils.snc_types as types
 
 
 # --------------------------------------------------------------------------------------------------

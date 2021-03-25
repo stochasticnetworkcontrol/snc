@@ -3,8 +3,8 @@ from enum import Enum, unique
 import numpy as np
 from typing import Dict, Union, Iterator, Type, Tuple
 
-from src.meio import GuaranteedServiceModelDAG
-from src.meio.gsm.tree_gsm import Stage, GuaranteedServiceModelTree, GuaranteedServiceModel
+from meio.gsm.dag_gsm import GuaranteedServiceModelDAG
+from meio.gsm.tree_gsm import Stage, GuaranteedServiceModelTree, GuaranteedServiceModel
 
 
 def create_supply_chain_network_from_iterator(supply_chain: Iterator) -> Dict[str, Stage]:

@@ -8,12 +8,12 @@ from typing import List, Dict, Tuple, Set, Optional
 
 import numpy as np
 
-from src.meio.gsm.tree_gsm import (GuaranteedServiceModel, GuaranteedServiceModelTree,
-                                   Stage, GSM_Solution, IncompatibleGraphTopology)
-from src.meio.gsm.tree_gsm import (compute_total_inventory_cost, correct_policy_downstream,
-                                   verify_solution_policy, find_unsatisfied_constraints,
-                                   compute_basic_solution_cost, compute_base_stocks)
-from src.meio import GSM_Constraints, GSM_Policy
+from meio.gsm.tree_gsm import (GuaranteedServiceModel, GuaranteedServiceModelTree,
+                               Stage, GSM_Solution, IncompatibleGraphTopology)
+from meio.gsm.tree_gsm import (compute_total_inventory_cost, correct_policy_downstream,
+                               verify_solution_policy, find_unsatisfied_constraints,
+                               compute_basic_solution_cost, compute_base_stocks)
+from meio.gsm.types import GSM_Constraints, GSM_Policy
 
 
 class GuaranteedServiceModelDAG(GuaranteedServiceModel):

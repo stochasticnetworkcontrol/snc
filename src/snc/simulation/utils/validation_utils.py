@@ -2,17 +2,17 @@ from matplotlib import pyplot as plt
 import numpy as np
 from typing import List
 
-from src.snc import AgentInterface
-from src.snc import HedgehogAgentInterface
-from src.snc import MaxWeightAgent
-from src.snc.simulation.plot import plotting_handlers as hand
-from src.snc.simulation.plot import (
+from snc.agents.agent_interface import AgentInterface
+from snc.agents.hedgehog.hh_agents.hedgehog_agent_interface import HedgehogAgentInterface
+from snc.agents.maxweight_variants.maxweight_agent import MaxWeightAgent
+from snc.simulation.plot import plotting_handlers as hand
+from snc.simulation.plot.base_handlers import (
     Handler,
     PrintActualtoFluidRatio,
     PrintInverseLoadings,
     PrintStateHedging
 )
-from src.snc.utils import snc_types as types
+from snc.utils import snc_types as types
 
 
 def print_workload_to_physical_resources_indexes(nu: types.NuMatrix) -> None:

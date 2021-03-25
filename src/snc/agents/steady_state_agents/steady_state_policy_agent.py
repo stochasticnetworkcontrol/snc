@@ -1,13 +1,13 @@
 import numpy as np
 from typing import Dict, Optional
 
-from src.snc import \
+from snc.agents.activity_rate_to_mpc_actions.feedback_stationary_feasible_mpc_policy import \
     FeedbackStationaryFeasibleMpcPolicy
-from src.snc import AgentInterface
-from src.snc \
+from snc.agents.agent_interface import AgentInterface
+from snc.agents.hedgehog.asymptotic_workload_cov.compute_asymptotic_cov_interface \
     import ComputeAsymptoticCovInterface
-from src.snc.environments import controlled_random_walk as crw
-from src.snc.utils import snc_types as types
+from snc.environments import controlled_random_walk as crw
+from snc.utils import snc_types as types
 
 
 class SteadyStatePolicyAgent(AgentInterface):

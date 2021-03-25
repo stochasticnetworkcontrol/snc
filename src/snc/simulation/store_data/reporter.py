@@ -1,8 +1,8 @@
 from collections import defaultdict
 from typing import List, Dict, Any, Optional
 
-from src import snc as types
-from src.snc.simulation.plot import Handler
+import snc.utils.snc_types as types
+from snc.simulation.plot.base_handlers import Handler
 
 
 class Reporter:

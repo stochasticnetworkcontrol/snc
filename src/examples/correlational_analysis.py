@@ -6,7 +6,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from src.snc.simulation.validation_script import process_parsed_args, run_validation
+from snc.simulation.validation_script import process_parsed_args, run_validation
 from argparse import Namespace
 
 snc_dir = os.path.join(os.getenv('HOME'), 'snc')

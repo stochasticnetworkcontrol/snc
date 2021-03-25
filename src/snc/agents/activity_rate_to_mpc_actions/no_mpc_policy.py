@@ -1,8 +1,8 @@
 import numpy as np
 
-from src.snc import ActionMPCPolicy
-from src.snc.utils import snc_tools
-from src import snc as types
+from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
+from snc.utils import snc_tools
+import snc.utils.snc_types as types
 
 
 class NoMPCPolicy(ActionMPCPolicy):

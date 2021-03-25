@@ -1,34 +1,35 @@
 from typing import Any, cast, Callable, Dict, List, Union, Tuple, Type, Optional
 
-from src.snc import AgentInterface
-import src.snc.agents.general_heuristics.custom_parameters_priority_agent as priority
-from src.snc import RandomNonIdlingAgent
-from src import snc as hh_int, snc as types
-from src.snc import BigStepHedgehogAgent
-from src.snc \
+from snc.agents.agent_interface import AgentInterface
+import snc.agents.general_heuristics.custom_parameters_priority_agent as priority
+from snc.agents.general_heuristics.random_nonidling_agent import RandomNonIdlingAgent
+import snc.agents.hedgehog.hh_agents.hedgehog_agent_interface as hh_int
+from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+from snc.agents.hedgehog.hh_agents.pure_feedback_mip_hedgehog_agent \
     import PureFeedbackMIPHedgehogAgent
-from src.snc \
+from snc.agents.hedgehog.hh_agents.pure_feedback_stationary_hedgehog_agent \
     import PureFeedbackStationaryHedgehogAgent
-from src.snc import AsymptoticCovarianceParams, \
+from snc.agents.hedgehog.params import AsymptoticCovarianceParams, \
     BigStepLayeredPolicyParams, \
     BigStepPenaltyPolicyParams, \
     DemandPlanningParams, \
     HedgehogHyperParams, \
     StrategicIdlingParams, \
     WorkloadRelaxationParams
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from src.snc import StrategicIdlingForesight
-from src.snc import \
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
+from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import \
     StrategicIdlingHedgehogGTO, StrategicIdlingHedgehogGTO2, StrategicIdlingHedgehogNaiveGTO
-from src.snc import StrategicIdlingHedging
-from src.snc import MaxWeightAgent
-from src.snc import SchedulingMaxWeightAgent
-from src.snc \
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
+from snc.agents.maxweight_variants.maxweight_agent import MaxWeightAgent
+from snc.agents.maxweight_variants.scheduling_maxweight_agent import SchedulingMaxWeightAgent
+from snc.agents.problem_specific_heuristics.distribution_with_rebalancing_local_priority_agent \
     import DistributionWithRebalancingLocalPriorityAgent
-from src.snc import RLSimulationAgent
-from src.snc import create_reinforce_agent, create_ppo_agent
-from src.snc.environments import ControlledRandomWalk
-import src.snc.environments.rl_environment_wrapper as rl_env
+from snc.agents.rl.snc_agent_interface_for_rl import RLSimulationAgent
+from snc.agents.rl.agents import create_reinforce_agent, create_ppo_agent
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+import snc.environments.rl_environment_wrapper as rl_env
+import snc.utils.snc_types as types
 
 
 def get_strategic_idling_class(si_class_name: str) -> Type[StrategicIdlingCore]:

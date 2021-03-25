@@ -3,16 +3,17 @@ import numpy as np
 from random import shuffle
 from typing import Tuple, Optional, List, Dict, Any
 
-from src.snc \
+from snc.agents.hedgehog.strategic_idling.compute_dual_effective_cost \
     import ComputeDualEffectiveCost
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore, \
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore, \
     StrategicIdlingOutput
-from src.snc import StrategicIdlingParams
-from src.snc import is_pull_model
-from src.snc.agents.solver_names import SolverNames
-from src.snc import e_assert
-from src import snc as exceptions, snc as types
-from src.snc import StateSpace, WorkloadSpace
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.agents.hedgehog.strategic_idling.strategic_idling_utils import is_pull_model
+from snc.agents.solver_names import SolverNames
+from snc.utils.exceptions import e_assert
+import snc.utils.exceptions as exceptions
+from snc.utils.snc_types import StateSpace, WorkloadSpace
+import snc.utils.snc_types as types
 
 
 class StrategicIdlingHedging(StrategicIdlingCore):

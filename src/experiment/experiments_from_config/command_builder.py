@@ -16,8 +16,8 @@ import numpy as np
 from datetime import datetime
 from copy import deepcopy
 from typing import Optional, Iterable, Any, Dict, List, Tuple
-from src.snc.environments import scenarios
-from src.experiment.experiment_utils import flatten_dict, unflatten_dict
+from snc.environments import scenarios
+from experiment.experiment_utils import flatten_dict, unflatten_dict
 
 
 def prep_for_json(data_dict: Dict[str, Any]) -> Dict[str, Any]:

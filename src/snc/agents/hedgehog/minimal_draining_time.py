@@ -3,10 +3,10 @@ from typing import Tuple
 import cvxpy as cvx
 import numpy as np
 from scipy.optimize import linprog
-from src.snc import compute_load_workload_matrix
-from src.snc.agents.solver_names import SolverNames
-from src.snc.environments import ControlledRandomWalk
-from src import snc as types
+from snc.agents.hedgehog.workload.workload import compute_load_workload_matrix
+from snc.agents.solver_names import SolverNames
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+import snc.utils.snc_types as types
 
 
 def compute_minimal_draining_time_from_workload(w: types.WorkloadSpace,

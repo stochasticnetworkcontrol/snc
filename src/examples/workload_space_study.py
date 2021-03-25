@@ -1,15 +1,16 @@
 import argparse
 import numpy as np
 
-from src.snc import compute_minimal_draining_time_cvxpy
-from src.snc \
+from snc.agents.hedgehog.minimal_draining_time import compute_minimal_draining_time_cvxpy
+from snc.agents.hedgehog.strategic_idling.compute_dual_effective_cost \
     import ComputeDualEffectiveCost
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling \
-    import get_default_strategic_idling_params
-from src import snc as wl, snc as utils
-from src.snc import StrategicIdlingHedging
-from src.snc.simulation.utils import validation_utils
-from src.snc.simulation.utils import load_env, load_env_params
+from snc.agents.hedgehog.strategic_idling.strategic_idling \
+    import get_default_strategic_idling_params, StrategicIdlingCore
+import snc.agents.hedgehog.workload.workload as wl
+from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
+from snc.simulation.utils import validation_utils
+from snc.simulation.utils.load_env import load_env, load_env_params
+import snc.utils.alt_methods_test as utils
 
 
 def parse_arg_path():

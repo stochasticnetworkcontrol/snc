@@ -18,15 +18,15 @@ from tf_agents.drivers.dynamic_episode_driver import DynamicEpisodeDriver
 from tf_agents.replay_buffers.tf_uniform_replay_buffer import TFUniformReplayBuffer
 from tf_agents.metrics import tf_metrics, tf_metric
 
-from src.experiment.rl import custom_tf_metrics
-from src.snc.environments import scenarios
-from src.snc import compute_load_workload_matrix
-from src.snc import compute_minimal_draining_time_from_env_cvxpy
-from src.experiment.experiment_utils import get_args_string
-from src.snc.environments import rl_env_from_snc_env
-from src.snc import create_reinforce_agent, create_ppo_agent
+from experiment.rl import custom_tf_metrics
+from snc.environments import scenarios
+from snc.agents.hedgehog.workload.workload import compute_load_workload_matrix
+from snc.agents.hedgehog.minimal_draining_time import compute_minimal_draining_time_from_env_cvxpy
+from experiment.experiment_utils import get_args_string
+from snc.environments.rl_environment_wrapper import rl_env_from_snc_env
+from snc.agents.rl.agents import create_reinforce_agent, create_ppo_agent
 
-from src.snc import set_up_json_logging
+from snc.simulation.store_data.json_logging import set_up_json_logging
 
 set_up_json_logging()
 

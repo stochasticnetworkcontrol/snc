@@ -1,25 +1,25 @@
 import numpy as np
 from typing import Optional, Type, Union, Dict
 
-from src.snc import \
+from snc.agents.activity_rate_to_mpc_actions.feedback_mip_feasible_mpc_policy import \
     FeedbackMipFeasibleMpcPolicy
-from src.snc import \
+from snc.agents.activity_rate_to_mpc_actions.feedback_stationary_feasible_mpc_policy import \
     FeedbackStationaryFeasibleMpcPolicy
-from src.snc import get_class_from_name
-from src.snc import AsymptoticCovarianceParams, \
+from snc.agents.hedgehog.class_loader import get_class_from_name
+from snc.agents.hedgehog.hh_agents.hedgehog_agent_interface import AsymptoticCovarianceParams, \
     HedgehogAgentInterface, HedgehogHyperParams, WorkloadRelaxationParams
-from src import snc as mdt
-from src.snc import \
+import snc.agents.hedgehog.minimal_draining_time as mdt
+from snc.agents.hedgehog.params import \
     BigStepLayeredPolicyParams, \
     BigStepPenaltyPolicyParams, \
     DemandPlanningParams, \
     StrategicIdlingParams
-from src.snc import BigStepLayeredPolicy
-from src.snc import BigStepPolicy
-from src.snc.agents.hedgehog.policies.big_step_surplus_layered_policy import BigStepSurplusLayeredPolicy
-from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from src.snc import StrategicIdlingForesight
-from src.snc.environments import ControlledRandomWalk
+from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredPolicy
+from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
+from snc.agents.hedgehog.policies.big_step_surplus_layered_policy import BigStepSurplusLayeredPolicy
+from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
+from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.environments.controlled_random_walk import ControlledRandomWalk
 
 
 class BigStepHedgehogAgent(HedgehogAgentInterface):

@@ -2,10 +2,11 @@
 
 from typing import Optional
 import numpy as np
-from src.snc.environments \
+from snc.environments.job_generators. \
+    scaled_bernoulli_services_poisson_arrivals_generator \
     import ScaledBernoulliServicesPoissonArrivalsGenerator
-import src.snc.environments.state_initialiser as stinit
-from src.snc.environments import ControlledRandomWalk
+import snc.environments.state_initialiser as stinit
+from snc.environments.controlled_random_walk import ControlledRandomWalk
 
 
 # This file contains examples for:

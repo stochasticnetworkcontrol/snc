@@ -25,17 +25,17 @@ activity_index is the same in key-value pairs
 """
 import numpy as np
 from typing import Optional, Dict, Tuple
-from src.snc.environments import ControlledRandomWalk
-from src.snc.environments \
+from snc.environments.controlled_random_walk import ControlledRandomWalk
+from snc.environments.job_generators.discrete_review_job_generator \
     import DeterministicDiscreteReviewJobGenerator
-from src.snc.environments import JobGeneratorInterface
-from src.snc.environments \
+from snc.environments.job_generators.job_generator_interface import JobGeneratorInterface
+from snc.environments.job_generators.scaled_bernoulli_services_and_arrivals_generator  \
     import ScaledBernoulliServicesAndArrivalsGenerator
-from src.snc.environments \
+from snc.environments.job_generators.scaled_bernoulli_services_geom_x_Bernoulli_arrivals_generator \
     import ScaledBernoulliServicesGeometricXBernoulliArrivalsGenerator
-from src.snc.environments \
+from snc.environments.job_generators.scaled_bernoulli_services_poisson_arrivals_generator  \
     import ScaledBernoulliServicesPoissonArrivalsGenerator
-from src.snc.environments.state_initialiser import DeterministicCRWStateInitialiser
+from snc.environments.state_initialiser import DeterministicCRWStateInitialiser
 
 # @TODO:
 #  Refactor examples as list of parameters so we have more flexibility to call them with different

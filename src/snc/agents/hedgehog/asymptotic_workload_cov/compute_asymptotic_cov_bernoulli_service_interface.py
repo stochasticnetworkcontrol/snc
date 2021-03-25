@@ -1,9 +1,11 @@
 from abc import abstractmethod
 
 import numpy as np
-from src import snc as types
-from src.snc.environments import ScaledBernoulliServicesGeneratorInterface
-from src.snc import ComputeAsymptoticCovInterface
+import snc.utils.snc_types as types
+from snc.environments.job_generators.\
+    scaled_bernoulli_services_generator_interface import ScaledBernoulliServicesGeneratorInterface
+from snc.agents.hedgehog.asymptotic_workload_cov.\
+    compute_asymptotic_cov_interface import ComputeAsymptoticCovInterface
 
 
 class ComputeAsymptoticCovBernoulliServiceInterface(ComputeAsymptoticCovInterface):

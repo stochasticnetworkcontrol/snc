@@ -12,7 +12,7 @@ The purpose of implementing this simple experiment is threefold:
 from typing import Dict,List
 import numpy as np
 
-from src.meio import Stage
+from meio.gsm.utils import Stage
 
 ADDED_COST_PROFILES = {
     "upstream_heavy":(0.36, 0.28, 0.20, 0.12, 0.04),

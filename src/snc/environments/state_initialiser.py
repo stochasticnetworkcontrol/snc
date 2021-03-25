@@ -3,7 +3,7 @@ from typing import Dict
 
 import numpy as np
 from abc import ABC, abstractmethod
-from src import snc as snc_types
+import snc.utils.snc_types as snc_types
 
 
 class CRWStateInitialiser(ABC):
