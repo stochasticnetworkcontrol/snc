@@ -39,7 +39,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="snc.agents.hedgehog.params.AsymptoticCovarianceParams" href="snc.agents.hedgehog.params.AsymptoticCovarianceParams.html" />
+    <link rel="prev" title="snc.agents.hedgehog.hh_agents" href="snc.agents.hedgehog.hh_agents.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,11 +86,37 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">snc.agents.hedgehog.params</a></li>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="snc.html">snc</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="snc.agents.html">snc.agents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.activity_rate_to_mpc_actions.html">snc.agents.activity_rate_to_mpc_actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.general_heuristics.html">snc.agents.general_heuristics</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="snc.agents.hedgehog.html">snc.agents.hedgehog</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.asymptotic_workload_cov.html">snc.agents.hedgehog.asymptotic_workload_cov</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.class_loader.html">snc.agents.hedgehog.class_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.hh_agents.html">snc.agents.hedgehog.hh_agents</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">snc.agents.hedgehog.params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.policies.html">snc.agents.hedgehog.policies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.strategic_idling.html">snc.agents.hedgehog.strategic_idling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.workload.html">snc.agents.hedgehog.workload</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.maxweight_variants.html">snc.agents.maxweight_variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.problem_specific_heuristics.html">snc.agents.problem_specific_heuristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.rl.html">snc.agents.rl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.solver_names.html">snc.agents.solver_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.steady_state_agents.html">snc.agents.steady_state_agents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="snc.demand_planning.html">snc.demand_planning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.environments.html">snc.environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.simulation.html">snc.simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.utils.html">snc.utils</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -135,6 +163,12 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="snc.html">snc</a> &raquo;</li>
+        
+          <li><a href="snc.agents.html">snc.agents</a> &raquo;</li>
+        
+          <li><a href="snc.agents.hedgehog.html">snc.agents.hedgehog</a> &raquo;</li>
+        
       <li>snc.agents.hedgehog.params</li>
     
     
@@ -176,8 +210,38 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="snc-agents-hedgehog-params">
-<h1>snc.agents.hedgehog.params<a class="headerlink" href="#snc-agents-hedgehog-params" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-snc.agents.hedgehog.params">
+<span id="snc-agents-hedgehog-params"></span><h1>snc.agents.hedgehog.params<a class="headerlink" href="#module-snc.agents.hedgehog.params" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.AsymptoticCovarianceParams.html#snc.agents.hedgehog.params.AsymptoticCovarianceParams" title="snc.agents.hedgehog.params.AsymptoticCovarianceParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AsymptoticCovarianceParams</span></code></a></p></td>
+<td><p>Create new instance of AsymptoticCovarianceParams(num_batch, num_presimulation_steps)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.BigStepLayeredPolicyParams.html#snc.agents.hedgehog.params.BigStepLayeredPolicyParams" title="snc.agents.hedgehog.params.BigStepLayeredPolicyParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BigStepLayeredPolicyParams</span></code></a></p></td>
+<td><p>Create new instance of BigStepLayeredPolicyParams(convex_solver,)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.BigStepPenaltyPolicyParams.html#snc.agents.hedgehog.params.BigStepPenaltyPolicyParams" title="snc.agents.hedgehog.params.BigStepPenaltyPolicyParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BigStepPenaltyPolicyParams</span></code></a></p></td>
+<td><p>Create new instance of BigStepPenaltyPolicyParams(convex_solver, boolean_action_flag, nonidling_penalty_coeff, safety_penalty_coeff)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.DemandPlanningParams.html#snc.agents.hedgehog.params.DemandPlanningParams" title="snc.agents.hedgehog.params.DemandPlanningParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DemandPlanningParams</span></code></a></p></td>
+<td><p>Create new instance of DemandPlanningParams(demand_planning_class_name, params_dict)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.HedgehogHyperParams.html#snc.agents.hedgehog.params.HedgehogHyperParams" title="snc.agents.hedgehog.params.HedgehogHyperParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HedgehogHyperParams</span></code></a></p></td>
+<td><p>Create new instance of HedgehogHyperParams(activity_rates_policy_class_name, mpc_policy_class_name, theta_0, horizon_drain_time_ratio, horizon_mpc_ratio, minimum_horizon)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.StrategicIdlingParams.html#snc.agents.hedgehog.params.StrategicIdlingParams" title="snc.agents.hedgehog.params.StrategicIdlingParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StrategicIdlingParams</span></code></a></p></td>
+<td><p>Create new instance of StrategicIdlingParams(strategic_idling_class, convex_solver, epsilon, shift_eps, hedging_scaling_factor, penalty_coeff_w_star)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.agents.hedgehog.params.WorkloadRelaxationParams.html#snc.agents.hedgehog.params.WorkloadRelaxationParams" title="snc.agents.hedgehog.params.WorkloadRelaxationParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WorkloadRelaxationParams</span></code></a></p></td>
+<td><p>Create new instance of WorkloadRelaxationParams(num_vectors, load_threshold, convex_solver)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -185,6 +249,10 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="snc.agents.hedgehog.params.AsymptoticCovarianceParams.html" class="btn btn-neutral float-right" title="snc.agents.hedgehog.params.AsymptoticCovarianceParams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="snc.agents.hedgehog.hh_agents.html" class="btn btn-neutral float-left" title="snc.agents.hedgehog.hh_agents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

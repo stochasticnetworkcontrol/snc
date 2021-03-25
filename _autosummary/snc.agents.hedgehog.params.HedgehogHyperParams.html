@@ -39,7 +39,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="snc.agents.hedgehog.params.StrategicIdlingParams" href="snc.agents.hedgehog.params.StrategicIdlingParams.html" />
+    <link rel="prev" title="snc.agents.hedgehog.params.DemandPlanningParams" href="snc.agents.hedgehog.params.DemandPlanningParams.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,11 +86,37 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">snc.agents.hedgehog.params.HedgehogHyperParams</a></li>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="snc.html">snc</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="snc.agents.html">snc.agents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.activity_rate_to_mpc_actions.html">snc.agents.activity_rate_to_mpc_actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.general_heuristics.html">snc.agents.general_heuristics</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="snc.agents.hedgehog.html">snc.agents.hedgehog</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.asymptotic_workload_cov.html">snc.agents.hedgehog.asymptotic_workload_cov</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.class_loader.html">snc.agents.hedgehog.class_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.hh_agents.html">snc.agents.hedgehog.hh_agents</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="snc.agents.hedgehog.params.html">snc.agents.hedgehog.params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.policies.html">snc.agents.hedgehog.policies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.strategic_idling.html">snc.agents.hedgehog.strategic_idling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.agents.hedgehog.workload.html">snc.agents.hedgehog.workload</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.maxweight_variants.html">snc.agents.maxweight_variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.problem_specific_heuristics.html">snc.agents.problem_specific_heuristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.rl.html">snc.agents.rl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.solver_names.html">snc.agents.solver_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="snc.agents.steady_state_agents.html">snc.agents.steady_state_agents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="snc.demand_planning.html">snc.demand_planning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.environments.html">snc.environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.simulation.html">snc.simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.utils.html">snc.utils</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -135,6 +163,14 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="snc.html">snc</a> &raquo;</li>
+        
+          <li><a href="snc.agents.html">snc.agents</a> &raquo;</li>
+        
+          <li><a href="snc.agents.hedgehog.html">snc.agents.hedgehog</a> &raquo;</li>
+        
+          <li><a href="snc.agents.hedgehog.params.html">snc.agents.hedgehog.params</a> &raquo;</li>
+        
       <li>snc.agents.hedgehog.params.HedgehogHyperParams</li>
     
     
@@ -178,6 +214,116 @@
 </style>
 <div class="section" id="snc-agents-hedgehog-params-hedgehoghyperparams">
 <h1>snc.agents.hedgehog.params.HedgehogHyperParams<a class="headerlink" href="#snc-agents-hedgehog-params-hedgehoghyperparams" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">snc.agents.hedgehog.params.</span></code><code class="sig-name descname"><span class="pre">HedgehogHyperParams</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activity_rates_policy_class_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpc_policy_class_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">horizon_drain_time_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">horizon_mpc_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_horizon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<p>Create new instance of HedgehogHyperParams(activity_rates_policy_class_name, mpc_policy_class_name, theta_0, horizon_drain_time_ratio, horizon_mpc_ratio, minimum_horizon)</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.count" title="snc.agents.hedgehog.params.HedgehogHyperParams.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count</span></code></a></p></td>
+<td><p>Return number of occurrences of value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.index" title="snc.agents.hedgehog.params.HedgehogHyperParams.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a></p></td>
+<td><p>Return first index of value.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.activity_rates_policy_class_name" title="snc.agents.hedgehog.params.HedgehogHyperParams.activity_rates_policy_class_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">activity_rates_policy_class_name</span></code></a></p></td>
+<td><p>Alias for field number 0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.horizon_drain_time_ratio" title="snc.agents.hedgehog.params.HedgehogHyperParams.horizon_drain_time_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">horizon_drain_time_ratio</span></code></a></p></td>
+<td><p>Alias for field number 3</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.horizon_mpc_ratio" title="snc.agents.hedgehog.params.HedgehogHyperParams.horizon_mpc_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">horizon_mpc_ratio</span></code></a></p></td>
+<td><p>Alias for field number 4</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.minimum_horizon" title="snc.agents.hedgehog.params.HedgehogHyperParams.minimum_horizon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_horizon</span></code></a></p></td>
+<td><p>Alias for field number 5</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.mpc_policy_class_name" title="snc.agents.hedgehog.params.HedgehogHyperParams.mpc_policy_class_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mpc_policy_class_name</span></code></a></p></td>
+<td><p>Alias for field number 1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#snc.agents.hedgehog.params.HedgehogHyperParams.theta_0" title="snc.agents.hedgehog.params.HedgehogHyperParams.theta_0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">theta_0</span></code></a></p></td>
+<td><p>Alias for field number 2</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.__add__">
+<code class="sig-name descname"><span class="pre">__add__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">value</span></em>, <em class="sig-param"><span class="pre">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self+value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.__mul__">
+<code class="sig-name descname"><span class="pre">__mul__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">value</span></em>, <em class="sig-param"><span class="pre">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self*value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.activity_rates_policy_class_name">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">activity_rates_policy_class_name</span></code><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.activity_rates_policy_class_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.count">
+<code class="sig-name descname"><span class="pre">count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">value</span></em>, <em class="sig-param"><span class="pre">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return number of occurrences of value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.horizon_drain_time_ratio">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">horizon_drain_time_ratio</span></code><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.horizon_drain_time_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.horizon_mpc_ratio">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">horizon_mpc_ratio</span></code><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.horizon_mpc_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.index">
+<code class="sig-name descname"><span class="pre">index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">value</span></em>, <em class="sig-param"><span class="pre">start=0</span></em>, <em class="sig-param"><span class="pre">stop=9223372036854775807</span></em>, <em class="sig-param"><span class="pre">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return first index of value.</p>
+<p>Raises ValueError if the value is not present.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.minimum_horizon">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">minimum_horizon</span></code><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.minimum_horizon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.mpc_policy_class_name">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">mpc_policy_class_name</span></code><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.mpc_policy_class_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="snc.agents.hedgehog.params.HedgehogHyperParams.theta_0">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">theta_0</span></code><a class="headerlink" href="#snc.agents.hedgehog.params.HedgehogHyperParams.theta_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -185,6 +331,10 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="snc.agents.hedgehog.params.StrategicIdlingParams.html" class="btn btn-neutral float-right" title="snc.agents.hedgehog.params.StrategicIdlingParams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="snc.agents.hedgehog.params.DemandPlanningParams.html" class="btn btn-neutral float-left" title="snc.agents.hedgehog.params.DemandPlanningParams" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

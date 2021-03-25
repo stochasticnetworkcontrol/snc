@@ -39,7 +39,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="snc.utils.exceptions.e_assert" href="snc.utils.exceptions.e_assert.html" />
+    <link rel="prev" title="snc.utils" href="snc.utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,11 +86,27 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">snc.utils.exceptions</a></li>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="snc.html">snc</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="snc.agents.html">snc.agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.demand_planning.html">snc.demand_planning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.environments.html">snc.environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snc.simulation.html">snc.simulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="snc.utils.html">snc.utils</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">snc.utils.exceptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="snc.utils.exceptions.e_assert.html">snc.utils.exceptions.e_assert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.utils.exceptions.ArraySignError.html">snc.utils.exceptions.ArraySignError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.utils.exceptions.EmptyArrayError.html">snc.utils.exceptions.EmptyArrayError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snc.utils.exceptions.ScipyLinprogStatusError.html">snc.utils.exceptions.ScipyLinprogStatusError</a></li>
 </ul>
-</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -135,6 +153,10 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="snc.html">snc</a> &raquo;</li>
+        
+          <li><a href="snc.utils.html">snc.utils</a> &raquo;</li>
+        
       <li>snc.utils.exceptions</li>
     
     
@@ -176,8 +198,38 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="snc-utils-exceptions">
-<h1>snc.utils.exceptions<a class="headerlink" href="#snc-utils-exceptions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-snc.utils.exceptions">
+<span id="snc-utils-exceptions"></span><h1>snc.utils.exceptions<a class="headerlink" href="#module-snc.utils.exceptions" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.utils.exceptions.e_assert.html#snc.utils.exceptions.e_assert" title="snc.utils.exceptions.e_assert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">e_assert</span></code></a></p></td>
+<td><p>Custom assert which raise a specific exception when the condition is not met</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.utils.exceptions.ArraySignError.html#snc.utils.exceptions.ArraySignError" title="snc.utils.exceptions.ArraySignError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArraySignError</span></code></a></p></td>
+<td><p>Exception raised when an array has any or all of its components with different sign (i.e.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="snc.utils.exceptions.EmptyArrayError.html#snc.utils.exceptions.EmptyArrayError" title="snc.utils.exceptions.EmptyArrayError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmptyArrayError</span></code></a></p></td>
+<td><p>Exception raised when an array is empty</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="snc.utils.exceptions.ScipyLinprogStatusError.html#snc.utils.exceptions.ScipyLinprogStatusError" title="snc.utils.exceptions.ScipyLinprogStatusError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScipyLinprogStatusError</span></code></a></p></td>
+<td><p>Exception raised when the Scipy function linprog returns a status equal to 4</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -185,6 +237,10 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="snc.utils.exceptions.e_assert.html" class="btn btn-neutral float-right" title="snc.utils.exceptions.e_assert" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="snc.utils.html" class="btn btn-neutral float-left" title="snc.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
