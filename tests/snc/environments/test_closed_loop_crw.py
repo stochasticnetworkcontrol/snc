@@ -1,14 +1,14 @@
-from collections import deque, defaultdict
+from collections import defaultdict
 import numpy as np
 import pytest
 
-from snc.environments.closed_loop_crw import ClosedLoopCRW
-import snc.environments.examples as examples
-from snc.environments.job_generators.discrete_review_job_generator import \
+from src.snc.environments import ClosedLoopCRW
+import src.snc.environments.examples as examples
+from src.snc.environments import \
     DeterministicDiscreteReviewJobGenerator
-from snc.environments.job_generators.scaled_bernoulli_services_poisson_arrivals_generator import \
+from src.snc.environments import \
     ScaledBernoulliServicesPoissonArrivalsGenerator
-from snc.environments.state_initialiser import DeterministicCRWStateInitialiser
+from src.snc.environments.state_initialiser import DeterministicCRWStateInitialiser
 
 
 def build_closed_loop_env_2_demand_buffers(

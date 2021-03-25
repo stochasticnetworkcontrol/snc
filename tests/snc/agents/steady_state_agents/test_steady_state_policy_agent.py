@@ -1,8 +1,8 @@
 import numpy as np
 
-from snc.agents.steady_state_agents.steady_state_policy_agent import \
+from src.snc import \
     SteadyStatePolicyAgent
-from snc.environments import examples
+from src.snc.environments import examples
 
 
 def test_map_state_to_actions():

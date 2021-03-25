@@ -11,9 +11,9 @@
     the maximum in \max_{i} \{w^T \bar{c}^i\} for a specific w. """
 
 import numpy as np
-import snc.environments.examples as examples
-import snc.agents.hedgehog.workload.workload as wl
-from snc.utils import alt_methods_test
+import src.snc.environments.examples as examples
+from src import snc as wl
+from src.snc.utils import alt_methods_test
 
 import pytest
 
@@ -94,7 +94,7 @@ class TestSingleStationDemandModel:
         max_vertex_index = np.argmax(np.dot(w.T, feasible_vertexes).flatten())
         barc_theory = feasible_vertexes[max_vertex_index]
         barc, _, _ = alt_methods_test.compute_dual_effective_cost_cvxpy(w, workload_mat,
-                                                                     cost_per_buffer, method='cvx.ECOS')
+                                                                        cost_per_buffer, method='cvx.ECOS')
 
         np.testing.assert_almost_equal(barc, barc_theory, decimal=4)
 
@@ -291,7 +291,7 @@ class TestSimpleReentrantLineModel:
         max_vertex_index = np.argmax(np.dot(w.T, feasible_vertexes).flatten())
         barc_theory = feasible_vertexes[max_vertex_index]
         barc, _, _ = alt_methods_test.compute_dual_effective_cost_cvxpy(w, workload_mat,
-                                                                     cost_per_buffer, method='cvx.ECOS')
+                                                                        cost_per_buffer, method='cvx.ECOS')
         np.testing.assert_almost_equal(barc, barc_theory, decimal=4)
 
     def test_simple_reentrant_line_model_case1(self):
@@ -481,7 +481,7 @@ class TestSimpleReentrantLineWithDemandModel:
         max_vertex_index = np.argmax(np.dot(w.T, feasible_vertexes).flatten())
         barc_theory = feasible_vertexes[max_vertex_index]
         barc, _, _ = alt_methods_test.compute_dual_effective_cost_cvxpy(w, workload_mat,
-                                                                     cost_per_buffer, method='cvx.ECOS')
+                                                                        cost_per_buffer, method='cvx.ECOS')
         np.testing.assert_almost_equal(barc, barc_theory, decimal=4)
 
     def test_simple_reentrant_line_with_demand_model_case1(self):

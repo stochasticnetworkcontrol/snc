@@ -1,6 +1,6 @@
 from typing import cast
 
-from snc.agents.hedgehog.params import \
+from src.snc import \
     AsymptoticCovarianceParams, \
     BigStepLayeredPolicyParams, \
     BigStepPenaltyPolicyParams, \
@@ -8,7 +8,7 @@ from snc.agents.hedgehog.params import \
     HedgehogHyperParams, \
     StrategicIdlingParams, \
     WorkloadRelaxationParams
-import snc.simulation.utils.load_agents as load_agents
+import src.snc.simulation.utils.load_agents as load_agents
 
 
 def get_hedgehog_default_values(activity_rates_policy_class_name="BigStepLayeredPolicy"):

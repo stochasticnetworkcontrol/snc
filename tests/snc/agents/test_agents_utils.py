@@ -1,5 +1,5 @@
 import numpy as np
-import snc.agents.agents_utils as utils
+from src import snc as utils
 
 
 def test_assert_orthogonal_rows_true():

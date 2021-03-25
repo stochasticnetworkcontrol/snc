@@ -28,21 +28,19 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
 
-RUN python -m pip install --upgrade pip
+## Install development dependencies into the virtual environment
+# There is an issue installing some of the dependencies - switch off the new installer
+RUN poetry config experimental.new-installer false
+COPY poetry.lock pyproject.toml /tmp/src/snc/
+RUN cd /tmp/src/snc && poetry install -n --no-root
 
-COPY requirements.txt /code/requirements.txt
-RUN python -m pip install -r /code/requirements.txt
-RUN python -m pip install numpy==1.20.*
+# Install demand_planning_service into the virtual environment
+COPY ./ /tmp/src/snc/
 
-COPY ./docs/docs_requirements.txt /code/docs_requirements.txt
-RUN python -m pip install -r /code/docs_requirements.txt
+RUN cd /tmp/src/snc \
+    && poetry build -f wheel -n \
+    && pip install --no-deps dist/*.whl
 
+FROM builder as docs
 
-# Copy code once requirements are installed to speed up docker builds when only the code and not the
-# requirements have changed.
-COPY . /code
-
-USER ubuntu
-
-# Work around for SNC not installing properly (incomplete setup.py)
-ENV PYTHONPATH /code
+RUN pip install -r /tmp/src/snc/docs/docs_requirements.txt

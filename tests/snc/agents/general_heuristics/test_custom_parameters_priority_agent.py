@@ -1,11 +1,11 @@
 import numpy as np
 import pytest
 
-import snc.environments.job_generators.discrete_review_job_generator \
+import src.snc.environments.job_generators.discrete_review_job_generator \
     as drjg
-import snc.environments.controlled_random_walk as crw
-import snc.environments.state_initialiser as si
-import snc.agents.general_heuristics.custom_parameters_priority_agent \
+import src.snc.environments.controlled_random_walk as crw
+import src.snc.environments.state_initialiser as si
+import src.snc.agents.general_heuristics.custom_parameters_priority_agent \
     as custom_parameters_priority_agent
 
 

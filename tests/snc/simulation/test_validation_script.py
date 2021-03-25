@@ -4,8 +4,8 @@ from argparse import Namespace
 import pytest
 from mock import MagicMock, patch
 
-import snc
-import snc.simulation.validation_script as validation_script
+from src import snc
+import src.snc.simulation.validation_script as validation_script
 
 
 def get_args(agents,

@@ -1,19 +1,19 @@
 import numpy as np
 import pytest
 
-from snc.environments.job_generators.discrete_review_job_generator \
+from src.snc.environments \
     import DeterministicDiscreteReviewJobGenerator as drjg
-from snc.environments.job_generators.discrete_review_job_generator \
+from src.snc.environments \
     import PoissonDiscreteReviewJobGenerator as prjg
-from snc.environments.controlled_random_walk import ControlledRandomWalk
-import snc.utils.snc_tools as snc
-import snc.environments.state_initialiser as stinit
-import snc.environments.examples as examples
+from src.snc.environments import ControlledRandomWalk
+from src import snc as snc
+import src.snc.environments.state_initialiser as stinit
+import src.snc.environments.examples as examples
 import \
-    snc.environments.examples_distribution_with_rebalancing as examples_distribution_with_rebalancing
-from snc.environments.job_generators.scaled_bernoulli_services_poisson_arrivals_generator import \
+    src.snc.environments.examples_distribution_with_rebalancing as examples_distribution_with_rebalancing
+from src.snc.environments import \
     ScaledBernoulliServicesPoissonArrivalsGenerator
-from snc.environments.state_initialiser import DeterministicCRWStateInitialiser
+from src.snc.environments.state_initialiser import DeterministicCRWStateInitialiser
 
 
 def test_is_binary():

@@ -1,6 +1,6 @@
 import numpy as np
 
-from snc.environments import examples
+from src.snc.environments import examples
 
 
 def test_tandem_2_blocks():

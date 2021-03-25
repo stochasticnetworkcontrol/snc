@@ -17,7 +17,7 @@ import warnings
 warnings.filterwarnings('ignore', message = 'sphinx.util.inspect.Signature\(\) is deprecated')
 
 # Point to root source dir for API doc, relative to this file:
-sys.path.insert(0, os.path.abspath('../snc'))
+sys.path.insert(0, os.path.abspath('../src'))
 
 # -- Project information -----------------------------------------------------
 

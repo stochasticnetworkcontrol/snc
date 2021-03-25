@@ -1,9 +1,8 @@
 import pytest
 
-from snc.agents.hedgehog.hh_agents.\
-    pure_feedback_mip_hedgehog_agent import PureFeedbackMIPHedgehogAgent
-from snc.environments import examples
-from snc.simulation.utils.load_agents import get_hedgehog_hyperparams
+from src.snc import PureFeedbackMIPHedgehogAgent
+from src.snc.environments import examples
+from src.snc.simulation.utils import get_hedgehog_hyperparams
 
 
 def test_create_agent_with_mip_flag_set_to_false():

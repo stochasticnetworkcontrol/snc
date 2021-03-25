@@ -1,8 +1,6 @@
 import numpy as np
 
-from snc.environments import examples
-from snc.environments.job_generators.\
-    scaled_bernoulli_services_geom_x_Bernoulli_arrivals_generator \
+from src.snc.environments \
     import ScaledBernoulliServicesGeometricXBernoulliArrivalsGenerator as ControlDemandVarJobGem
 import pytest
 

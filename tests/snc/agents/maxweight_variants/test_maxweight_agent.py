@@ -1,15 +1,12 @@
 import numpy as np
 import pytest
 
-import snc.environments.examples as examples
-import snc.agents.maxweight_variants.maxweight_agent as mw
-import snc.agents.maxweight_variants.maxweight_lp as mw_lp
-import snc.agents.maxweight_variants.scheduling_maxweight_agent as smw
-import snc.simulation.snc_simulator as ps
-import snc.environments.controlled_random_walk as crw
-import snc.environments.job_generators.discrete_review_job_generator \
+import src.snc.environments.examples as examples
+from src import snc as mw, snc as mw_lp, snc as smw, snc as ps
+import src.snc.environments.controlled_random_walk as crw
+import src.snc.environments.job_generators.discrete_review_job_generator \
     as jg
-import snc.environments.state_initialiser as si
+import src.snc.environments.state_initialiser as si
 
 
 class TestGetGainActivityJ:

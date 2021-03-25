@@ -1,4 +1,4 @@
-from snc.agents.hedgehog.policies import policy_utils
+from src.snc.agents.hedgehog.policies import policy_utils
 
 
 def get_allowed_activities(big_step_policy, num_bottlenecks, k_idling_set):

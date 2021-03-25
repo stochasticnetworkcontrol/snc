@@ -1,9 +1,7 @@
 import numpy as np
 
-import snc.environments.examples as examples
-import snc.agents.maxweight_variants.scheduling_maxweight_agent as sch_mw
-import snc.agents.maxweight_variants.maxweight_lp as mw_lp
-import snc.simulation.snc_simulator as ps
+import src.snc.environments.examples as examples
+from src import snc as sch_mw, snc as mw_lp, snc as ps
 
 
 class TestGetGainBufferDrainedByActivityJ:

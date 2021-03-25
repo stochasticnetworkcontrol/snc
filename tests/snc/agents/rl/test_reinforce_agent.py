@@ -7,10 +7,10 @@ from tf_agents.drivers.dynamic_episode_driver import DynamicEpisodeDriver
 from tf_agents.replay_buffers.tf_uniform_replay_buffer import TFUniformReplayBuffer
 from tf_agents.specs.tensor_spec import BoundedTensorSpec
 
-import snc.utils.snc_tools as snc
-from snc.environments.rl_environment_wrapper import rl_env_from_snc_env
-from snc.agents.rl.agents import create_reinforce_agent
-from snc.environments.scenarios import load_scenario
+from src import snc as snc
+from src.snc.environments import rl_env_from_snc_env
+from src.snc import create_reinforce_agent
+from src.snc.environments import load_scenario
 
 
 @pytest.mark.parametrize(

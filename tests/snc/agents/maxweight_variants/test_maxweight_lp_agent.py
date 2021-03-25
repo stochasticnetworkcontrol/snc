@@ -1,7 +1,6 @@
 import numpy as np
-import snc.environments.examples as examples
-import snc.agents.maxweight_variants.maxweight_lp as mw_lp
-import snc.simulation.snc_simulator as ps
+import src.snc.environments.examples as examples
+from src import snc as mw_lp, snc as ps
 
 
 class TestGetActionsWorkingOnEmptyBuffers:

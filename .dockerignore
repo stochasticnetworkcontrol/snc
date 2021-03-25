@@ -1,12 +1,6 @@
 *
-!database
+!src
 !docs
-!examples
-!experiment
-!meio
-!sandbox
-!snc
-!requirements.txt
-!setup.py
-!test_requirements.txt
+!poetry.lock
+!pyproject.toml
 

@@ -1,11 +1,9 @@
 import numpy as np
 
-from snc.agents.hedgehog.asymptotic_workload_cov.\
-    compute_asymptotic_cov_bernoulli_service_poisson_arrivals \
+from src.snc.agents.hedgehog.asymptotic_workload_cov.compute_asymptotic_cov_bernoulli_service_poisson_arrivals \
     import ComputeAsymptoticCovBernoulliServicePoissonArrivals
-from tests.snc.agents.hedgehog.asymptotic_covariance.\
-    test_compute_asymptotic_cov_utils import perform_test as perform_test
-from snc.environments import examples
+from .test_compute_asymptotic_cov_utils import perform_test as perform_test
+from src.snc.environments import examples
 
 
 def test_compute_covariance_arrival_process():

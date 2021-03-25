@@ -1,6 +1,6 @@
 import pytest
 
-from snc.demand_planning.constant_demand_plan import ConstantDemandPlan
+from src.snc import ConstantDemandPlan
 
 
 def test_constant_demand_plan():

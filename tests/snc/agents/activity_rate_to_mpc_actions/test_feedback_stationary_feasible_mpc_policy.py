@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-import snc.environments.examples as examples
-from snc.agents.activity_rate_to_mpc_actions.feedback_stationary_feasible_mpc_policy \
+import src.snc.environments.examples as examples
+from src.snc \
     import FeedbackStationaryFeasibleMpcPolicy
 
 

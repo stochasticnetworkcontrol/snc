@@ -6,16 +6,15 @@ from gym import spaces as gym_spaces
 from tf_agents.environments.gym_wrapper import GymWrapper
 from tf_agents.environments.tf_py_environment import TFPyEnvironment
 
-import snc.utils.snc_tools as snc
-from snc.environments.rl_environment_wrapper \
+from src import snc as snc
+from src.snc.environments \
     import RLControlledRandomWalk, rl_env_from_snc_env
-from snc.environments.job_generators. \
-    scaled_bernoulli_services_poisson_arrivals_generator  \
+from src.snc.environments \
     import ScaledBernoulliServicesPoissonArrivalsGenerator
-from snc.environments.job_generators.discrete_review_job_generator \
+from src.snc.environments \
     import DeterministicDiscreteReviewJobGenerator
-import snc.environments.state_initialiser as stinit
-from snc.environments.scenarios import load_scenario
+import src.snc.environments.state_initialiser as stinit
+from src.snc.environments import load_scenario
 
 
 def test_find_coupled_resource_sets_a():

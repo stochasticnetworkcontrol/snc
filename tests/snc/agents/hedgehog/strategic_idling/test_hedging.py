@@ -1,21 +1,16 @@
 import numpy as np
 import pytest
 
-import snc.agents.hedgehog.strategic_idling.strategic_idling_utils
-from snc.agents.hedgehog.asymptotic_workload_cov.\
-    compute_asymptotic_cov_bernoulli_service_and_arrivals \
+from src import snc as hedging_utils, snc as wl, snc as alt_methods_test, snc as exceptions
+from src.snc \
     import ComputeAsymptoticCovBernoulliServiceAndArrivals
-import snc.agents.hedgehog.strategic_idling.hedging_utils as hedging_utils
-import snc.agents.hedgehog.workload.workload as wl
-from snc.agents.hedgehog.params import StrategicIdlingParams
-from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import \
+from src.snc import StrategicIdlingParams
+from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
+from src.snc import \
     StrategicIdlingGTO, StrategicIdlingHedgehogGTO
-from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
-from snc.agents.hedgehog.strategic_idling.strategic_idling_utils import get_dynamic_bottlenecks
-import snc.environments.examples as examples
-import snc.utils.alt_methods_test as alt_methods_test
-import snc.utils.exceptions as exceptions
+from src.snc import StrategicIdlingHedging
+from src.snc import get_dynamic_bottlenecks
+import src.snc.environments.examples as examples
 
 
 def test_create_strategic_idling_get_dynamic_bottlenecks():
@@ -1259,11 +1254,11 @@ def test_null_strategic_idling_values():
 
 
 def test_is_pull_model_false():
-    assert not snc.agents.hedgehog.strategic_idling.strategic_idling_utils.is_pull_model('push')
+    assert not src.snc.agents.hedgehog.strategic_idling.strategic_idling_utils.is_pull_model('push')
 
 
 def test_is_pull_model_true():
-    assert snc.agents.hedgehog.strategic_idling.strategic_idling_utils.is_pull_model('pull')
+    assert src.snc.agents.hedgehog.strategic_idling.strategic_idling_utils.is_pull_model('pull')
 
 
 def test_get_index_deficit_buffers():

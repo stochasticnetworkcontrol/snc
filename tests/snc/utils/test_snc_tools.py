@@ -1,5 +1,5 @@
 import numpy as np
-import snc.utils.snc_tools as snc_tools
+from src import snc as snc_tools
 
 
 def test_is_binary_ones():

@@ -1,6 +1,6 @@
 import argparse
 
-from experiment import experiment_utils
+from src.experiment import experiment_utils
 
 
 def test_param_string_creation():

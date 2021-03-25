@@ -1,14 +1,12 @@
 import numpy as np
 import pytest
 
-from snc.agents.hedgehog.asymptotic_workload_cov.\
-    compute_asymptotic_cov_bernoulli_service_and_arrivals \
+from src.snc \
     import ComputeAsymptoticCovBernoulliServiceAndArrivals
-from snc.agents.hedgehog.asymptotic_workload_cov.\
-    compute_asymptotic_cov_bernoulli_service_poisson_arrivals \
+from src.snc.agents.hedgehog.asymptotic_workload_cov.compute_asymptotic_cov_bernoulli_service_poisson_arrivals \
     import ComputeAsymptoticCovBernoulliServicePoissonArrivals
-import snc.agents.hedgehog.workload.workload as workload
-from snc.environments import examples
+from src import snc as workload
+from src.snc.environments import examples
 
 
 @pytest.fixture(params=[ComputeAsymptoticCovBernoulliServicePoissonArrivals,

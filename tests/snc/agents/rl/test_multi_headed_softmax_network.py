@@ -6,7 +6,7 @@ import tensorflow_probability as tfp
 from tf_agents.specs.tensor_spec import BoundedTensorSpec
 from tf_agents.specs.distribution_spec import DistributionSpec
 
-from snc.agents.rl.multi_headed_softmax_policy \
+from src.snc.agents.rl.multi_headed_softmax_policy \
     import MultiHeadedCategoricalActionNetwork, OneHotCategoricalProjectionNetwork
 
 

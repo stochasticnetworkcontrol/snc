@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
-from snc.agents.hedgehog.workload import workload
-from snc.agents.hedgehog.workload.validate_negative_workload_vectors import ValidateNegativeWorkloadVectors
-import snc.environments.examples as examples
+from src.snc.agents.hedgehog.workload import workload
+from src.snc import ValidateNegativeWorkloadVectors
+import src.snc.environments.examples as examples
 
 
 def compute_workload_and_draining_workload(env, tol):

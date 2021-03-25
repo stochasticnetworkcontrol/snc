@@ -5,16 +5,16 @@ import numpy as np
 
 import pytest
 
-import meio.gsm.tree_gsm as tree_gsm
-import meio.gsm.dag_gsm as dag_gsm
-from meio.gsm.common_test_utils import setup_coc_network, setup_skip_network
-from meio.gsm.tree_gsm import GuaranteedServiceModelTree
-from meio.gsm.utils import read_supply_chain_from_txt, create_gsm_instance, GSM
-from meio.gsm.common_test_utils import (assert_solution_policies_equal,
-                                        compare_with_brute_force_solution,
-                                        check_labeling_invariance, check_additional_constraints,
-                                        setup_cyclic_network)
-from meio.experiment.basic_serial_network import create_serial_stages
+import src.meio.gsm.tree_gsm as tree_gsm
+from src import meio as dag_gsm
+from src.meio import setup_coc_network, setup_skip_network
+from src.meio.gsm.tree_gsm import GuaranteedServiceModelTree
+from src.meio import read_supply_chain_from_txt, create_gsm_instance, GSM
+from src.meio import (assert_solution_policies_equal,
+                      compare_with_brute_force_solution,
+                      check_labeling_invariance, check_additional_constraints,
+                      setup_cyclic_network)
+from src.meio.experiment import create_serial_stages
 
 
 dirname = os.path.dirname(__file__)

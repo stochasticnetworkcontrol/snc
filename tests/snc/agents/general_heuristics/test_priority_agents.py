@@ -1,16 +1,13 @@
 import numpy as np
 import pytest
 
-import snc.environments.job_generators.discrete_review_job_generator \
+import src.snc.environments.job_generators.discrete_review_job_generator \
     as drjg
-import snc.environments.controlled_random_walk as crw
-import snc.environments.state_initialiser as si
-import snc.agents.general_heuristics.random_nonidling_agent \
-    as random_nonidling_agent
-import snc.agents.general_heuristics.longest_buffer_priority_agent \
+import src.snc.environments.controlled_random_walk as crw
+import src.snc.environments.state_initialiser as si
+from src import snc as random_nonidling_agent, snc as custom_priority_agent
+import src.snc.agents.general_heuristics.longest_buffer_priority_agent \
     as longest_priority_agent
-import snc.agents.general_heuristics.custom_activity_priority_agent \
-    as custom_priority_agent
 
 
 def get_null_env_params(state, num_resources=None, buffer_processing_matrix=None,

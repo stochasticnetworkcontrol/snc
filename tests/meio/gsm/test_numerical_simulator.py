@@ -1,8 +1,8 @@
 import numpy as np
 import os.path
 from scipy.stats import poisson
-from meio.gsm.utils import read_supply_chain_from_txt
-from meio.experiment.numerical_simulator import simulate, compute_base_stocks, truncate_and_conserve
+from src.meio import read_supply_chain_from_txt
+from src.meio.experiment import simulate, compute_base_stocks, truncate_and_conserve
 
 
 def test_numerical_simulator():
@@ -80,7 +80,7 @@ def test_numerical_simulator():
 
     # now lets use the simulator to replicate the stats above
     data_path = os.path.abspath(os.path.dirname(__file__))
-    path = os.path.join(data_path, "../../../meio/experiment/basic_serial_network_config.txt")
+    path = os.path.join(data_path, "../../../src/meio/experiment/basic_serial_network_config.txt")
     stages = read_supply_chain_from_txt(path)
     policy = {"Dist": {"s": 3, "si": 0}, "Demand": {"s": 0, "si": 3}}
 

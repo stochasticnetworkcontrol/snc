@@ -1,7 +1,7 @@
 import numpy as np
-import snc.agents.hedgehog.minimal_draining_time as mdt
-from snc.agents.hedgehog.workload.workload import compute_load_workload_matrix
-from snc.environments import examples
+from src import snc as mdt
+from src.snc import compute_load_workload_matrix
+from src.snc.environments import examples
 
 
 def test_compute_minimal_draining_time_push_model():

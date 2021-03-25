@@ -146,7 +146,7 @@ pip install -e .
 ```
 
 # Running experiments
-The main script to run experiments is [validation_script](snc/simulation/validation_script.py), 
+The main script to run experiments is [validation_script](src/snc/simulation/validation_script.py), 
 which allows us to simulate any of the available agents, including trained reinforcement learning 
 agents.
 
@@ -175,7 +175,7 @@ python snc/simulation/validation_script.py -ns 2000 --discount_factor 0.99999 --
 ### Running trained reinforcement learning agents
 
 To load trained reinforcement learning agents pass a list of paths to the directories to the 
-`--rl_checkpoints` argument of the [validation_script](snc/simulation/validation_script.py). These
+`--rl_checkpoints` argument of the [validation_script](src/snc/simulation/validation_script.py). These
 directories should be in an order corresponding to the order of the agent list passed to `--agents`.
 This also supports the running of multiple instances of the same RL agent with different saved
 parameters (e.g. `--agents "ppo ppo" --rl_checkpoints "['weights_dir_1', 'weights_dir_2']`).

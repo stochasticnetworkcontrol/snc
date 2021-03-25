@@ -1,10 +1,10 @@
 import numpy as np
 
-from snc.agents.hedgehog.params import BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams
-from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredPolicy
-from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
-from snc.agents.hedgehog.workload import workload
-import snc.environments.scenarios as scenarios
+from src.snc import BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams
+from src.snc import BigStepLayeredPolicy
+from src.snc import BigStepPolicy
+from src.snc.agents.hedgehog.workload import workload
+import src.snc.environments.scenarios as scenarios
 
 
 def get_simple_link_constrained_model():
@@ -14,7 +14,7 @@ def get_simple_link_constrained_model():
                            cost_per_buffer=cost_per_buffer)
     _, env = scenarios.load_scenario('simple_link_constrained_model', 0, param_overrides)
 
-    _, workload_mat, nu = workload.compute_load_workload_matrix(env,6)
+    _, workload_mat, nu = workload.compute_load_workload_matrix(env, 6)
     env.workload_mat = workload_mat
     env.nu = nu
 

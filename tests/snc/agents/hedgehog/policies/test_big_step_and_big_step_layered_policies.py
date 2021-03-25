@@ -1,11 +1,11 @@
 import numpy as np
 import pytest
 
-from snc.agents.hedgehog.params import BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams
-from snc.agents.hedgehog.policies import policy_utils
-from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredPolicy
-from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
-from snc.agents.hedgehog.policies.big_step_surplus_layered_policy import BigStepSurplusLayeredPolicy
+from src.snc import BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams
+from src.snc.agents.hedgehog.policies import policy_utils
+from src.snc import BigStepLayeredPolicy
+from src.snc import BigStepPolicy
+from src.snc.agents.hedgehog.policies.big_step_surplus_layered_policy import BigStepSurplusLayeredPolicy
 from tests.snc.agents.hedgehog.policies.utils_test_policies import get_allowed_activities
 
 

@@ -1,11 +1,11 @@
 import pytest
 import numpy as np
 
-from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
-from snc.agents.hedgehog.hh_agents.big_step_hedgehog_gto_agent import BigStepHedgehogGTOAgent
-import snc.environments.scenarios as scenarios
-import snc.simulation.snc_simulator as ps
-import snc.simulation.utils.load_agents as load_agents
+from src.snc import BigStepHedgehogAgent
+from src.snc import BigStepHedgehogGTOAgent
+import src.snc.environments.scenarios as scenarios
+from src import snc as ps
+import src.snc.simulation.utils.load_agents as load_agents
 
 
 SIM_STEPS = 300

@@ -1,11 +1,10 @@
 import numpy as np
 import pytest
-import snc.environments.examples_distribution_with_rebalancing as \
+import src.snc.environments.examples_distribution_with_rebalancing as \
     examples_distribution_with_rebalancing
-import snc.agents.problem_specific_heuristics.\
-    distribution_with_rebalancing_local_priority_agent as dwr_agent
+from src import snc as dwr_agent, snc as ps
+
 # dwr: distribution with rebalancing
-import snc.simulation.snc_simulator as ps
 
 
 REFILL_SUPPLY_ACTIONS = ['act1', 'act7', 'act13']

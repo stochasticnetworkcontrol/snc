@@ -1,12 +1,10 @@
 import numpy as np
-import snc.environments.examples as envex
-import snc.agents.hedgehog.workload.workload as wl
-import snc.utils.snc_tools as snctools
-import snc.utils.alt_methods_test as alt_methods_test
-import snc.simulation.utils.validation_utils as validation_utils
-from snc.agents.hedgehog.params import StrategicIdlingParams
-from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from snc.environments import examples
+import src.snc.environments.examples as envex
+from src import snc as wl, snc as snctools, snc as alt_methods_test
+import src.snc.simulation.utils.validation_utils as validation_utils
+from src.snc import StrategicIdlingParams
+from src.snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
+from src.snc.environments import examples
 
 
 def test_compute_network_load_and_workload_single_server_queue():

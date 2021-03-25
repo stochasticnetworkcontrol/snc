@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from snc.agents.activity_rate_to_mpc_actions.no_mpc_policy \
+from src.snc \
     import NoMPCPolicy
 
 

@@ -1,7 +1,6 @@
 import numpy as np
 
-from snc.agents.hedgehog import safety_stocks
-import snc.environments.examples as examples
+from src.snc.agents.hedgehog import safety_stocks
 import pytest
 
 

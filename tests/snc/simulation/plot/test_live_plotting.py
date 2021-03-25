@@ -2,13 +2,12 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 
-import snc.simulation.plot.plotting_utils
-from snc.environments import examples
-from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
-import snc.simulation.snc_simulator as ps
-import snc.simulation.plot.plotting_handlers as hand
-import snc.simulation.store_data.reporter as rep
-import snc.simulation.utils.load_agents as load_agents
+from src.snc.environments import examples
+from src.snc import BigStepHedgehogAgent
+from src import snc as ps
+import src.snc.simulation.plot.plotting_handlers as hand
+import src.snc.simulation.store_data.reporter as rep
+import src.snc.simulation.utils.load_agents as load_agents
 
 
 def build_default_simple_reentrant_line_simulator(seed):
@@ -47,7 +46,7 @@ def test_live_plotting_to_existing_axes():
     reporter = rep.Reporter(handlers=handlers)
 
     # Run Simulation
-    with snc.simulation.plot.plotting_utils.non_gui_matplotlib():
+    with src.snc.simulation.plot.plotting_utils.non_gui_matplotlib():
         hedgehog_simulator.run(num_simulation_steps, reporter=reporter)
 
     for h in handlers:
@@ -75,7 +74,7 @@ def test_multiple_handlers():
     reporter = rep.Reporter(handlers=handlers)
 
     # Run Simulation
-    with snc.simulation.plot.plotting_utils.non_gui_matplotlib():
+    with src.snc.simulation.plot.plotting_utils.non_gui_matplotlib():
         hedgehog_simulator.run(num_simulation_steps, reporter=reporter)
 
     for h in handlers:

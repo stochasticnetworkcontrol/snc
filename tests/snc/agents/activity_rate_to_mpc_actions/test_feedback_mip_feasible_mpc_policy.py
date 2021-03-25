@@ -1,5 +1,5 @@
 import numpy as np
-from snc.agents.activity_rate_to_mpc_actions.feedback_mip_feasible_mpc_policy \
+from src.snc \
     import FeedbackMipFeasibleMpcPolicy
 
 

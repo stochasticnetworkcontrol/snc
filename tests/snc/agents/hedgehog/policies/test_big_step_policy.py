@@ -1,13 +1,13 @@
 import pytest
 import numpy as np
 
-from snc.agents.hedgehog.params import BigStepPenaltyPolicyParams
-from snc.agents.hedgehog.workload import workload
-from snc.agents.hedgehog.policies import policy_utils
-from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
-import snc.environments.examples as examples
-import snc.utils.snc_tools as snc_tools
-from tests.snc.agents.hedgehog.policies.utils_test_policies import get_allowed_activities
+from src.snc import BigStepPenaltyPolicyParams
+from src.snc.agents.hedgehog.workload import workload
+from src.snc.agents.hedgehog.policies import policy_utils
+from src.snc import BigStepPolicy
+import src.snc.environments.examples as examples
+from src import snc as snc_tools
+from .utils_test_policies import get_allowed_activities
 
 
 def get_cost(cost_per_buffer, buffer_processing_matrix, z_star):
