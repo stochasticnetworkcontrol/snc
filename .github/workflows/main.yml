@@ -30,7 +30,9 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - name: Build and Commit
+      - name: Install Doc Dependncies
+        run: pip install -r docs/docs_requirements.txt
+      - name: Build and Commit Documentation
         uses: sphinx-notes/pages@master
         with:
           documentation_path: docs
