@@ -138,12 +138,19 @@ sudo apt-get install libgmp3-dev
 sudo apt-get install python3.7-dev
 ```
 
-To install this project in editable mode run the command below from the root directory of the 
-`snc` repository:
+### Source installation
+
+This project uses [Poetry](https://python-poetry.org/docs) to
+manage dependencies in a local virtual environment. To install Poetry, [follow the
+instructions in the Poetry documentation](https://python-poetry.org/docs/#installation).
+Once done, run the following command.
+
 ```bash
-pip install -r requirements.txt 
-pip install -e .
+poetry install
 ```
+
+You must also run the `poetry install` command to install updated dependencies when
+the `pyproject.toml` file is updated, for example after a `git pull`.
 
 # Running experiments
 The main script to run experiments is [validation_script](src/snc/simulation/validation_script.py), 
@@ -189,9 +196,15 @@ one for PPO.
 These commands should be run from the root directory of this repository.
 
 ```bash
-pip install -r requirements.txt
-tox
+poetry run task test
 ```
+
+Alternatively, you can run just the unit tests, starting with the failing tests and exiting after
+the first test failure:
+
+```bash
+ poetry run task quicktest
+ ```
 
 # Building the docker image
 
