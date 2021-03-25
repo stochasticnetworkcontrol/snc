@@ -5,7 +5,6 @@ description = "Stochastic Network Control "
 authors = ["StochasticNetworkControl"]
 packages = [
     {include = "snc", from = "src"},
-    {include = "database", from = "src"},
     {include = "examples", from = "src"},
     {include = "experiment", from = "src"},
     {include = "meio", from = "src"},
@@ -62,8 +61,8 @@ pytest-isort = "^1.0.0"
 
 [tool.taskipy.tasks]
 lint_strict = "pytest --pylint --cache-clear -m pylint -v && pytest --pylint --cache-clear -m pylint --pylint-rcfile=extrapylint src"
-lint = "pytest --pylint --cache-clear -m pylint -v src/database src/experiment src/snc --junitxml=reports/pylint.xml"
-mypy = "pytest --mypy --cache-clear -m mypy -v src/database src/experiment src/snc --junitxml=reports/mypy.xml"
+lint = "pytest --pylint --cache-clear -m pylint -v src/experiment src/snc --junitxml=reports/pylint.xml"
+mypy = "pytest --mypy --cache-clear -m mypy -v src/experiment src/snc --junitxml=reports/mypy.xml"
 quicktest = "pytest -x --ff -rN -Wignore"
 test_strict = "pytest --pylint --mypy --black --isort --cache-clear -ra -v --cov snc --cov-report term --cov-report html:cover_html --junitxml=reports/junit.xml -o junit_family=xunit2 && pytest --pylint --cache-clear -m pylint --pylint-rcfile=extrapylint src"
 tests = "pytest --cache-clear -ra -v --cov snc --cov-report term --cov-report html:cover_html --junitxml=reports/junit.xml -o junit_family=xunit2"
