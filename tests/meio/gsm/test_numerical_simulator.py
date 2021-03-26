@@ -80,7 +80,7 @@ def test_numerical_simulator():
 
     # now lets use the simulator to replicate the stats above
     data_path = os.path.abspath(os.path.dirname(__file__))
-    path = os.path.join(data_path, "../../../meio/experiment/basic_serial_network_config.txt")
+    path = os.path.join(data_path, "../../../src/meio/experiment/basic_serial_network_config.txt")
     stages = read_supply_chain_from_txt(path)
     policy = {"Dist": {"s": 3, "si": 0}, "Demand": {"s": 0, "si": 3}}
 

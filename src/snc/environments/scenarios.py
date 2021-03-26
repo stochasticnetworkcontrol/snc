@@ -43,7 +43,7 @@ SCENARIO_CONSTRUCTORS: Dict[str, Callable] = {
     'simple_reentrant_line': examples.simple_reentrant_line_model,
     'extended_reentrant_line_model': examples.extended_reentrant_line_model,
     'decoupled_simple_reentrant_line_models': examples.decoupled_simple_reentrant_line_models,
-    'single_reentrant_resource':examples.single_reentrant_resource,
+    'single_reentrant_resource': examples.single_reentrant_resource,
     'simple_reentrant_line_model_variance': examples.simple_reentrant_line_model_variance,
     'simple_reentrant_line_homogeneous_cost': examples.simple_reentrant_line_model,
     'simple_routing_model': examples.simple_routing_model,

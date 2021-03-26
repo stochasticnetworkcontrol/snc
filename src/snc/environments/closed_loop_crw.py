@@ -233,7 +233,7 @@ class ClosedLoopCRW(ControlledRandomWalk):
             - resource_to_activity: Dict associating resources (keys) to actions (values).
         """
         activity_to_resource: Dict[int, int] = {}
-        resource_to_activity = defaultdict(list)
+        resource_to_activity: DefaultDict[int, List[int]] = defaultdict(list)
 
         for node in supply_nodes:
             action = node[1]

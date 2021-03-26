@@ -142,5 +142,5 @@ cover_html
 *.swp
 *~
 *.swo
-examples/.ipynb*
-/snc/logs/
+src/examples/.ipynb*
+/src/snc/logs/

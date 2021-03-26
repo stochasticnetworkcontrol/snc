@@ -102,7 +102,7 @@ class BigStepBasePolicy:
                 self.buffer_processing_matrix,
                 self.constituency_matrix
             )
-            if len(fa_s) > 0:
+            if fa_s:
                 ind_forbidden_activities.extend(fa_s)
         return set(ind_forbidden_activities)
 

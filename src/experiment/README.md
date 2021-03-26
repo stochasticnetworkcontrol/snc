@@ -2,7 +2,7 @@
 
 #### Preparing to Experiment
 An overview of how to build a docker image for this repo and a summary docker usage is provided
-in the [main README](../README.md) for this repository. Once you have
+in the [main README](../../README.md) for this repository. Once you have
 built a docker image test it locally and run a single experiment run before setting up multiple
 experiments.
 
