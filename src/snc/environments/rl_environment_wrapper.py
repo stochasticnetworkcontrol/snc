@@ -9,6 +9,7 @@ from tf_agents.environments.gym_wrapper import GymWrapper
 from tf_agents.environments.tf_py_environment import TFPyEnvironment
 from tf_agents.environments.wrappers import ActionRepeat
 from tf_agents.environments.parallel_py_environment import ParallelPyEnvironment
+from tf_agents.environments.suite_gym import wrap_env
 
 import snc.environments.controlled_random_walk as crw
 import snc.environments.job_generators.job_generator_interface as jobgen
@@ -597,7 +598,7 @@ def rl_env_from_snc_env(env: crw.ControlledRandomWalk, discount_factor: float,
     if not for_tf_agent:
         return base_env, action_space_dims
 
-    def env_constructor(rl_env, seed):
+    def env_constructor(rl_env, seed=1):
         """Function used to set up new environments for each process when multiprocessing."""
         rl_env.reset_with_random_state(seed)
         # Wrap the RLControlledRandomWalk ready for a Python implementation of a TFAgent
