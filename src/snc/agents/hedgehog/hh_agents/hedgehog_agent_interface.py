@@ -387,8 +387,8 @@ class HedgehogAgentInterface(AgentInterface):
             'horizon': horizon,
             'demand_plan': self.get_demand_plan()
         }
-        kwargs_get_policy = self.serialise_get_policy_kwargs(**kwargs)
-        z_star, _ = self.policy_obj.get_policy(**kwargs_get_policy)
+        #kwargs_get_policy = self.serialise_get_policy_kwargs(**kwargs)
+        #z_star, _ = self.policy_obj.get_policy(**kwargs_get_policy)
 
         if self.debug_info:
             print(f"horizon: {horizon}")
@@ -398,7 +398,7 @@ class HedgehogAgentInterface(AgentInterface):
             stored_vars = {'strategic_idling_tuple': strategic_idling_tuple, 'horizon': horizon}
             reporter.store(**stored_vars)
 
-        return z_star, horizon
+        return kwargs
 
     @staticmethod
     def get_num_steps_to_recompute_policy(current_horizon: float,
@@ -433,7 +433,7 @@ class HedgehogAgentInterface(AgentInterface):
         """
 
         # If any resource is starving or countdown ends, then recompute activity rates.
-        if self.num_steps_to_recompute_policy == 0:
+        if True:#self.num_steps_to_recompute_policy == 0:
 
             # Compute safety stock target.
             safety_stocks_vec = safety_stocks.obtain_safety_stock_vector(
@@ -450,7 +450,8 @@ class HedgehogAgentInterface(AgentInterface):
                 "reporter": None
             }
             args.update(override_args)
-            self.current_policy, current_horizon = self.query_hedgehog_policy(**args)
+            #self.current_policy, current_horizon =
+            kwargs = self.query_hedgehog_policy(**args)
             # Reset countdown timer to recomputing the activity rates.
             self.num_steps_to_recompute_policy = self.get_num_steps_to_recompute_policy(
                 current_horizon,
@@ -471,6 +472,9 @@ class HedgehogAgentInterface(AgentInterface):
         # Obtain physically feasible actions from MPC policy.
         actions = self.mpc_policy.obtain_actions(
             state=state,
+            x_star = kwargs['x_star'],
+            x_eff = kwargs['x_eff'],
+            k_idling_set = kwargs['k_idling_set'],
             mpc_variables=self.mpc_variables,
             num_steps_to_recompute_policy=self.num_steps_to_recompute_policy,
             z_star=self.current_policy,
