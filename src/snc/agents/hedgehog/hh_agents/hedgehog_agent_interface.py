@@ -380,6 +380,8 @@ class HedgehogAgentInterface(AgentInterface):
         kwargs = {
             'state': state,
             'safety_stocks_vec': safety_stocks_vec,
+            'x_eff': strategic_idling_tuple.x_eff,
+            'x_star': strategic_idling_tuple.x_star,
             'k_idling_set': strategic_idling_tuple.k_idling_set,
             'draining_bottlenecks': draining_bottlenecks,
             'horizon': horizon,

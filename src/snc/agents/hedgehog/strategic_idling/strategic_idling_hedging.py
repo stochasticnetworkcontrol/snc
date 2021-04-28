@@ -481,15 +481,12 @@ class StrategicIdlingHedging(StrategicIdlingCore):
             hedging_case = 'empty_interior'
 
         height_process = self._compute_height_process(w, psi_plus)
+        current_workload_variables['psi_plus'] = psi_plus
+        current_workload_variables['c_plus'] = c_plus
+        current_workload_variables['height_case'] = hedging_case
+        current_workload_variables['height_process'] = height_process
 
         if self._is_w_inside_artificial_monotone_region(w, psi_plus):
-            current_workload_variables = {'w': w,
-                                          'w_star': w_star,
-                                          'c_plus': c_plus,
-                                          'c_bar': c_bar,
-                                          'psi_plus': psi_plus,
-                                          'height_process': height_process,
-                                          'hedging_case': hedging_case}
             return current_workload_variables
 
         beta_star, sigma_2_h, delta_h, lambda_star, theta_roots \
@@ -500,21 +497,15 @@ class StrategicIdlingHedging(StrategicIdlingCore):
             # Update cone envelope with the current closest face if needed.
             self._add_face_to_cone_envelope(psi_plus, beta_star)
 
-        current_workload_variables = {'w': w,
-                                      'beta_star': beta_star,
-                                      'k_idling_set': k_idling_set,
-                                      'sigma_2_h': sigma_2_h,
-                                      'psi_plus': psi_plus,
-                                      'height_process': height_process,
-                                      'w_star':w_star,
-                                      'c_plus': c_plus,
-                                      'c_bar': c_bar,
-                                      'psi_plus_cone_list': self.psi_plus_cone_list,
-                                      'beta_star_cone_list':self.beta_star_cone_list,
-                                      'delta_h':delta_h,
-                                      'lambda_star': lambda_star,
-                                      'theta_roots': theta_roots,
-                                      'hedging_case': hedging_case}
+        current_workload_variables['beta_star'] = beta_star
+        current_workload_variables['k_idling_set'] = k_idling_set
+        current_workload_variables['sigma_2_h'] = sigma_2_h
+        current_workload_variables['psi_plus_cone_list'] = psi_plus_cone_list
+        current_workload_variables['beta_star_cone_list'] = beta_star_cone_list
+        current_workload_variables['delta_h'] = delta_h
+        current_workload_variables['lambda_star'] = lambda_star
+        current_workload_variables['theta_roots'] = theta_roots
+
 
         return current_workload_variables
 
