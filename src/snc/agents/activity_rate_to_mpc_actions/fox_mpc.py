@@ -95,18 +95,22 @@ class FoxMpcPolicy(ActionMPCPolicy):
             non-idling activities (i.e. num of columns of the constituency matrix), and number of
             columns equal to number of time steps to perform MPC.
         """
-        assert 'mpc_variables' in kwargs, "Ensure MPC variables dict is passed"
-        assert 'sum_actions' in kwargs["mpc_variables"], \
-            "Number of times each activity has to be performed ('sum_actions') is required to be " \
-            "passed as parameter."
         assert 'state' in kwargs, "Current state ('state') is required to be passed as parameter."
 
         state = kwargs["state"]
         x_eff = kwargs["x_eff"]
-        nonidlig_set = kwargs["k_idling_set"]
-        buffer_weights = np.maximum(x_eff - state,0)
+        x_star = kwargs["x_star"]
+        print(state.ravel().astype(int),x_eff.ravel().astype(int),x_star.ravel().astype(int))
+        idling_set = kwargs["k_idling_set"]
+        x_target = x_star if idling_set else x_eff
+        print(idling_set)
+        buffer_weights = np.maximum(x_target - state, 0).astype(int)
+        print(buffer_weights.ravel())
+        if state[2] > 16:
+            input()
+        print()
         actions = np.zeros((self.n_activities,1))
-        for r in range(self.activities_per_resource):
+        for r in range(len(self.activities_per_resource)):
             actions_list = []
             for a in self.activities_per_resource[r]:
                 if state[self.activities_to_source_buffers[a]] == 0:
@@ -116,7 +120,7 @@ class FoxMpcPolicy(ActionMPCPolicy):
                     continue
                 target_buffer = self.activities_to_target_buffers[a]
                 buffer_weight = buffer_weights[target_buffer]
-                if buffer_weight > 0 or r not in nonidling_set:
+                if buffer_weight > 0 or r not in idling_set:
                     actions_list.append((a,buffer_weight))
 
             if not actions_list:

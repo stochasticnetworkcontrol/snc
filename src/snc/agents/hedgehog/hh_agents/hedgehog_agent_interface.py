@@ -238,6 +238,7 @@ class HedgehogAgentInterface(AgentInterface):
             'workload_mat': self.workload_tuple.workload_mat,
             'load': self.workload_tuple.load,
             'cost_per_buffer': self.env.cost_per_buffer,
+            'list_boundary_constraint_matrices': self.env.list_boundary_constraint_matrices,
             'model_type': self.env.model_type,
             'strategic_idling_params': self.strategic_idling_params,
             'debug_info': self.debug_info
@@ -362,7 +363,8 @@ class HedgehogAgentInterface(AgentInterface):
             - z_star: Activity rates.
             - horizon: Horizon for which the activity rates have been computed.
         """
-        strategic_idling_tuple = self.strategic_idling_object.get_allowed_idling_directions(state)
+        strategic_idling_tuple = self.strategic_idling_object.get_allowed_idling_directions(state,
+                                                                                            safety_stocks_vec)
 
         draining_bottlenecks = get_dynamic_bottlenecks(
             strategic_idling_tuple.w, self.workload_tuple.workload_mat, self.workload_tuple.load)
@@ -453,11 +455,11 @@ class HedgehogAgentInterface(AgentInterface):
             #self.current_policy, current_horizon =
             kwargs = self.query_hedgehog_policy(**args)
             # Reset countdown timer to recomputing the activity rates.
-            self.num_steps_to_recompute_policy = self.get_num_steps_to_recompute_policy(
-                current_horizon,
-                self.hedgehog_hyperparams.horizon_mpc_ratio,
-                self.hedgehog_hyperparams.minimum_horizon
-            )
+            #self.num_steps_to_recompute_policy = self.get_num_steps_to_recompute_policy(
+                #current_horizon,
+                #self.hedgehog_hyperparams.horizon_mpc_ratio,
+                #self.hedgehog_hyperparams.minimum_horizon
+            #)
             # Reset number times each action has to be performed before recomputing activity rates.
             self.reset_mpc_variables()
 

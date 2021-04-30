@@ -23,6 +23,7 @@ class StrategicIdlingHedging(StrategicIdlingCore):
                  neg_log_discount_factor: float,
                  load: WorkloadSpace,
                  cost_per_buffer: types.StateSpace,
+                 list_boundary_constraint_matrices,
                  model_type: str,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
                  workload_cov: Optional[types.WorkloadCov] = None,
@@ -41,8 +42,8 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         :param workload_cov: asymptotic covariance of the workload process.
         :param debug_info: Boolean flag that indicates whether printing useful debug info.
         """
-        super().__init__(workload_mat, load, cost_per_buffer, model_type,
-                         strategic_idling_params, debug_info)
+        super().__init__(workload_mat, load, cost_per_buffer, list_boundary_constraint_matrices,
+                         model_type, strategic_idling_params, debug_info)
         self._workload_cov = workload_cov
         self._neg_log_discount_factor = neg_log_discount_factor
 
@@ -483,7 +484,7 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         height_process = self._compute_height_process(w, psi_plus)
         current_workload_variables['psi_plus'] = psi_plus
         current_workload_variables['c_plus'] = c_plus
-        current_workload_variables['height_case'] = hedging_case
+        current_workload_variables['hedging_case'] = hedging_case
         current_workload_variables['height_process'] = height_process
 
         if self._is_w_inside_artificial_monotone_region(w, psi_plus):
@@ -500,8 +501,6 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         current_workload_variables['beta_star'] = beta_star
         current_workload_variables['k_idling_set'] = k_idling_set
         current_workload_variables['sigma_2_h'] = sigma_2_h
-        current_workload_variables['psi_plus_cone_list'] = psi_plus_cone_list
-        current_workload_variables['beta_star_cone_list'] = beta_star_cone_list
         current_workload_variables['delta_h'] = delta_h
         current_workload_variables['lambda_star'] = lambda_star
         current_workload_variables['theta_roots'] = theta_roots
@@ -546,7 +545,7 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         assert self._workload_cov is not None, \
                 "update workload covariance first to run policy with hedging"
 
-    def get_allowed_idling_directions(self, x: StateSpace) -> StrategicIdlingOutput:
+    def get_allowed_idling_directions(self, x: StateSpace, safety_stocks_vec) -> StrategicIdlingOutput:
         """
         Method projects current worload onto the full monotone effective cost cone, or
         projects onto the precomputed envelope of the monotone effective cost cone.
@@ -555,6 +554,7 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         :return: set of allowed idling resources with auxiliary variables
         """
         w = self._workload_mat @ x
+        self._safety_stocks_vec = safety_stocks_vec
         self._verify_offline_preliminaries()
         if self._is_negative_orthant(w):
             idling_decision_dict = self._negative_workloads(w)

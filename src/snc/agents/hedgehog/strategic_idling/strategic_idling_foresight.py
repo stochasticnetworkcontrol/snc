@@ -30,6 +30,7 @@ class StrategicIdlingForesight(StrategicIdlingHedgehogGTO):
                  neg_log_discount_factor: float,
                  load: WorkloadSpace,
                  cost_per_buffer: types.StateSpace,
+                 list_boundary_constraint_matrices,
                  model_type: str,
                  policy_object: BigStepWBoundPolicy,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
@@ -47,7 +48,7 @@ class StrategicIdlingForesight(StrategicIdlingHedgehogGTO):
         :param workload_cov: asymptotic covariance of the workload process.
         :param debug_info: Boolean flag that indicates whether printing useful debug info.
         """
-        super().__init__(workload_mat, neg_log_discount_factor, load, cost_per_buffer, model_type,
+        super().__init__(workload_mat, neg_log_discount_factor, load, cost_per_buffer, list_boundary_constraint_matrices, model_type,
                          strategic_idling_params, workload_cov, debug_info)
 
         self._current_state: Optional[StateSpace] = None
@@ -58,7 +59,7 @@ class StrategicIdlingForesight(StrategicIdlingHedgehogGTO):
         self._initialise_fluid_policy(policy_object)
         self._compute_num_roll_out_steps()
 
-    def get_allowed_idling_directions(self, state: StateSpace) -> StrategicIdlingOutput:
+    def get_allowed_idling_directions(self, state: StateSpace, safety_stocks_vec) -> StrategicIdlingOutput:
         """
         Method returns a set of bottlenecks which are allowed to idle for a current
         buffer state.
@@ -67,6 +68,7 @@ class StrategicIdlingForesight(StrategicIdlingHedgehogGTO):
         :return: set of allowed idling resources with auxiliary variables
         """
         self._current_state = state
+        self._safety_stocks_vec = safety_stocks_vec
         return super().get_allowed_idling_directions(state)
 
     def _has_gto_regime_changed(self, current_workload_variables: Dict[str, Any]) -> bool:

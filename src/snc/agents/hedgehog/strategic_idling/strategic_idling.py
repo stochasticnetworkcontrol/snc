@@ -41,6 +41,7 @@ class StrategicIdlingCore(object):
                  workload_mat: WorkloadMatrix,
                  load: WorkloadSpace,
                  cost_per_buffer: StateSpace,
+                 list_boundary_constraint_matrices,
                  model_type: str,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
                  debug_info: bool = False) -> None:
@@ -56,6 +57,7 @@ class StrategicIdlingCore(object):
         self._workload_mat = workload_mat
         self._load = load
         self._cost_per_buffer = cost_per_buffer
+        self.list_boundary_constraint_matrices = list_boundary_constraint_matrices
 
         assert model_type in ['push', 'pull']
         self.model_type = model_type
@@ -68,9 +70,9 @@ class StrategicIdlingCore(object):
         self._num_bottlenecks, self._num_buffers = workload_mat.shape
 
         convex_solver = strategic_idling_params.convex_solver
-        self.c_bar_solver = ComputePrimalEffectiveCost(workload_mat, cost_per_buffer, convex_solver)
+        self.c_bar_solver = ComputePrimalEffectiveCost(workload_mat, cost_per_buffer, list_boundary_constraint_matrices, convex_solver)
 
-        self._w_star_lp_problem, self._x_star, self._w_param = \
+        self._w_star_lp_problem, self._x_star, self._w_param, self._safety_stocks_param,= \
             self._create_find_workload_with_min_eff_cost_by_idling_lp_program()
 
     @property
@@ -110,6 +112,8 @@ class StrategicIdlingCore(object):
         """
         assert 'w' in overrides, "Current workload variable is not being returned"
         w = overrides['w']
+        x_eff = overrides.get('x_eff', np.array([]))
+        x_star = overrides.get('x_star', np.array([]))
         beta_star = overrides.get('beta_star', 0)
         k_idling_set = overrides.get('k_idling_set', np.array([]))
         sigma_2_h = overrides.get('sigma_2_h', 0)
@@ -125,7 +129,7 @@ class StrategicIdlingCore(object):
         delta_h = overrides.get('delta_h', 0)
         lambda_star = overrides.get('lambda_star', 0)
         theta_roots = overrides.get('theta_roots', None)
-        return StrategicIdlingOutput(w, beta_star, k_idling_set, sigma_2_h, psi_plus,
+        return StrategicIdlingOutput(w, x_eff, x_star, beta_star, k_idling_set, sigma_2_h, psi_plus,
                                      height_process, w_star, c_plus, c_bar,
                                      psi_plus_cone_list, beta_star_cone_list,
                                      delta_h, lambda_star, theta_roots)
@@ -221,7 +225,7 @@ class StrategicIdlingCore(object):
         :return: c_bar: vector defining level set of the effective cost at current w. None is
             returned if the optimisation is unsuccessful.
         """
-        c_bar, x_eff, _ = self.c_bar_solver.solve(w)
+        c_bar, x_eff, _ = self.c_bar_solver.solve(w, self._safety_stocks_vec)
         return c_bar, x_eff
 
     @staticmethod
@@ -241,20 +245,31 @@ class StrategicIdlingCore(object):
     def _create_find_workload_with_min_eff_cost_by_idling_lp_program(self):
         x_var = cvx.Variable((self._num_buffers, 1), nonneg=True)  # Variable
         w_par = cvx.Parameter((self._num_bottlenecks, 1))  # Parameter
+        safety_stocks_vec = cvx.Parameter((self._num_bottlenecks, 1))
         penalty_coeff_w_star = self.strategic_idling_params.penalty_coeff_w_star
         objective = cvx.Minimize(
             self._cost_per_buffer.T @ x_var
             + penalty_coeff_w_star * cvx.sum(self._workload_mat @ x_var - w_par))
         constraints = [self._workload_mat @ x_var >= w_par]
+        a_mat = np.vstack(self.list_boundary_constraint_matrices)
+
+        constraints.append(a_mat @ x_var >= safety_stocks_vec)
+        constraints.append(x_var >= 1)
+
         lp_problem = cvx.Problem(objective, constraints)
-        return lp_problem, x_var, w_par
+        return lp_problem, x_var, w_par, safety_stocks_vec
 
     def _find_workload_with_min_eff_cost_by_idling(self, w: WorkloadSpace) -> WorkloadSpace:
         self._w_param.value = w
+        self._safety_stocks_param.value = np.zeros_like(self._safety_stocks_vec)
         self._w_star_lp_problem.solve(solver=eval(self.strategic_idling_params.convex_solver),
                                       warm_start=True)  # Solve LP.
         x_star = self._x_star.value
         w_star = self._workload_mat @ x_star  # Workload in the boundary of the monotone region.
+        self._safety_stocks_param.value = self._safety_stocks_vec
+        self._w_star_lp_problem.solve(solver=eval(self.strategic_idling_params.convex_solver),
+                                      warm_start=True)  # Solve LP.
+        x_star = self._x_star.value
         tol = 1e-6
         assert np.all(w_star >= w - tol)
         return w_star, x_star
