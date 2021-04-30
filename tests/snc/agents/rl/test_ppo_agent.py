@@ -28,7 +28,7 @@ def test_ppo_agent_init(env_name, expected_action_spec_shape):
     # Instantiate and initialise a PPO agent for the environment.
     ppo_agent = create_ppo_agent(tf_env, num_epochs=10)
     ppo_agent.initialize()
-    # Validate initialisation by checking relevant properties of the initalised agent.
+    # Validate initialisation by checking relevant properties of the initialised agent.
     assert isinstance(ppo_agent.action_spec, BoundedTensorSpec)
     assert ppo_agent.action_spec.shape == expected_action_spec_shape
     assert ppo_agent.name == "PPO_Agent"
@@ -49,7 +49,7 @@ def test_ppo_agent_init_with_multiple_resource_sets():
     # Instantiate and initialise a PPO agent for the environment.
     ppo_agent = create_ppo_agent(tf_env, num_epochs=10)
     ppo_agent.initialize()
-    # Validate initialisation by checking some properties of the initalised agent.
+    # Validate initialisation by checking some properties of the initialised agent.
     assert isinstance(ppo_agent.action_spec, tuple)
     assert len(ppo_agent.action_spec) == 2
     assert isinstance(ppo_agent.action_spec[0], BoundedTensorSpec)

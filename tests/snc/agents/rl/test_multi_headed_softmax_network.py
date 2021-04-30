@@ -6,8 +6,10 @@ import tensorflow_probability as tfp
 from tf_agents.specs.tensor_spec import BoundedTensorSpec
 from tf_agents.specs.distribution_spec import DistributionSpec
 
-from snc.agents.rl.multi_headed_softmax_policy \
-    import MultiHeadedCategoricalActionNetwork, OneHotCategoricalProjectionNetwork
+from snc.agents.rl.multi_headed_softmax_policy import (
+    MultiHeadedCategoricalActionNetwork,
+    OneHotCategoricalProjectionNetwork
+)
 
 
 def test_initialisation_single_head():
@@ -170,7 +172,7 @@ def test_one_hot_categorical_projection_network():
     # Test the forward pass (assuming a final output of the shared layers of dimension 64).
     inputs = tf.convert_to_tensor(np.random.random((1, 100, 64)))
     num_batch_dims = 2
-    action_dist = action_head(inputs, num_batch_dims)
+    action_dist, _ = action_head(inputs, num_batch_dims)
     assert isinstance(action_dist, tfp.distributions.OneHotCategorical)
     assert action_dist.event_shape == num_actions
     # Ensure that there are two trainable weights, the weights matrix and a bias of a single linear
