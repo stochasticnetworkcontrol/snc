@@ -84,7 +84,8 @@ class SteadyStatePolicyAgent(AgentInterface):
             state=state,
             x_star = state,
             x_eff = state,
-            k_idling_set = np.array([]),
+            r_idling_set = np.array([]),
+            draining_resources = set(),
             mpc_variables=self.mpc_variables,
             num_steps_to_recompute_policy=self.num_steps_to_recompute_policy,
             z_star=self.policy, demand_rate=self.env.job_generator.demand_rate)

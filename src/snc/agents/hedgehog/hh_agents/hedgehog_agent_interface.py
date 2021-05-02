@@ -285,8 +285,8 @@ class HedgehogAgentInterface(AgentInterface):
         sigma_2 = workload_cov.diagonal()  # Variance of the workload process
         load_sig = safety_stocks.map_workload_to_physical_resources_with_conservative_max_heuristic(
             workload_tuple.nu, workload_tuple.load, sigma_2)
-        load_ph, sigma_2_ph = load_sig
-        return load_ph, sigma_2_ph
+        load_ph, sigma_2_ph, w_dirs_to_resources = load_sig
+        return load_ph, sigma_2_ph, w_dirs_to_resources
 
     def perform_offline_calculations(self) -> None:
         """
@@ -315,8 +315,8 @@ class HedgehogAgentInterface(AgentInterface):
 
         self._initialize_strategic_idling_object()
 
-        self.load_ph, self.sigma_2_ph = self.map_workload_to_physical_resources(self.workload_tuple,
-                                                                                self.workload_cov)
+        self.load_ph, self.sigma_2_ph, self.w_dirs_to_resources = self.map_workload_to_physical_resources(self.workload_tuple,
+                                                                                                          self.workload_cov)
 
         # Reset trigger to recompute big step policy LP and remaining set of actions (they might've
         # been set if the estimation of the asymptotic covariance was done with this self agent).
@@ -471,12 +471,19 @@ class HedgehogAgentInterface(AgentInterface):
                 args['reporter'].store(**stored_vars)
                 self.actual_num_mpc_steps = 0
 
+        r_idling_set = self._get_resource_idling_set(kwargs['k_idling_set'], kwargs['draining_bottlenecks'])
+        print(r_idling_set)
+        draining_resources = set()
+        for w_dir in kwargs['draining_bottlenecks']:
+            draining_resources = draining_resources.union(self.w_dirs_to_resources[w_dir])
+
         # Obtain physically feasible actions from MPC policy.
         actions = self.mpc_policy.obtain_actions(
             state=state,
             x_star = kwargs['x_star'],
             x_eff = kwargs['x_eff'],
-            k_idling_set = kwargs['k_idling_set'],
+            r_idling_set = r_idling_set,
+            draining_resources = draining_resources,
             mpc_variables=self.mpc_variables,
             num_steps_to_recompute_policy=self.num_steps_to_recompute_policy,
             z_star=self.current_policy,
@@ -491,6 +498,15 @@ class HedgehogAgentInterface(AgentInterface):
         self.actual_num_mpc_steps += 1
 
         return actions
+
+    def _get_resource_idling_set(self,k_idling_set, draining_bottlenecks):
+        r_idling_set = set()
+        for w_dir in k_idling_set:
+            if w_dir in draining_bottlenecks:
+                continue
+            r_idling_set = r_idling_set.union(self.w_dirs_to_resources[w_dir])
+
+        return r_idling_set
 
     def to_serializable(self) -> Dict:
         """

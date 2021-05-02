@@ -2,6 +2,7 @@ import numpy as np
 from typing import List, Tuple
 import snc.utils.snc_types as types
 import math
+from collections import defaultdict
 
 
 def map_workload_to_physical_resources_with_conservative_max_heuristic(
@@ -30,15 +31,18 @@ def map_workload_to_physical_resources_with_conservative_max_heuristic(
     # Initialise output
     load_ph = np.zeros((num_resources, 1))
     sigma_2_ph = np.zeros((num_resources, 1))
+    w_dirs_to_resources = defaultdict(set)
 
     for s in range(num_resources):
-        for load_wl_i, sigma_2_wl_i, nu_i in zip(load_wl, sigma_2_wl, nu):
+        for i,(load_wl_i, sigma_2_wl_i, nu_i) in enumerate(zip(load_wl, sigma_2_wl, nu)):
             if nu_i[s] > 0:
                 load_ph[s] = max(load_ph[s], load_wl_i)
                 sigma_2_ph[s] = max(sigma_2_ph[s], sigma_2_wl_i)
+                w_dirs_to_resources[i].add(s)
+
     assert np.all(load_ph >= 0)
     assert np.all(sigma_2_ph >= 0)
-    return load_ph, sigma_2_ph
+    return load_ph, sigma_2_ph, w_dirs_to_resources
 
 
 def obtain_safety_stock_per_resource(theta: float, load_ph_s: float, sigma_2_ph_s: float,

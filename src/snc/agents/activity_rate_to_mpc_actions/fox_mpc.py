@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from typing import List, Optional, Tuple
 
 from snc.agents.activity_rate_to_mpc_actions.action_mpc_policy import ActionMPCPolicy
@@ -34,9 +35,10 @@ class FoxMpcPolicy(ActionMPCPolicy):
         self.n_activities = buffer_processing_matrix.shape[1]
         self.activities_per_resource, self.num_activities_per_resource \
             = self.get_ind_activities_per_resource(physical_constituency_matrix)
-        self.activities_to_target_buffers, self.activities_to_source_buffers \
-            = self.get_target_and_source_buffers(buffer_processing_matrix)
         self.exit_activities = self.get_exit_activities(buffer_processing_matrix)
+        self.activities_to_target_buffers, self.activities_to_source_buffers \
+            = self.get_target_and_source_buffers(buffer_processing_matrix,self.exit_activities)
+
 
     @staticmethod
     def get_exit_activities(buffer_processing_matrix):
@@ -47,14 +49,16 @@ class FoxMpcPolicy(ActionMPCPolicy):
         return exit_activities
 
     @staticmethod
-    def get_target_and_source_buffers(buffer_processing_matrix):
+    def get_target_and_source_buffers(buffer_processing_matrix,exit_activities):
         n_activities = buffer_processing_matrix.shape[1]
         activities_to_target_buffers = {}
         activities_to_source_buffers = {}
         for a in range(n_activities):
             act_vector = buffer_processing_matrix[:,a]
-            activities_to_source_buffers[a] = np.where(act_vector < 0)[0]
-            activities_to_target_buffers[a] = np.where(act_vector > 0)[0]
+            activities_to_source_buffers[a] = int(np.where(act_vector < 0)[0][0])
+            if a in exit_activities:
+                continue
+            activities_to_target_buffers[a] = int(np.where(act_vector > 0)[0][0])
         return activities_to_target_buffers, activities_to_source_buffers
 
     @staticmethod
@@ -101,33 +105,98 @@ class FoxMpcPolicy(ActionMPCPolicy):
         x_eff = kwargs["x_eff"]
         x_star = kwargs["x_star"]
         print(state.ravel().astype(int),x_eff.ravel().astype(int),x_star.ravel().astype(int))
-        idling_set = kwargs["k_idling_set"]
-        x_target = x_star if idling_set else x_eff
+        idling_set = kwargs["r_idling_set"]
+        draining_resources = kwargs["draining_resources"]
         print(idling_set)
-        buffer_weights = np.maximum(x_target - state, 0).astype(int)
-        print(buffer_weights.ravel())
-        if state[2] > 16:
-            input()
-        print()
+        print(self.activities_per_resource)
+        x_target = x_star if len(idling_set) > 0 else x_eff
+        buffer_weights = list(np.maximum(x_target - state, 0).astype(int).ravel())
+        print(buffer_weights)
         actions = np.zeros((self.n_activities,1))
-        for r in range(len(self.activities_per_resource)):
-            actions_list = []
-            for a in self.activities_per_resource[r]:
-                if state[self.activities_to_source_buffers[a]] == 0:
-                    continue
-                if a in self.exit_activities:
-                    actions_list.append((a,1))
-                    continue
-                target_buffer = self.activities_to_target_buffers[a]
-                buffer_weight = buffer_weights[target_buffer]
-                if buffer_weight > 0 or r not in idling_set:
-                    actions_list.append((a,buffer_weight))
 
-            if not actions_list:
-                continue
-
-            decided_action,_ = max(actions_list,key=lambda x:x[1])
+        blocked_source_buffers = set()
+        blocked_target_buffers = set()
+        for r in draining_resources:
+            actions_list = self._get_actions_list(r,state,buffer_weights,False)
+            if len(actions_list) > 1:
+                for a,_ in actions_list:
+                    if a in self.exit_activities:
+                        blocked_buffer = self.activities_to_source_buffers[a]
+                        blocked_target_buffers.add(blocked_buffer)
+                    else:
+                        blocked_buffer = self.activities_to_target_buffers[a]
+                        blocked_source_buffers.add(blocked_buffer)
+            random.shuffle(actions_list)
+            print(r,actions_list)
+            decided_action,_ = actions_list[0]
 
             actions[decided_action,0] = 1
 
+
+        for r in range(len(self.activities_per_resource)):
+            if r in draining_resources:
+                continue
+            actions_list = self._get_actions_list(r,state,buffer_weights, r in idling_set,
+                                                  blocked_source_buffers,
+                                                  blocked_target_buffers)
+            if not actions_list:
+                #input(r)
+                continue
+            random.shuffle(actions_list)
+            print(r,actions_list)
+            decided_action,_ = actions_list[0]
+
+
+            actions[decided_action,0] = 1
+        print()
         return actions
+
+    def _get_actions_list(self,r,state,buffer_weights,r_in_idling_set,
+                          blocked_source_buffers=set(),
+                          blocked_target_buffers=set()):
+
+        actions_list = []
+        max_weight = 0
+
+        has_starved_activities = False
+        for a in self.activities_per_resource[r]:
+            if a in self.exit_activities:
+                continue
+            source_buffer = self.activities_to_source_buffers[a]
+            target_buffer = self.activities_to_target_buffers[a]
+            buffer_weight = buffer_weights[target_buffer]
+            if buffer_weight > 0 and state[source_buffer,0] == 0:
+                has_starved_activities = True
+
+        for a in self.activities_per_resource[r]:
+            if state[self.activities_to_source_buffers[a]] == 0:
+                continue
+            if a in self.exit_activities:
+                source_buffer = self.activities_to_source_buffers[a]
+                if source_buffer in blocked_source_buffers:
+                    continue
+                weight = 1#max(1,int(state[source_buffer,0]))
+                if weight == max_weight:
+                    actions_list.append((a,weight))
+                elif weight > max_weight:
+                    actions_list = [(a,weight)]
+                    max_weight = weight
+                continue
+
+            source_buffer = self.activities_to_target_buffers[a]
+            target_buffer = self.activities_to_target_buffers[a]
+            if source_buffer in blocked_source_buffers:
+                continue
+            if target_buffer in blocked_target_buffers:
+                continue
+            buffer_weight = buffer_weights[target_buffer]
+            if r_in_idling_set and buffer_weight == 0 and not has_starved_activities:
+                continue
+            if buffer_weight == max_weight:
+                actions_list.append((a,buffer_weight))
+            elif buffer_weight > max_weight:
+                actions_list = [(a,buffer_weight)]
+                max_weight = buffer_weight
+        print(has_starved_activities)
+        return actions_list
+
