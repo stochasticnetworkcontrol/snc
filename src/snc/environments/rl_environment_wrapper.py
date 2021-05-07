@@ -140,7 +140,7 @@ class RLControlledRandomWalk(crw.ControlledRandomWalk):
             actions_per_resource = unconstrained_constituency_matrix.sum(axis=1) + 1
             # Define the action space as a series of binary action spaces.
             action_spaces = list(
-                map(lambda d: gym_spaces.Box(low=0.0, high=1.0, shape=(1, int(d)),
+                map(lambda d: gym_spaces.Box(low=0.0, high=1.0, shape=(int(d),),
                                              dtype=np.float32), actions_per_resource))
             # We now build a list of action vectors where each resource either idles or pursues one
             # of the activities associated with it.
@@ -177,7 +177,7 @@ class RLControlledRandomWalk(crw.ControlledRandomWalk):
         # when we wrap the environment for tf_agents the action space takes values of type float as
         # are provided by the neural network.
         self._activities_action_space = gym_spaces.Box(
-            low=0.0, high=1.0, shape=(1, self._num_activities), dtype=np.float32
+            low=0.0, high=1.0, shape=(self._num_activities,), dtype=np.float32
         )
 
     def _action_spaces_from_resource_sets(
@@ -289,7 +289,7 @@ class RLControlledRandomWalk(crw.ControlledRandomWalk):
                         num_actions = len(action_vectors)
                         action_spaces.append(
                             gym_spaces.Box(
-                                low=0.0, high=1.0, shape=(1, num_actions), dtype=np.float32
+                                low=0.0, high=1.0, shape=(num_actions,), dtype=np.float32
                             )
                         )
                         # Ensure that we mark the resources in the current set as processed.
@@ -322,7 +322,7 @@ class RLControlledRandomWalk(crw.ControlledRandomWalk):
                 # The gym space is a Box so that when we wrap the environment for tf_agents the
                 # action space takes values of type float as are provided by the neural network.
                 action_spaces.append(
-                    gym_spaces.Box(low=0.0, high=1.0, shape=(1, num_actions), dtype=np.float32))
+                    gym_spaces.Box(low=0.0, high=1.0, shape=(num_actions,), dtype=np.float32))
         return action_spaces, all_action_vectors
 
     @staticmethod

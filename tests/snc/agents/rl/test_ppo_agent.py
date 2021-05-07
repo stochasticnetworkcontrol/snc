@@ -14,7 +14,7 @@ from snc.environments.scenarios import load_scenario
 
 
 @pytest.mark.parametrize(
-    'env_name,expected_action_spec_shape', [('single_server_queue', tf.TensorShape((1, 2)))]
+    'env_name,expected_action_spec_shape', [('single_server_queue', tf.TensorShape((2)))]
 )
 def test_ppo_agent_init(env_name, expected_action_spec_shape):
     """
@@ -54,8 +54,8 @@ def test_ppo_agent_init_with_multiple_resource_sets():
     assert len(ppo_agent.action_spec) == 2
     assert isinstance(ppo_agent.action_spec[0], BoundedTensorSpec)
     assert isinstance(ppo_agent.action_spec[1], BoundedTensorSpec)
-    assert ppo_agent.action_spec[0].shape == tf.TensorShape((1, 3))
-    assert ppo_agent.action_spec[1].shape == tf.TensorShape((1, 3))
+    assert ppo_agent.action_spec[0].shape == tf.TensorShape((3))
+    assert ppo_agent.action_spec[1].shape == tf.TensorShape((3))
     assert ppo_agent.name == "PPO_Agent"
     assert ppo_agent.time_step_spec == tf_env.time_step_spec()
 

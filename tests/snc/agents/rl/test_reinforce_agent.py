@@ -14,7 +14,7 @@ from snc.environments.scenarios import load_scenario
 
 
 @pytest.mark.parametrize(
-    'env_name,expected_action_spec_shape', [('single_server_queue', tf.TensorShape((1, 2)))]
+    'env_name,expected_action_spec_shape', [('single_server_queue', tf.TensorShape((2,)))]
 )
 def test_reinforce_agent_init(env_name, expected_action_spec_shape):
     """
@@ -30,7 +30,7 @@ def test_reinforce_agent_init(env_name, expected_action_spec_shape):
     # Instantiate and initialise a REINFORCE agent for the environment.
     reinforce_agent = create_reinforce_agent(tf_env)
     reinforce_agent.initialize()
-    # Validate initialisation by checking some properties of the initalised agent.
+    # Validate initialisation by checking some properties of the initialised agent.
     assert isinstance(reinforce_agent.action_spec, BoundedTensorSpec)
     assert reinforce_agent.action_spec.shape == expected_action_spec_shape
     assert reinforce_agent.name == "reinforce_agent"
@@ -59,8 +59,8 @@ def test_reinforce_agent_init_with_multiple_resource_sets():
     assert len(reinforce_agent.action_spec) == 2
     assert isinstance(reinforce_agent.action_spec[0], BoundedTensorSpec)
     assert isinstance(reinforce_agent.action_spec[1], BoundedTensorSpec)
-    assert reinforce_agent.action_spec[0].shape == tf.TensorShape((1, 3))
-    assert reinforce_agent.action_spec[1].shape == tf.TensorShape((1, 3))
+    assert reinforce_agent.action_spec[0].shape == tf.TensorShape((3,))
+    assert reinforce_agent.action_spec[1].shape == tf.TensorShape((3,))
     assert reinforce_agent.name == "reinforce_agent"
     assert reinforce_agent.time_step_spec == tf_env.time_step_spec()
 

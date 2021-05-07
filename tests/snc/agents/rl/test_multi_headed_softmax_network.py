@@ -138,15 +138,15 @@ def test_forward_pass_multiple_heads():
     zeros_input = np.zeros((1, observation_dim))
     zeros_output = network(zeros_input, step_type=None)[0]
     assert len(zeros_output) == 2
-    assert zeros_output[0].logits.shape == (batch_size, 1, 3)
-    assert zeros_output[1].logits.shape == (batch_size, 1, 5)
+    assert zeros_output[0].logits.shape == (batch_size, 3)
+    assert zeros_output[1].logits.shape == (batch_size, 5)
     assert np.all(zeros_output[0].logits == 0) and np.all(zeros_output[1].logits == 0)
     # Perform the same tests with random inputs ensuring non-zero outputs.
     random_input = np.random.random((1, observation_dim))
     random_output = network(random_input, step_type=None)[0]
     assert len(random_output) == 2
-    assert random_output[0].logits.shape == (batch_size, 1, 3)
-    assert random_output[1].logits.shape == (batch_size, 1, 5)
+    assert random_output[0].logits.shape == (batch_size, 3)
+    assert random_output[1].logits.shape == (batch_size, 5)
     assert np.all(random_output[0].logits != 0) and np.all(random_output[1].logits != 0)
 
 

@@ -31,7 +31,7 @@ class OneHotCategoricalProjectionNetwork(DistributionNetwork):
         :param num_actions: The dimensionality of this head's action space.
         :param name: A name fo this head.
         """
-        output_shape = (1, num_actions)
+        output_shape = (num_actions,)
         output_spec = self._output_distribution_spec(output_shape, sample_spec, name)
         super(OneHotCategoricalProjectionNetwork, self).__init__(
             # We don't need these, but base class requires them.
@@ -94,8 +94,6 @@ class OneHotCategoricalProjectionNetwork(DistributionNetwork):
         # head.
         inputs = batch_squash.flatten(inputs)
         logits = self._projection_layer(inputs)
-        logits = tf.reshape(logits, [-1] + self._output_shape.as_list())
-        logits = batch_squash.unflatten(logits)
         # We finally return the appropriate TensorFlow distribution and the (empty) network state.
         return self.output_spec.build_distribution(logits=logits), ()
 
