@@ -114,33 +114,18 @@ class FoxMpcPolicy(ActionMPCPolicy):
         print(buffer_weights)
         actions = np.zeros((self.n_activities,1))
 
-        blocked_source_buffers = set()
-        blocked_target_buffers = set()
         for r in draining_resources:
             actions_list = self._get_actions_list(r,state,buffer_weights,False)
-            if len(actions_list) > 1:
-                for a,_ in actions_list:
-                    if a in self.exit_activities:
-                        blocked_buffer = self.activities_to_source_buffers[a]
-                        blocked_target_buffers.add(blocked_buffer)
-                    else:
-                        blocked_buffer = self.activities_to_target_buffers[a]
-                        blocked_source_buffers.add(blocked_buffer)
             random.shuffle(actions_list)
-            print(r,actions_list)
             decided_action,_ = actions_list[0]
-
             actions[decided_action,0] = 1
 
 
         for r in range(len(self.activities_per_resource)):
             if r in draining_resources:
                 continue
-            actions_list = self._get_actions_list(r,state,buffer_weights, r in idling_set,
-                                                  blocked_source_buffers,
-                                                  blocked_target_buffers)
+            actions_list = self._get_actions_list(r,state,buffer_weights, r in idling_set)
             if not actions_list:
-                #input(r)
                 continue
             random.shuffle(actions_list)
             print(r,actions_list)
@@ -151,9 +136,7 @@ class FoxMpcPolicy(ActionMPCPolicy):
         print()
         return actions
 
-    def _get_actions_list(self,r,state,buffer_weights,r_in_idling_set,
-                          blocked_source_buffers=set(),
-                          blocked_target_buffers=set()):
+    def _get_actions_list(self,r,state,buffer_weights,r_in_idling_set):
 
         actions_list = []
         max_weight = 0
@@ -173,9 +156,7 @@ class FoxMpcPolicy(ActionMPCPolicy):
                 continue
             if a in self.exit_activities:
                 source_buffer = self.activities_to_source_buffers[a]
-                if source_buffer in blocked_source_buffers:
-                    continue
-                weight = 1#max(1,int(state[source_buffer,0]))
+                weight = max(1,int(state[source_buffer,0]))
                 if weight == max_weight:
                     actions_list.append((a,weight))
                 elif weight > max_weight:
@@ -185,12 +166,8 @@ class FoxMpcPolicy(ActionMPCPolicy):
 
             source_buffer = self.activities_to_target_buffers[a]
             target_buffer = self.activities_to_target_buffers[a]
-            if source_buffer in blocked_source_buffers:
-                continue
-            if target_buffer in blocked_target_buffers:
-                continue
             buffer_weight = buffer_weights[target_buffer]
-            if r_in_idling_set and buffer_weight == 0 and not has_starved_activities:
+            if r_in_idling_set and buffer_weight == 0:# and not has_starved_activities:
                 continue
             if buffer_weight == max_weight:
                 actions_list.append((a,buffer_weight))
@@ -199,4 +176,3 @@ class FoxMpcPolicy(ActionMPCPolicy):
                 max_weight = buffer_weight
         print(has_starved_activities)
         return actions_list
-
