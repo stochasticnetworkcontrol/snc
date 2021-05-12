@@ -14,14 +14,14 @@ packages = [
 # Note: Poetry will exclude files declared in .gitignore when creating the python package file.
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "<3.8,>=3.7"
 importlib_metadata = "^1.6"
 cplex = "12.10.0.3"
 cvxopt = "1.2.3"
 cvxpy = "1.1.11"
 gorilla = "0.3.0"
 matplotlib = "3.2.1"
-numpy = "1.18.4"
+numpy = "1.19.5"
 pandas = "1.0.3"
 pycddlib = "2.1.0"
 scipy = "^1.6.0"
@@ -29,11 +29,11 @@ scs = "2.1.2"
 streamlit = "0.74.1"
 
 # Reinforcement Learning
-gym = "0.12.0"
-tensorflow = "2.1.2"
-tensorflow-probability = "0.8.0"
-tensorflow-estimator = "2.1.0"
-tf-agents = "0.3.0"
+gym = "0.17.2"
+tensorflow = "2.4.0"
+tensorflow-probability = "0.12.1"
+tensorflow-estimator = "2.4.0rc0"
+tf-agents = "0.7.1"
 tqdm = "4.32.2"
 
 # Sandbox simulator

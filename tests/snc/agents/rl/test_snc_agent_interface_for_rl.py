@@ -11,16 +11,18 @@ from snc.utils import snc_types
 
 from snc.simulation.store_data.numpy_encoder import NumpyEncoder
 from snc.environments.scenarios import load_scenario
-from snc.environments.rl_environment_wrapper import \
-    RLControlledRandomWalk, rl_env_from_snc_env
 from snc.agents.rl.agents import create_reinforce_agent, create_ppo_agent
 from snc.agents.rl.snc_agent_interface_for_rl import RLSimulationAgent
 from snc.environments.controlled_random_walk import ControlledRandomWalk
+from snc.environments.rl_environment_wrapper import (
+    RLControlledRandomWalk,
+    rl_env_from_snc_env
+)
 
 
 def test_rl_simulation_agent_init():
     """
-    Test the intitalisation of an RL agent with an interface compatible with the SNC simulator.
+    Test the initialisation of an RL agent with an interface compatible with the SNC simulator.
     """
     # To instantiate an agent from tf_agents we need an RL environment which itself requires a
     # standard SNC environment. We therefore set up an SNC environment and then wrap it for the
@@ -38,7 +40,7 @@ def test_rl_simulation_agent_init():
     # Test that the agent has all of the attributed we want and that they are of the right type.
     assert hasattr(sim_agent, "_rl_env") and isinstance(sim_agent._rl_env, RLControlledRandomWalk)
     assert hasattr(sim_agent, "_rl_agent") and isinstance(sim_agent._rl_agent, TFAgent)
-    assert hasattr(sim_agent, "_policy") and isinstance(sim_agent._policy, tf_policy.Base)
+    assert hasattr(sim_agent, "_policy") and isinstance(sim_agent._policy, tf_policy.TFPolicy)
     assert hasattr(sim_agent, "_is_eval_policy") and isinstance(sim_agent._is_eval_policy, bool)
     assert hasattr(sim_agent, "env") and isinstance(sim_agent.env, ControlledRandomWalk)
     assert hasattr(sim_agent, "buffer_processing_matrix") and isinstance(

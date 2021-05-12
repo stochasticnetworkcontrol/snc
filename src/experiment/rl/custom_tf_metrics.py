@@ -185,7 +185,7 @@ class ActionProbabilityMetric(TFStepMetric):
     """
 
     def __init__(self,
-                 policy: tf_policy.Base,
+                 policy: tf_policy.TFPolicy,
                  action_indices: Tuple[int, ...],
                  name: str = 'ActionProbability',
                  prefix: str = 'Metrics',

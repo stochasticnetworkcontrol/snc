@@ -122,9 +122,9 @@ def test_single_server_queue_spaces():
     assert isinstance(env.action_space, gym_spaces.Tuple)
     assert len(env._rl_action_space.spaces) == 1
     assert isinstance(env._rl_action_space.spaces[0], gym_spaces.Box)
-    assert env.action_space.spaces[0].shape == (1, 2)
+    assert env.action_space.spaces[0].shape == (2,)
     assert isinstance(env.activities_action_space, gym_spaces.Box)
-    assert env.activities_action_space.shape == (1, 1)
+    assert env.activities_action_space.shape == (1,)
     assert isinstance(env.observation_space, gym_spaces.Box)
     assert env.observation_space.shape == (1,)
 
@@ -161,7 +161,7 @@ def test_independent_resource_actions():
 
     # Test that the wrapper sets the spaces up as we would expect.
     assert len(env._rl_action_space.spaces) == 2
-    assert np.all(np.array([s.shape[1] for s in env._rl_action_space.spaces]) == 3)
+    assert np.all(np.array([s.shape[0] for s in env._rl_action_space.spaces]) == 3)
     assert len(env._action_vectors) == 3 + 3
     assert env.observation_space.shape == (4,)
 
@@ -244,8 +244,8 @@ def test_rl_env_with_simple_activity_conditions():
 
     # Ensure that the action spaces are as expected.
     assert len(env._rl_action_space.spaces) == 3
-    assert env._rl_action_space.spaces[0].shape == (1, 3)
-    assert env._rl_action_space.spaces[1].shape == (1, 2)
+    assert env._rl_action_space.spaces[0].shape == (3,)
+    assert env._rl_action_space.spaces[1].shape == (2,)
 
 
 def test_rl_env_with_complex_activity_conditions():
@@ -292,9 +292,9 @@ def test_rl_env_with_complex_activity_conditions():
     # Test that action spaces are as expected.
     assert len(env._rl_action_space.spaces) == 5
     # First group has 4 resources, and 8 actions.
-    assert env._rl_action_space.spaces[0].shape == (1, 8)
+    assert env._rl_action_space.spaces[0].shape == (8,)
     # Each independent group has only two actions.
-    assert env._rl_action_space.spaces[1].shape == (1, 2)
+    assert env._rl_action_space.spaces[1].shape == (2,)
 
 
 def test_simple_rl_action_interpretation():

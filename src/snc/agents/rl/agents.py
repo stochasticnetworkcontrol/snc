@@ -74,7 +74,7 @@ def create_reinforce_agent(
         gradient_clipping=agent_params.get('gradient_clipping', None),
         debug_summaries=debug,
         summarize_grads_and_vars=debug,
-        entropy_regularization=agent_params.get('entropy_regulariztion', None),
+        entropy_regularization=agent_params.get('entropy_regularization', None),
         train_step_counter=training_step_counter,
         name=agent_name
     )

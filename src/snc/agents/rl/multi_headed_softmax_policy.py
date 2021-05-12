@@ -31,7 +31,7 @@ class OneHotCategoricalProjectionNetwork(DistributionNetwork):
         :param num_actions: The dimensionality of this head's action space.
         :param name: A name fo this head.
         """
-        output_shape = (1, num_actions)
+        output_shape = (num_actions,)
         output_spec = self._output_distribution_spec(output_shape, sample_spec, name)
         super(OneHotCategoricalProjectionNetwork, self).__init__(
             # We don't need these, but base class requires them.
@@ -74,14 +74,16 @@ class OneHotCategoricalProjectionNetwork(DistributionNetwork):
             sample_spec=sample_spec,
             dtype=sample_spec.dtype)
 
-    def call(self, inputs: tf.Tensor, batch_dims: int) -> tfp.distributions.OneHotCategorical:
+    def call(self, inputs: tf.Tensor, batch_dims: int) \
+        -> Tuple[tfp.distributions.OneHotCategorical, Tuple]:
         """
         Maps from a shared layer of hidden activations of the overall action net (inputs) to a
         distribution over actions for this head alone.
 
         :param inputs: The hidden activation from the final shared layer of the action network.
         :param batch_dims: The number of batch dimensions in the inputs.
-        :return: A (OneHotCategorical) distribution over actions for this head.
+        :return: A (OneHotCategorical) distribution over actions for this head and the network
+            state (an empty tuple as this network is not stateful).
         """
         # outer_rank is needed because the projection is not done on the raw observations so getting
         # the outer rank is hard as there is no spec to compare to.
@@ -92,10 +94,8 @@ class OneHotCategoricalProjectionNetwork(DistributionNetwork):
         # head.
         inputs = batch_squash.flatten(inputs)
         logits = self._projection_layer(inputs)
-        logits = tf.reshape(logits, [-1] + self._output_shape.as_list())
-        logits = batch_squash.unflatten(logits)
-        # We finally return the appropriate TensorFlow distribution.
-        return self.output_spec.build_distribution(logits=logits)
+        # We finally return the appropriate TensorFlow distribution and the (empty) network state.
+        return self.output_spec.build_distribution(logits=logits), ()
 
     @property
     def projection_layer(self):
@@ -201,7 +201,9 @@ class MultiHeadedCategoricalActionNetwork(DistributionNetwork):
 
         # Attain a nested set of actions i.e. a tuple of actions one for each head.
         action_dist = tf.nest.map_structure(
-            lambda proj_net: proj_net(hidden_activations, outer_rank), self._action_heads)
+            lambda proj_net: proj_net(hidden_activations, outer_rank)[0],
+            self._action_heads
+        )
 
         # If there is only one action head unpack the tuple of 1 to attain the singular action
         # distribution itself.
