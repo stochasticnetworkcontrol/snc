@@ -301,6 +301,7 @@ class HedgehogAgentInterface(AgentInterface):
 
         # Initialise policy, as implemented by children classes.
         self.policy_obj = self.activity_rates_policy_class(**self.serialise_init_policy_kwargs())
+
         self.workload_cov = self.asymptotic_workload_cov_estimator.estimate_asymptotic_workload_cov(
             self.env.job_generator.buffer_processing_matrix,
             self.workload_tuple,
@@ -375,13 +376,11 @@ class HedgehogAgentInterface(AgentInterface):
             convex_solver=draining_time_solver,
             minimum_horizon=self.hedgehog_hyperparams.minimum_horizon
         )
-        horizon = 1
 
         # Find activity rates for some horizon given nonidling and safety stock penalties.
         kwargs = {
             'state': state,
             'safety_stocks_vec': safety_stocks_vec,
-            'w_star': strategic_idling_tuple.w_star-strategic_idling_tuple.w,
             'k_idling_set': strategic_idling_tuple.k_idling_set,
             'draining_bottlenecks': draining_bottlenecks,
             'horizon': horizon,
@@ -471,11 +470,6 @@ class HedgehogAgentInterface(AgentInterface):
         # Obtain physically feasible actions from MPC policy.
         actions = self.mpc_policy.obtain_actions(
             state=state,
-            x_star = kwargs['x_star'],
-            x_eff = kwargs['x_eff'],
-            w_star = kwargs['w_star'],
-            r_idling_set = r_idling_set,
-            draining_resources = draining_resources,
             mpc_variables=self.mpc_variables,
             num_steps_to_recompute_policy=self.num_steps_to_recompute_policy,
             z_star=self.current_policy,
