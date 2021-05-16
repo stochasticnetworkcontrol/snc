@@ -75,7 +75,7 @@ class StrategicIdlingHedgehogNaiveGTO(StrategicIdlingHedging):
             eps = 1e-6  # numerical tolerance
             assert psi_drift_dot > -eps
 
-    def get_allowed_idling_directions(self, state: StateSpace, safety_stocks_vec) -> StrategicIdlingOutput:
+    def get_allowed_idling_directions(self, state: StateSpace) -> StrategicIdlingOutput:
         """
         Method returns idling decision corresponding to either standard hedging or
         switching curve regimes.
@@ -84,7 +84,6 @@ class StrategicIdlingHedgehogNaiveGTO(StrategicIdlingHedging):
         :return: set of allowed idling resources with auxiliary variables
         """
         w = self._workload_mat @ state
-        self._safety_stocks_vec = safety_stocks_vec
         self._verify_offline_preliminaries()
         if self._is_negative_orthant(w) and not self._is_1d_workload_relaxation(w):
             idling_decision_dict = self._negative_workloads(w)

@@ -83,7 +83,7 @@ StrategicIdlingParams = namedtuple(
         'penalty_coeff_w_star'
     ),
     defaults=(
-        'StrategicIdlingForesight',  # strategic_idling_class
+        'StrategicIdlingHedging',  # strategic_idling_class
         'cvx.CPLEX',  # convex_solver
         0.05,  # epsilon
         1e-2,  # shift_eps
