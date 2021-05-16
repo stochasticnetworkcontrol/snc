@@ -23,7 +23,6 @@ class StrategicIdlingHedging(StrategicIdlingCore):
                  neg_log_discount_factor: float,
                  load: WorkloadSpace,
                  cost_per_buffer: types.StateSpace,
-                 list_boundary_constraint_matrices,
                  model_type: str,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
                  workload_cov: Optional[types.WorkloadCov] = None,
@@ -42,7 +41,7 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         :param workload_cov: asymptotic covariance of the workload process.
         :param debug_info: Boolean flag that indicates whether printing useful debug info.
         """
-        super().__init__(workload_mat, load, cost_per_buffer, list_boundary_constraint_matrices,
+        super().__init__(workload_mat, load, cost_per_buffer,
                          model_type, strategic_idling_params, debug_info)
         self._workload_cov = workload_cov
         self._neg_log_discount_factor = neg_log_discount_factor

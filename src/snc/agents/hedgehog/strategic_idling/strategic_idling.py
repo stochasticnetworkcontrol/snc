@@ -5,8 +5,6 @@ from typing import Optional, List, NamedTuple, Dict, Any
 from snc.agents.hedgehog.params import StrategicIdlingParams
 from snc.agents.hedgehog.strategic_idling.compute_dual_effective_cost \
     import ComputeDualEffectiveCost
-from snc.agents.hedgehog.strategic_idling.compute_primal_effective_cost \
-    import ComputePrimalEffectiveCost
 from snc.agents.solver_names import SolverNames
 from snc.simulation.store_data.numpy_encoder import clean_to_serializable
 from snc.utils.snc_types import Array1D, StateSpace, WorkloadMatrix, WorkloadSpace
@@ -57,7 +55,6 @@ class StrategicIdlingCore(object):
         self._workload_mat = workload_mat
         self._load = load
         self._cost_per_buffer = cost_per_buffer
-        self.list_boundary_constraint_matrices = list_boundary_constraint_matrices
 
         assert model_type in ['push', 'pull']
         self.model_type = model_type
@@ -70,9 +67,9 @@ class StrategicIdlingCore(object):
         self._num_bottlenecks, self._num_buffers = workload_mat.shape
 
         convex_solver = strategic_idling_params.convex_solver
-        self.c_bar_solver = ComputePrimalEffectiveCost(workload_mat, cost_per_buffer, list_boundary_constraint_matrices, convex_solver)
+        self.c_bar_solver = ComputeDualEffectiveCost(workload_mat, cost_per_buffer, convex_solver)
 
-        self._w_star_lp_problem, self._x_star, self._w_param, self._safety_stocks_param,= \
+        self._w_star_lp_problem, self._x_star, self._w_param, = \
             self._create_find_workload_with_min_eff_cost_by_idling_lp_program()
 
     @property
@@ -225,7 +222,7 @@ class StrategicIdlingCore(object):
         :return: c_bar: vector defining level set of the effective cost at current w. None is
             returned if the optimisation is unsuccessful.
         """
-        c_bar, x_eff, _ = self.c_bar_solver.solve(w, self._safety_stocks_vec)
+        c_bar, x_eff, _ = self.c_bar_solver.solve(w)
         return c_bar, x_eff
 
     @staticmethod
@@ -242,34 +239,24 @@ class StrategicIdlingCore(object):
         """
         return w_star - w
 
-    def _create_find_workload_with_min_eff_cost_by_idling_lp_program(self):
+    def _create_find_workload_with_min_eff_cost_by_idling_lp_program(self, add_safety_stocks=False):
         x_var = cvx.Variable((self._num_buffers, 1), nonneg=True)  # Variable
         w_par = cvx.Parameter((self._num_bottlenecks, 1))  # Parameter
-        safety_stocks_vec = cvx.Parameter((self._num_bottlenecks, 1))
         penalty_coeff_w_star = self.strategic_idling_params.penalty_coeff_w_star
         objective = cvx.Minimize(
             self._cost_per_buffer.T @ x_var
             + penalty_coeff_w_star * cvx.sum(self._workload_mat @ x_var - w_par))
         constraints = [self._workload_mat @ x_var >= w_par]
-        a_mat = np.vstack(self.list_boundary_constraint_matrices)
-
-        constraints.append(a_mat @ x_var >= safety_stocks_vec)
-        constraints.append(x_var >= 1)
 
         lp_problem = cvx.Problem(objective, constraints)
-        return lp_problem, x_var, w_par, safety_stocks_vec
+        return lp_problem, x_var, w_par
 
     def _find_workload_with_min_eff_cost_by_idling(self, w: WorkloadSpace) -> WorkloadSpace:
         self._w_param.value = w
-        self._safety_stocks_param.value = np.zeros_like(self._safety_stocks_vec)
         self._w_star_lp_problem.solve(solver=eval(self.strategic_idling_params.convex_solver),
                                       warm_start=True)  # Solve LP.
         x_star = self._x_star.value
         w_star = self._workload_mat @ x_star  # Workload in the boundary of the monotone region.
-        self._safety_stocks_param.value = self._safety_stocks_vec
-        self._w_star_lp_problem.solve(solver=eval(self.strategic_idling_params.convex_solver),
-                                      warm_start=True)  # Solve LP.
-        x_star = self._x_star.value
         tol = 1e-6
         assert np.all(w_star >= w - tol)
         return w_star, x_star
