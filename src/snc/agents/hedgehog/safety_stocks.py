@@ -34,7 +34,7 @@ def map_workload_to_physical_resources_with_conservative_max_heuristic(
     w_dirs_to_resources = defaultdict(set)
 
     for s in range(num_resources):
-        for i,(load_wl_i, sigma_2_wl_i, nu_i) in enumerate(zip(load_wl, sigma_2_wl, nu)):
+        for i, (load_wl_i, sigma_2_wl_i, nu_i) in enumerate(zip(load_wl, sigma_2_wl, nu)):
             if nu_i[s] > 0:
                 load_ph[s] = max(load_ph[s], load_wl_i)
                 sigma_2_ph[s] = max(sigma_2_ph[s], sigma_2_wl_i)
