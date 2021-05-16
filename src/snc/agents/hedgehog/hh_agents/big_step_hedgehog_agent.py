@@ -3,7 +3,6 @@ from typing import Optional, Type, Union, Dict
 
 from snc.agents.activity_rate_to_mpc_actions.feedback_mip_feasible_mpc_policy import \
     FeedbackMipFeasibleMpcPolicy
-from snc.agents.activity_rate_to_mpc_actions.fox_mpc import FoxMpcPolicy
 from snc.agents.activity_rate_to_mpc_actions.feedback_stationary_feasible_mpc_policy import \
     FeedbackStationaryFeasibleMpcPolicy
 from snc.agents.hedgehog.class_loader import get_class_from_name
@@ -120,10 +119,8 @@ class BigStepHedgehogAgent(HedgehogAgentInterface):
         classes = [
             FeedbackStationaryFeasibleMpcPolicy,
             FeedbackMipFeasibleMpcPolicy,
-            FoxMpcPolicy
         ]
-        return FoxMpcPolicy
-        #return get_class_from_name(class_name, classes, 'MPC policy')
+        return get_class_from_name(class_name, classes, 'MPC policy')
 
     def _fill_init_big_step_policy_kwargs(self):
         """
