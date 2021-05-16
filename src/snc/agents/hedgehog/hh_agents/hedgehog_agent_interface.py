@@ -301,7 +301,6 @@ class HedgehogAgentInterface(AgentInterface):
 
         # Initialise policy, as implemented by children classes.
         self.policy_obj = self.activity_rates_policy_class(**self.serialise_init_policy_kwargs())
-
         self.workload_cov = self.asymptotic_workload_cov_estimator.estimate_asymptotic_workload_cov(
             self.env.job_generator.buffer_processing_matrix,
             self.workload_tuple,
@@ -363,8 +362,7 @@ class HedgehogAgentInterface(AgentInterface):
             - z_star: Activity rates.
             - horizon: Horizon for which the activity rates have been computed.
         """
-        strategic_idling_tuple = self.strategic_idling_object.get_allowed_idling_directions(state,
-                                                                                            safety_stocks_vec)
+        strategic_idling_tuple = self.strategic_idling_object.get_allowed_idling_directions(state)
 
         draining_bottlenecks = get_dynamic_bottlenecks(
             strategic_idling_tuple.w, self.workload_tuple.workload_mat, self.workload_tuple.load)
@@ -377,20 +375,20 @@ class HedgehogAgentInterface(AgentInterface):
             convex_solver=draining_time_solver,
             minimum_horizon=self.hedgehog_hyperparams.minimum_horizon
         )
+        horizon = 1
 
         # Find activity rates for some horizon given nonidling and safety stock penalties.
         kwargs = {
             'state': state,
             'safety_stocks_vec': safety_stocks_vec,
-            'x_eff': strategic_idling_tuple.x_eff,
-            'x_star': strategic_idling_tuple.x_star,
+            'w_star': strategic_idling_tuple.w_star-strategic_idling_tuple.w,
             'k_idling_set': strategic_idling_tuple.k_idling_set,
             'draining_bottlenecks': draining_bottlenecks,
             'horizon': horizon,
             'demand_plan': self.get_demand_plan()
         }
-        #kwargs_get_policy = self.serialise_get_policy_kwargs(**kwargs)
-        #z_star, _ = self.policy_obj.get_policy(**kwargs_get_policy)
+        kwargs_get_policy = self.serialise_get_policy_kwargs(**kwargs)
+        z_star, _ = self.policy_obj.get_policy(**kwargs_get_policy)
 
         if self.debug_info:
             print(f"horizon: {horizon}")
@@ -400,7 +398,7 @@ class HedgehogAgentInterface(AgentInterface):
             stored_vars = {'strategic_idling_tuple': strategic_idling_tuple, 'horizon': horizon}
             reporter.store(**stored_vars)
 
-        return kwargs
+        return z_star, horizon, kwargs
 
     @staticmethod
     def get_num_steps_to_recompute_policy(current_horizon: float,
@@ -435,7 +433,7 @@ class HedgehogAgentInterface(AgentInterface):
         """
 
         # If any resource is starving or countdown ends, then recompute activity rates.
-        if True:#self.num_steps_to_recompute_policy == 0:
+        if self.num_steps_to_recompute_policy == 0:
 
             # Compute safety stock target.
             safety_stocks_vec = safety_stocks.obtain_safety_stock_vector(
@@ -452,14 +450,13 @@ class HedgehogAgentInterface(AgentInterface):
                 "reporter": None
             }
             args.update(override_args)
-            #self.current_policy, current_horizon =
-            kwargs = self.query_hedgehog_policy(**args)
+            self.current_policy, current_horizon, kwargs = self.query_hedgehog_policy(**args)
             # Reset countdown timer to recomputing the activity rates.
-            #self.num_steps_to_recompute_policy = self.get_num_steps_to_recompute_policy(
-                #current_horizon,
-                #self.hedgehog_hyperparams.horizon_mpc_ratio,
-                #self.hedgehog_hyperparams.minimum_horizon
-            #)
+            self.num_steps_to_recompute_policy = self.get_num_steps_to_recompute_policy(
+                current_horizon,
+                self.hedgehog_hyperparams.horizon_mpc_ratio,
+                self.hedgehog_hyperparams.minimum_horizon
+            )
             # Reset number times each action has to be performed before recomputing activity rates.
             self.reset_mpc_variables()
 
@@ -471,17 +468,12 @@ class HedgehogAgentInterface(AgentInterface):
                 args['reporter'].store(**stored_vars)
                 self.actual_num_mpc_steps = 0
 
-        r_idling_set = self._get_resource_idling_set(kwargs['k_idling_set'], kwargs['draining_bottlenecks'])
-        print(r_idling_set)
-        draining_resources = set()
-        for w_dir in kwargs['draining_bottlenecks']:
-            draining_resources = draining_resources.union(self.w_dirs_to_resources[w_dir])
-
         # Obtain physically feasible actions from MPC policy.
         actions = self.mpc_policy.obtain_actions(
             state=state,
             x_star = kwargs['x_star'],
             x_eff = kwargs['x_eff'],
+            w_star = kwargs['w_star'],
             r_idling_set = r_idling_set,
             draining_resources = draining_resources,
             mpc_variables=self.mpc_variables,
@@ -498,15 +490,6 @@ class HedgehogAgentInterface(AgentInterface):
         self.actual_num_mpc_steps += 1
 
         return actions
-
-    def _get_resource_idling_set(self,k_idling_set, draining_bottlenecks):
-        r_idling_set = set()
-        for w_dir in k_idling_set:
-            if w_dir in draining_bottlenecks:
-                continue
-            r_idling_set = r_idling_set.union(self.w_dirs_to_resources[w_dir])
-
-        return r_idling_set
 
     def to_serializable(self) -> Dict:
         """
