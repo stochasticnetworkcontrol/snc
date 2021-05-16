@@ -21,10 +21,10 @@ class StrategicIdlingFox(StrategicIdlingHedging):
                  neg_log_discount_factor: float,
                  load: WorkloadSpace,
                  cost_per_buffer: types.StateSpace,
-                 list_boundary_constraint_matrices,
                  model_type: str,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
                  workload_cov: Optional[types.WorkloadCov] = None,
+                 list_boundary_constraint_matrices,
                  debug_info: bool = False) -> None:
         """
         StrategicIdling class is responsible for online identification of idling directions for
@@ -40,8 +40,8 @@ class StrategicIdlingFox(StrategicIdlingHedging):
         :param workload_cov: asymptotic covariance of the workload process.
         :param debug_info: Boolean flag that indicates whether printing useful debug info.
         """
-        super().__init__(workload_mat, load, cost_per_buffer,
-                         model_type, strategic_idling_params, debug_info)
+        super().__init__(workload_mat, neg_log_discount_factor, load, cost_per_buffer,
+                         model_type, strategic_idling_params, workload_cov, debug_info)
 
         self.list_boundary_constraint_matrices = list_boundary_constraint_matrices
         self.c_bar_solver = ComputePrimalEffectiveCost(workload_mat, cost_per_buffer, list_boundary_constraint_matrices, convex_solver)
@@ -101,40 +101,32 @@ class StrategicIdlingFox(StrategicIdlingHedging):
         lp_problem = cvx.Problem(objective, constraints)
         return lp_problem, x_var, w_par, safety_stocks_vec
 
-
-    def get_allowed_idling_directions(self, state: StateSpace) -> StrategicIdlingOutput:
+    def get_allowed_idling_directions(self, x: StateSpace, safety_stocks_vec) -> StrategicIdlingOutput:
         """
-        Method returns idling decision corresponding to either standard hedging or
-        switching curve regimes.
+        Method projects current worload onto the full monotone effective cost cone, or
+        projects onto the precomputed envelope of the monotone effective cost cone.
 
-        :param state: current buffer state of the network.
+        :param x: current buffer state of the network.
         :return: set of allowed idling resources with auxiliary variables
         """
-        w = self._workload_mat @ state
+        w = self._workload_mat @ x
+        self._safety_stocks_vec = safety_stocks_vec
         self._verify_offline_preliminaries()
-        if self._is_negative_orthant(w) and not self._is_1d_workload_relaxation(w):
+        if self._is_negative_orthant(w):
             idling_decision_dict = self._negative_workloads(w)
-            regime = "negative_workloads"
         else:
-            current_workload_vars = self._non_negative_workloads(w)
+            current_workload_variables = self._non_negative_workloads(w)
 
-            if self._is_decision_not_to_idle(current_workload_vars['k_idling_set']):
-                idling_decision_dict = current_workload_vars
-                regime = "no_dling"
-            elif self._is_switching_curve_regime(w, current_workload_vars):
-                idling_decision_dict = self._handle_switching_curve_regime(w,
-                                                                           current_workload_vars)
-                regime = "switching_curve"
+            if self._is_decision_not_to_idle(current_workload_variables['k_idling_set']):
+                idling_decision_dict = current_workload_variables
             else:
-                idling_decision_dict = self._add_standard_hedging(w, current_workload_vars)
-                self._verify_standard_hedging_regime(idling_decision_dict)
-                regime = "standard_hedging"
+                idling_decision_dict = self._add_standard_hedging(w, current_workload_variables)
 
         idling_decision = self._get_null_strategic_idling_output(**idling_decision_dict)
+
         if self.debug_info:
             print(f"beta_star: {idling_decision.beta_star}, "
                   f"k_iling_set: {idling_decision.k_idling_set}, "
                   f"sigma_2_h: {idling_decision.sigma_2_h}, "
-                  f"delta_h: {idling_decision.delta_h}, "
-                  f"regime: {regime}")
+                  f"delta_h: {idling_decision.delta_h}")
         return idling_decision

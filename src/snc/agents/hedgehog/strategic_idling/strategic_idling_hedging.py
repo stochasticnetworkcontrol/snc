@@ -544,7 +544,7 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         assert self._workload_cov is not None, \
                 "update workload covariance first to run policy with hedging"
 
-    def get_allowed_idling_directions(self, x: StateSpace, safety_stocks_vec) -> StrategicIdlingOutput:
+    def get_allowed_idling_directions(self, x: StateSpace) -> StrategicIdlingOutput:
         """
         Method projects current worload onto the full monotone effective cost cone, or
         projects onto the precomputed envelope of the monotone effective cost cone.
@@ -553,7 +553,6 @@ class StrategicIdlingHedging(StrategicIdlingCore):
         :return: set of allowed idling resources with auxiliary variables
         """
         w = self._workload_mat @ x
-        self._safety_stocks_vec = safety_stocks_vec
         self._verify_offline_preliminaries()
         if self._is_negative_orthant(w):
             idling_decision_dict = self._negative_workloads(w)
