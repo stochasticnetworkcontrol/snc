@@ -118,7 +118,7 @@ class BigStepHedgehogAgent(HedgehogAgentInterface):
         """
         classes = [
             FeedbackStationaryFeasibleMpcPolicy,
-            FeedbackMipFeasibleMpcPolicy,
+            FeedbackMipFeasibleMpcPolicy
         ]
         return get_class_from_name(class_name, classes, 'MPC policy')
 
