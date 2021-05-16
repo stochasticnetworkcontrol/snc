@@ -39,7 +39,6 @@ class StrategicIdlingCore(object):
                  workload_mat: WorkloadMatrix,
                  load: WorkloadSpace,
                  cost_per_buffer: StateSpace,
-                 list_boundary_constraint_matrices,
                  model_type: str,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
                  debug_info: bool = False) -> None:
@@ -69,7 +68,7 @@ class StrategicIdlingCore(object):
         convex_solver = strategic_idling_params.convex_solver
         self.c_bar_solver = ComputeDualEffectiveCost(workload_mat, cost_per_buffer, convex_solver)
 
-        self._w_star_lp_problem, self._x_star, self._w_param, = \
+        self._w_star_lp_problem, self._x_star, self._w_param = \
             self._create_find_workload_with_min_eff_cost_by_idling_lp_program()
 
     @property
@@ -239,7 +238,7 @@ class StrategicIdlingCore(object):
         """
         return w_star - w
 
-    def _create_find_workload_with_min_eff_cost_by_idling_lp_program(self, add_safety_stocks=False):
+    def _create_find_workload_with_min_eff_cost_by_idling_lp_program(self):
         x_var = cvx.Variable((self._num_buffers, 1), nonneg=True)  # Variable
         w_par = cvx.Parameter((self._num_bottlenecks, 1))  # Parameter
         penalty_coeff_w_star = self.strategic_idling_params.penalty_coeff_w_star
@@ -247,7 +246,6 @@ class StrategicIdlingCore(object):
             self._cost_per_buffer.T @ x_var
             + penalty_coeff_w_star * cvx.sum(self._workload_mat @ x_var - w_par))
         constraints = [self._workload_mat @ x_var >= w_par]
-
         lp_problem = cvx.Problem(objective, constraints)
         return lp_problem, x_var, w_par
 

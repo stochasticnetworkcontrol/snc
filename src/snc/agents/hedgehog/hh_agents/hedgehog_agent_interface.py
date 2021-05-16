@@ -20,6 +20,7 @@ from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredP
 from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
 from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
 from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.agents.hedgehog.strategic_idling.strategic_idling_fox import StrategicIdlingFox
 from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import \
     StrategicIdlingHedgehogGTO, \
     StrategicIdlingHedgehogGTO2, \
@@ -238,7 +239,6 @@ class HedgehogAgentInterface(AgentInterface):
             'workload_mat': self.workload_tuple.workload_mat,
             'load': self.workload_tuple.load,
             'cost_per_buffer': self.env.cost_per_buffer,
-            'list_boundary_constraint_matrices': self.env.list_boundary_constraint_matrices,
             'model_type': self.env.model_type,
             'strategic_idling_params': self.strategic_idling_params,
             'debug_info': self.debug_info
@@ -250,6 +250,9 @@ class HedgehogAgentInterface(AgentInterface):
             })
         if self.strategic_idling_class == StrategicIdlingForesight:
             init_vars.update({'policy_object': self.policy_obj})
+
+        if self.strategic_idling_class == StrategicIdlingFox:
+            init_vars.update({'list_boundary_constraint_matrices': self.env.list_boundary_constraint_matrices})
 
         self.strategic_idling_object = self.strategic_idling_class(**init_vars)
 
