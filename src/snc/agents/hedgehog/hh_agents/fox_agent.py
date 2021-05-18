@@ -1,8 +1,10 @@
 import numpy as np
-from typing import Optional, Type, Union, Dict
+from typing import Optional, Type, Union, Dict, Tuple, Any
 
 from snc.agents.activity_rate_to_mpc_actions.feedback_mip_feasible_mpc_policy import \
     FeedbackMipFeasibleMpcPolicy
+from snc.agents.hedgehog import safety_stocks
+from snc.agents.hedgehog.strategic_idling.strategic_idling_utils import get_dynamic_bottlenecks
 from snc.agents.activity_rate_to_mpc_actions.fox_mpc import FoxMpcPolicy
 from snc.agents.activity_rate_to_mpc_actions.feedback_stationary_feasible_mpc_policy import \
     FeedbackStationaryFeasibleMpcPolicy
@@ -15,12 +17,12 @@ from snc.agents.hedgehog.params import \
     BigStepPenaltyPolicyParams, \
     DemandPlanningParams, \
     StrategicIdlingParams
-from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredPolicy
-from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
-from snc.agents.hedgehog.policies.big_step_surplus_layered_policy import BigStepSurplusLayeredPolicy
 from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
-from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.agents.hedgehog.strategic_idling.strategic_idling_fox import StrategicIdlingFox
 from snc.environments.controlled_random_walk import ControlledRandomWalk
+import snc.utils.snc_types as types
+from snc.environments import controlled_random_walk as crw
+import snc.simulation.store_data.reporter as rep
 
 
 class FoxAgent(HedgehogAgentInterface):
@@ -33,9 +35,9 @@ class FoxAgent(HedgehogAgentInterface):
                  strategic_idling_params: StrategicIdlingParams = StrategicIdlingParams(),
                  policy_params: Optional[
                      Union[BigStepLayeredPolicyParams, BigStepPenaltyPolicyParams]] = None,
-                 strategic_idling_class: Type[StrategicIdlingCore] = StrategicIdlingForesight,
+                 strategic_idling_class: Type[StrategicIdlingCore] = StrategicIdlingFox,
                  demand_planning_params: DemandPlanningParams = DemandPlanningParams(),
-                 name: str = "BigStepActivityRatesHedgehogAgent",
+                 name: str = "FoxAgent",
                  debug_info: bool = False,
                  agent_seed: Optional[int] = None,
                  mpc_seed: Optional[int] = None) -> None:
@@ -108,6 +110,27 @@ class FoxAgent(HedgehogAgentInterface):
             debug_info,
             agent_seed
         )
+        self.strategic_idling_class = StrategicIdlingFox
+
+    @staticmethod
+    def get_horizon(**kwargs) -> int:
+        """
+        Returns the size of the big step, i.e. the horizon, for which the big step policy will
+        compute a schedule.
+
+        :return: num_time_steps: Horizon as a number of time steps.
+        """
+        pass
+
+    def serialise_init_policy_kwargs(self):
+        """
+        Serialise the parameters for the initialisation of the activity rates class. Depending on
+        the activity rates class, it passes different parameters.
+        It allows: BigStepLayeredPolicy, BigStepPolicy and BigStepSurplusLayeredPolicy classes.
+
+        :return: Dictionary of parameters.
+        """
+        pass
 
     @staticmethod
     def get_mpc_policy_class(class_name: str) -> Type:
@@ -137,21 +160,6 @@ class FoxAgent(HedgehogAgentInterface):
             'debug_info': self.debug_info
         }
         return kwargs_init
-
-    def serialise_get_policy_kwargs(self, **kwargs):
-        """
-        Serialise the parameters needed to get the activity rates policy. Depending on the
-        activity rates class, it passes different parameters.
-        It allows: BigStepLayeredPolicy, BigStepPolicy and BigStepSurplusLayeredPolicy classes.
-
-        :return: Dictionary of parameters.
-        """
-        if self.activity_rates_policy_class == BigStepLayeredPolicy:
-            return self._fill_get_policy_big_step_layered_policy_kwargs(**kwargs)
-        elif self.activity_rates_policy_class in [BigStepPolicy, BigStepSurplusLayeredPolicy]:
-            return self._fill_get_policy_big_step_policy_with_surplus_kwargs(**kwargs)
-        else:
-            raise ValueError('activity_rates_policy_class not recognised.')
 
     def reset_mpc_variables(self, **kwargs) -> None:
         self.mpc_variables["sum_actions"] = np.round(max(1, self.num_steps_to_recompute_policy)
@@ -222,7 +230,6 @@ class FoxAgent(HedgehogAgentInterface):
             'horizon': horizon,
             'demand_plan': self.get_demand_plan()
         }
-        kwargs_get_policy = self.serialise_get_policy_kwargs(**kwargs)
 
         if self.debug_info:
             print(f"horizon: {horizon}")

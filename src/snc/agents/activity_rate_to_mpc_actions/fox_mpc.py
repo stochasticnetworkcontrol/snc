@@ -116,7 +116,7 @@ class FoxMpcPolicy(ActionMPCPolicy):
 
         for r in draining_resources:
             actions_list = self._get_actions_list(r,state,buffer_weights,False)
-            random.shuffle(actions_list)
+            #random.shuffle(actions_list)
             decided_action,_ = actions_list[0]
             actions[decided_action,0] = 1
 
@@ -156,6 +156,8 @@ class FoxMpcPolicy(ActionMPCPolicy):
                 continue
             if a in self.exit_activities:
                 source_buffer = self.activities_to_source_buffers[a]
+                buffer_weight = buffer_weights[source_buffer]
+                #weight = max(1,buffer_weight)
                 weight = max(1,int(state[source_buffer,0]))
                 if weight == max_weight:
                     actions_list.append((a,weight))

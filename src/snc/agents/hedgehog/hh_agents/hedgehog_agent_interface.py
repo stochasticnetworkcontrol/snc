@@ -98,6 +98,7 @@ class HedgehogAgentInterface(AgentInterface):
 
         assert strategic_idling_class in [StrategicIdlingCore,
                                           StrategicIdlingForesight,
+                                          StrategicIdlingFox,
                                           StrategicIdlingGTO,
                                           StrategicIdlingHedgehogGTO,
                                           StrategicIdlingHedgehogGTO2,
@@ -303,7 +304,8 @@ class HedgehogAgentInterface(AgentInterface):
         )
 
         # Initialise policy, as implemented by children classes.
-        self.policy_obj = self.activity_rates_policy_class(**self.serialise_init_policy_kwargs())
+        if not self.strategic_idling_class == StrategicIdlingFox:
+            self.policy_obj = self.activity_rates_policy_class(**self.serialise_init_policy_kwargs())
 
         self.workload_cov = self.asymptotic_workload_cov_estimator.estimate_asymptotic_workload_cov(
             self.env.job_generator.buffer_processing_matrix,

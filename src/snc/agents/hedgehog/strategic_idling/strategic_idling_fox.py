@@ -6,11 +6,15 @@ from snc.agents.hedgehog.minimal_draining_time import compute_minimal_draining_t
     as compute_min_drain_time
 from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingOutput, \
     StrategicIdlingCore
+from snc.agents.hedgehog.params import StrategicIdlingParams
+from snc.agents.hedgehog.strategic_idling.compute_dual_effective_cost \
+    import ComputeDualEffectiveCost
 from snc.agents.hedgehog.strategic_idling.compute_primal_effective_cost \
     import ComputePrimalEffectiveCost
 from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
 from snc.agents.hedgehog.strategic_idling.strategic_idling_utils import get_dynamic_bottlenecks, \
     is_pull_model
+import snc.utils.snc_types as types
 from snc.utils.snc_types import WorkloadSpace, StateSpace
 
 
@@ -22,9 +26,9 @@ class StrategicIdlingFox(StrategicIdlingHedging):
                  load: WorkloadSpace,
                  cost_per_buffer: types.StateSpace,
                  model_type: str,
+                 list_boundary_constraint_matrices,
                  strategic_idling_params: Optional[StrategicIdlingParams] = None,
                  workload_cov: Optional[types.WorkloadCov] = None,
-                 list_boundary_constraint_matrices,
                  debug_info: bool = False) -> None:
         """
         StrategicIdling class is responsible for online identification of idling directions for
@@ -40,8 +44,40 @@ class StrategicIdlingFox(StrategicIdlingHedging):
         :param workload_cov: asymptotic covariance of the workload process.
         :param debug_info: Boolean flag that indicates whether printing useful debug info.
         """
-        super().__init__(workload_mat, neg_log_discount_factor, load, cost_per_buffer,
-                         model_type, strategic_idling_params, workload_cov, debug_info)
+        self._workload_mat = workload_mat
+        self._load = load
+        self._cost_per_buffer = cost_per_buffer
+
+        assert model_type in ['push', 'pull']
+        self.model_type = model_type
+
+        self.check_strategic_idling_parameters(strategic_idling_params)
+        self.strategic_idling_params = strategic_idling_params
+
+        self.debug_info = debug_info
+
+        self._num_bottlenecks, self._num_buffers = workload_mat.shape
+
+        convex_solver = strategic_idling_params.convex_solver
+        self.c_bar_solver = ComputeDualEffectiveCost(workload_mat, cost_per_buffer, convex_solver)
+
+        self._workload_cov = workload_cov
+        self._neg_log_discount_factor = neg_log_discount_factor
+
+        self.check_strategic_idling_parameters(strategic_idling_params)
+        self.strategic_idling_params = strategic_idling_params
+
+        self._psi_plus_cone_list: Optional[List[WorkloadSpace]] = None
+        self._beta_star_cone_list: Optional[List[float]] = None
+
+        # Create linear programs that will be used at each iteration.
+        convex_solver = strategic_idling_params.convex_solver
+        self.c_minus_solver = ComputeDualEffectiveCost(workload_mat, cost_per_buffer, convex_solver)
+        self.c_plus_solver = ComputeDualEffectiveCost(workload_mat, cost_per_buffer, convex_solver)
+
+        if workload_cov is not None:
+            self.update_workload_cov(workload_cov)
+
 
         self.list_boundary_constraint_matrices = list_boundary_constraint_matrices
         self.c_bar_solver = ComputePrimalEffectiveCost(workload_mat, cost_per_buffer, list_boundary_constraint_matrices, convex_solver)
@@ -88,9 +124,8 @@ class StrategicIdlingFox(StrategicIdlingHedging):
         constraints = [self._workload_mat @ x_var >= w_par]
         constraints.append(self._workload_mat[0,:] @ x_var == w_par[0])
 
-        if add_safety_stocks:
-            a_mat = np.vstack(self.list_boundary_constraint_matrices)
-            constraints.append(a_mat @ x_var >= safety_stocks_vec)
+        a_mat = np.vstack(self.list_boundary_constraint_matrices)
+        constraints.append(a_mat @ x_var >= safety_stocks_vec)
 
         constraints.append(x_var >= 1)
         constraints.append(x_var[1:4] >= 20)
