@@ -20,6 +20,7 @@ from snc.agents.hedgehog.policies.big_step_layered_policy import BigStepLayeredP
 from snc.agents.hedgehog.policies.big_step_policy import BigStepPolicy
 from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
 from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.agents.hedgehog.strategic_idling.strategic_idling_fox import StrategicIdlingFox
 from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import \
     StrategicIdlingHedgehogGTO, \
     StrategicIdlingHedgehogGTO2, \
@@ -97,6 +98,7 @@ class HedgehogAgentInterface(AgentInterface):
 
         assert strategic_idling_class in [StrategicIdlingCore,
                                           StrategicIdlingForesight,
+                                          StrategicIdlingFox,
                                           StrategicIdlingGTO,
                                           StrategicIdlingHedgehogGTO,
                                           StrategicIdlingHedgehogGTO2,
@@ -250,6 +252,9 @@ class HedgehogAgentInterface(AgentInterface):
         if self.strategic_idling_class == StrategicIdlingForesight:
             init_vars.update({'policy_object': self.policy_obj})
 
+        if self.strategic_idling_class == StrategicIdlingFox:
+            init_vars.update({'list_boundary_constraint_matrices': self.env.list_boundary_constraint_matrices})
+
         self.strategic_idling_object = self.strategic_idling_class(**init_vars)
 
     @staticmethod
@@ -284,8 +289,8 @@ class HedgehogAgentInterface(AgentInterface):
         sigma_2 = workload_cov.diagonal()  # Variance of the workload process
         load_sig = safety_stocks.map_workload_to_physical_resources_with_conservative_max_heuristic(
             workload_tuple.nu, workload_tuple.load, sigma_2)
-        load_ph, sigma_2_ph = load_sig
-        return load_ph, sigma_2_ph
+        load_ph, sigma_2_ph, w_dirs_to_resources = load_sig
+        return load_ph, sigma_2_ph, w_dirs_to_resources
 
     def perform_offline_calculations(self) -> None:
         """
@@ -299,7 +304,8 @@ class HedgehogAgentInterface(AgentInterface):
         )
 
         # Initialise policy, as implemented by children classes.
-        self.policy_obj = self.activity_rates_policy_class(**self.serialise_init_policy_kwargs())
+        if not self.strategic_idling_class == StrategicIdlingFox:
+            self.policy_obj = self.activity_rates_policy_class(**self.serialise_init_policy_kwargs())
 
         self.workload_cov = self.asymptotic_workload_cov_estimator.estimate_asymptotic_workload_cov(
             self.env.job_generator.buffer_processing_matrix,
@@ -314,8 +320,8 @@ class HedgehogAgentInterface(AgentInterface):
 
         self._initialize_strategic_idling_object()
 
-        self.load_ph, self.sigma_2_ph = self.map_workload_to_physical_resources(self.workload_tuple,
-                                                                                self.workload_cov)
+        self.load_ph, self.sigma_2_ph, self.w_dirs_to_resources = self.map_workload_to_physical_resources(self.workload_tuple,
+                                                                                                          self.workload_cov)
 
         # Reset trigger to recompute big step policy LP and remaining set of actions (they might've
         # been set if the estimation of the asymptotic covariance was done with this self agent).
@@ -396,7 +402,7 @@ class HedgehogAgentInterface(AgentInterface):
             stored_vars = {'strategic_idling_tuple': strategic_idling_tuple, 'horizon': horizon}
             reporter.store(**stored_vars)
 
-        return z_star, horizon
+        return z_star, horizon, kwargs
 
     @staticmethod
     def get_num_steps_to_recompute_policy(current_horizon: float,
@@ -448,7 +454,7 @@ class HedgehogAgentInterface(AgentInterface):
                 "reporter": None
             }
             args.update(override_args)
-            self.current_policy, current_horizon = self.query_hedgehog_policy(**args)
+            self.current_policy, current_horizon, kwargs = self.query_hedgehog_policy(**args)
             # Reset countdown timer to recomputing the activity rates.
             self.num_steps_to_recompute_policy = self.get_num_steps_to_recompute_policy(
                 current_horizon,

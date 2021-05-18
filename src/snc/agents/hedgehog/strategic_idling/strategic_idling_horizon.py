@@ -47,13 +47,13 @@ class StrategicIdlingCoreHorizon(StrategicIdlingCore):
         """
         w_drift = w - self._horizon * self.drift
 
-        c_bar = self._get_level_set_for_current_workload(w_drift)
+        c_bar, x_eff = self._get_level_set_for_current_workload(w_drift)
         if not self._is_infeasible(c_bar) and self._is_defining_a_monotone_region(c_bar):
             current_workload_vars = {'w': w, 'w_star': w_drift, 'c_bar': c_bar,
                                      'k_idling_set': np.array([])}
             return current_workload_vars
 
-        w_star = self._find_workload_with_min_eff_cost_by_idling(w_drift)
+        w_star, x_star = self._find_workload_with_min_eff_cost_by_idling(w_drift)
 
         v_star = self._get_vector_defining_possible_idling_direction(w_star, w_drift)
         k_idling_set = np.where(v_star > eps)[0]
