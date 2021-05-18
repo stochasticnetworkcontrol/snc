@@ -39,7 +39,6 @@ class FoxMpcPolicy(ActionMPCPolicy):
         self.activities_to_target_buffers, self.activities_to_source_buffers \
             = self.get_target_and_source_buffers(buffer_processing_matrix,self.exit_activities)
 
-
     @staticmethod
     def get_exit_activities(buffer_processing_matrix):
         exit_activities = set()
