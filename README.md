@@ -4,7 +4,7 @@ number of sequential decision-making agents for stochastic network control (SNC)
 
 The Stochastic Network Control (SNC) toolbox was initially developed at 
 [Secondmind](http://secondmind.ai/ "Secondmind") by 
-[Sergio Valcarcel Macua](https://github.com/sergiovalmac), 
+[Sergio Valcarcel Macua](https://github.com/sergiovalmac) (Tech Lead), 
 [Egor Tiavlovsky Vasilevitch](https://github.com/tiavlovsky), 
 [Sofia Ceppi](https://github.com/sofiaceppi), 
 [Ian Davies](https://github.com/IanRDavies), 
