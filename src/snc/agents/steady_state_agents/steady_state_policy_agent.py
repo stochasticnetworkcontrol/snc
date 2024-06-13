@@ -81,7 +81,12 @@ class SteadyStatePolicyAgent(AgentInterface):
 
         # Obtain physically feasible actions from MPC policy.
         actions = self.mpc_policy.obtain_actions(
-            state=state, mpc_variables=self.mpc_variables,
+            state=state,
+            x_star = state,
+            x_eff = state,
+            r_idling_set = np.array([]),
+            draining_resources = set(),
+            mpc_variables=self.mpc_variables,
             num_steps_to_recompute_policy=self.num_steps_to_recompute_policy,
             z_star=self.policy, demand_rate=self.env.job_generator.demand_rate)
 

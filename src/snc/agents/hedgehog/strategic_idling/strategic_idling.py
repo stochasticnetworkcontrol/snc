@@ -12,6 +12,8 @@ from snc.utils.snc_types import Array1D, StateSpace, WorkloadMatrix, WorkloadSpa
 
 StrategicIdlingOutput = NamedTuple('StrategicIdlingOutput',
                                    [('w', WorkloadSpace),
+                                    ('x_eff', StateSpace),
+                                    ('x_star', StateSpace),
                                     ('beta_star', float),
                                     ('k_idling_set', Array1D),
                                     ('sigma_2_h', float),
@@ -106,6 +108,8 @@ class StrategicIdlingCore(object):
         """
         assert 'w' in overrides, "Current workload variable is not being returned"
         w = overrides['w']
+        x_eff = overrides.get('x_eff', np.array([]))
+        x_star = overrides.get('x_star', np.array([]))
         beta_star = overrides.get('beta_star', 0)
         k_idling_set = overrides.get('k_idling_set', np.array([]))
         sigma_2_h = overrides.get('sigma_2_h', 0)
@@ -121,7 +125,7 @@ class StrategicIdlingCore(object):
         delta_h = overrides.get('delta_h', 0)
         lambda_star = overrides.get('lambda_star', 0)
         theta_roots = overrides.get('theta_roots', None)
-        return StrategicIdlingOutput(w, beta_star, k_idling_set, sigma_2_h, psi_plus,
+        return StrategicIdlingOutput(w, x_eff, x_star, beta_star, k_idling_set, sigma_2_h, psi_plus,
                                      height_process, w_star, c_plus, c_bar,
                                      psi_plus_cone_list, beta_star_cone_list,
                                      delta_h, lambda_star, theta_roots)
@@ -217,8 +221,8 @@ class StrategicIdlingCore(object):
         :return: c_bar: vector defining level set of the effective cost at current w. None is
             returned if the optimisation is unsuccessful.
         """
-        c_bar, _, _ = self.c_bar_solver.solve(w)
-        return c_bar
+        c_bar, x_eff, _ = self.c_bar_solver.solve(w)
+        return c_bar, x_eff
 
     @staticmethod
     def _get_vector_defining_possible_idling_direction(w_star: WorkloadSpace,
@@ -253,7 +257,7 @@ class StrategicIdlingCore(object):
         w_star = self._workload_mat @ x_star  # Workload in the boundary of the monotone region.
         tol = 1e-6
         assert np.all(w_star >= w - tol)
-        return w_star
+        return w_star, x_star
 
     def _non_negative_workloads(self, w: WorkloadSpace, eps: float = 1e-6) -> Dict[str, Any]:
         """
@@ -269,28 +273,29 @@ class StrategicIdlingCore(object):
             if not np.any(w > eps):
                 return {'w': w, 'w_star': w, 'k_idling_set': np.array([])}
 
-        c_bar = self._get_level_set_for_current_workload(w)
+        c_bar, x_eff = self._get_level_set_for_current_workload(w)
 
         if self._is_infeasible(c_bar):
-            return {'w': w, 'w_star': w, 'k_idling_set': np.array([])}
+            return {'w': w, 'w_star': w, 'x_eff': x_eff, 'k_idling_set': np.array([])}
         elif self._is_defining_a_monotone_region(c_bar):
             current_workload_vars = {'w': w, 'w_star': w, 'c_bar': c_bar,
+                                     'x_eff': x_eff,
                                      'k_idling_set': np.array([])}
             return current_workload_vars
 
-        w_star = self._find_workload_with_min_eff_cost_by_idling(w)
+        w_star, x_star = self._find_workload_with_min_eff_cost_by_idling(w)
 
         if self._is_w_inside_monotone_region(w, w_star, c_bar):
             # Since c_bar doesn't define a monotone region, w is already at the boundary.
-            current_workload_vars = {'w': w, 'w_star': w_star, 'c_bar': c_bar,
-                                     'k_idling_set': np.array([])}
+            current_workload_vars = {'w': w, 'w_star': w_star, 'c_bar': c_bar, 'x_eff': x_eff,
+                                     'x_star': x_star, 'k_idling_set': np.array([])}
             return current_workload_vars
 
         v_star = self._get_vector_defining_possible_idling_direction(w_star, w)
         k_idling_set = np.where(v_star > eps)[0]
 
-        current_workload_vars = {'w': w, 'w_star': w_star, 'c_bar': c_bar, 'v_star': v_star,
-                                 'k_idling_set': k_idling_set}
+        current_workload_vars = {'w': w, 'w_star': w_star, 'c_bar': c_bar, 'v_star': v_star, 'x_star': x_star,
+                                 'x_eff': x_eff, 'k_idling_set': k_idling_set}
 
         return current_workload_vars
 

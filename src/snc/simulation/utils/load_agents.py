@@ -5,6 +5,7 @@ import snc.agents.general_heuristics.custom_parameters_priority_agent as priorit
 from snc.agents.general_heuristics.random_nonidling_agent import RandomNonIdlingAgent
 import snc.agents.hedgehog.hh_agents.hedgehog_agent_interface as hh_int
 from snc.agents.hedgehog.hh_agents.big_step_hedgehog_agent import BigStepHedgehogAgent
+from snc.agents.hedgehog.hh_agents.fox_agent import FoxAgent
 from snc.agents.hedgehog.hh_agents.pure_feedback_mip_hedgehog_agent \
     import PureFeedbackMIPHedgehogAgent
 from snc.agents.hedgehog.hh_agents.pure_feedback_stationary_hedgehog_agent \
@@ -18,6 +19,7 @@ from snc.agents.hedgehog.params import AsymptoticCovarianceParams, \
     WorkloadRelaxationParams
 from snc.agents.hedgehog.strategic_idling.strategic_idling import StrategicIdlingCore
 from snc.agents.hedgehog.strategic_idling.strategic_idling_foresight import StrategicIdlingForesight
+from snc.agents.hedgehog.strategic_idling.strategic_idling_fox import StrategicIdlingFox
 from snc.agents.hedgehog.strategic_idling.strategic_idling_hedgehog_gto import \
     StrategicIdlingHedgehogGTO, StrategicIdlingHedgehogGTO2, StrategicIdlingHedgehogNaiveGTO
 from snc.agents.hedgehog.strategic_idling.strategic_idling_hedging import StrategicIdlingHedging
@@ -43,6 +45,7 @@ def get_strategic_idling_class(si_class_name: str) -> Type[StrategicIdlingCore]:
     classes = [
         StrategicIdlingCore,
         StrategicIdlingForesight,
+        StrategicIdlingFox,
         StrategicIdlingHedgehogGTO,
         StrategicIdlingHedgehogGTO2,
         StrategicIdlingHedgehogNaiveGTO,
@@ -191,6 +194,41 @@ def build_pf_stationary_hedgehog(
     ac_params, wk_params, si_params, po_params, hh_params, si_class, dp_params, name \
         = get_hedgehog_hyperparams(**hh_overrides)
     return PureFeedbackStationaryHedgehogAgent(
+        env,
+        discount_factor,
+        wk_params,
+        hh_params,
+        ac_params,
+        si_params,
+        po_params,
+        si_class,
+        dp_params,
+        name,
+        debug_info,
+        agent_seed,
+        mpc_seed
+    )
+
+def build_fox_agent(
+        env: ControlledRandomWalk,
+        discount_factor: float,
+        hh_overrides: Dict[str, Any],
+        debug_info: bool = False, agent_seed: Optional[int] = None,
+        mpc_seed: Optional[int] = None) -> hh_int.HedgehogAgentInterface:
+    """
+    Sets up an instantiation of a Pure Feedback with Stationary MPC Hedgehog agent.
+
+    :param env: Environment the hedgehog agent will run in.
+    :param discount_factor: Discount factor to future rewards/costs.
+    :param hh_overrides: Dictionary of hedgehog parameter overrides.
+    :param debug_info: Boolean flag that indicates whether printing useful debug info.
+    :param agent_seed: Agent random seed.
+    :param mpc_seed: MPC random seed.
+    :return: A PureFeedbackStationaryHedgehogAgent agent.
+    """
+    ac_params, wk_params, si_params, po_params, hh_params, si_class, dp_params, name \
+        = get_hedgehog_hyperparams(**hh_overrides)
+    return FoxAgent(
         env,
         discount_factor,
         wk_params,
@@ -358,7 +396,7 @@ def get_agent(agent_name: str, env: ControlledRandomWalk, **kwargs: Any) \
     """
     if agent_name not in AGENT_CONSTRUCTORS:
         raise NotImplementedError(f'Requested agent "{agent_name}" not implemented.')
-    if agent_name in ['bs_hedgehog', 'pf_stationary_hedgehog', 'pf_mip_hedgehog']:
+    if agent_name in ['bs_hedgehog', 'pf_stationary_hedgehog', 'pf_mip_hedgehog', 'fox']:
         return AGENT_CONSTRUCTORS[agent_name](env,
                                               discount_factor=kwargs['discount_factor'],
                                               hh_overrides=kwargs['hh_overrides'],
@@ -400,10 +438,11 @@ def get_all_agent_names(env_name: str, with_rl_agent: bool = False) -> List[str]
     return agent_list
 
 
-HEDGEHOG_AGENTS = ['bs_hedgehog', 'pf_stationary_hedgehog', 'pf_mip_hedgehog']
+HEDGEHOG_AGENTS = ['bs_hedgehog', 'pf_stationary_hedgehog', 'pf_mip_hedgehog', 'fox']
 
 AGENT_CONSTRUCTORS: Dict[str, Callable] = {
     'bs_hedgehog': build_bs_hedgehog_agent,
+    'fox': build_fox_agent,
     'pf_mip_hedgehog': build_pf_mip_hedgehog,
     'pf_stationary_hedgehog': build_pf_stationary_hedgehog,
     'distribution_with_rebalancing_heuristic': DistributionWithRebalancingLocalPriorityAgent,
